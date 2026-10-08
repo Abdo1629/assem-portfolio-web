@@ -65,6 +65,7 @@ export const en: LocaleContent = {
     close: "Close",
     soon: "Showreel will be added soon",
     navWork: "Work",
+    navHome: "Home",
     navAbout: "About me",
     navProjects: "Projects",
     navServices: "Services",
