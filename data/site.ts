@@ -16,10 +16,10 @@ export const collaborators: Localized[] = [
 ];
 
 export const software = [
-  { name: "Premiere Pro", short: "PR", detail: { ar: "مونتاج وإيقاع وبناء الحكاية", en: "Editing, rhythm and story construction" } },
-  { name: "After Effects", short: "AE", detail: { ar: "موشن ديزاين وحركة بصرية", en: "Motion design and visual movement" } },
-  { name: "Photoshop", short: "PS", detail: { ar: "معالجة وتصميم العناصر البصرية", en: "Visual treatment and graphic composition" } },
-  { name: "Illustrator", short: "AI", detail: { ar: "رسوم وهوية وعناصر قابلة للتحريك", en: "Illustration, identity and motion-ready assets" } },
+  { name: "Premiere Pro", short: "PR", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/premiere-pro.svg", detail: { ar: "مونتاج وإيقاع وبناء الحكاية", en: "Editing, rhythm and story construction" } },
+  { name: "After Effects", short: "AE", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/after-effects-40.svg", detail: { ar: "موشن ديزاين وحركة بصرية", en: "Motion design and visual movement" } },
+  { name: "Photoshop", short: "PS", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/photoshop-40.svg", detail: { ar: "معالجة وتصميم العناصر البصرية", en: "Visual treatment and graphic composition" } },
+  { name: "Illustrator", short: "AI", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", detail: { ar: "رسوم وهوية وعناصر قابلة للتحريك", en: "Illustration, identity and motion-ready assets" } },
 ];
 
 export const projects = [
@@ -86,18 +86,18 @@ export const cameraScene = {
 
 export const copy = {
   ar: {
-    discipline: "مونتاج فيديو · موشن ديزاين · سرد بصري",
-    statement: "أحوّل الفكرة إلى مشهد.",
+    discipline: "تصوير · فيديوجرافي · مونتاج فيديو · موشن ديزاين",
+    statement: "من أول كادر لآخر Cut… الحكاية لازم تتشاف.",
     scroll: "اسحب لتدخل الحكاية",
-    manifesto: ["مش كل لقطة محتاجة Cut.", "ومش كل فكرة محتاجة صوت عالي.", "أحيانًا، التفاصيل هي اللي بتحكي."],
+    manifesto: ["التصوير بيخلق اللحظة.", "المونتاج بيخلق الإيقاع.", "والفكرة هي اللي بتربط الاتنين."],
     selected: "أعمال مختارة",
-    selectedSub: "كل Cut قرار. كل حركة لها معنى.",
+    selectedSub: "تصوير، مونتاج، موشن، وريلز مصممة عشان الفكرة تعيش على الشاشة.",
     people: "في الطريق، قابلنا ناس كتير.",
     peopleSub: "أشخاص عندهم حاجة تستاهل تتحكي.",
     toolkit: "العدة",
-    toolkitSub: "الأدوات تتغير. العين هي الثابتة.",
+    toolkitSub: "Premiere، After Effects، Photoshop، Illustrator — أدوات مختلفة، رؤية واحدة.",
     aboutTitle: "وراء كل Cut قرار.",
-    aboutText: "أشتغل عند تقاطع المونتاج والتصميم والموشن والسرد. أبحث عن الإيقاع الذي يجعل الفكرة تُرى، لا أن تُشرح فقط.",
+    aboutText: "مصور وفيديوجرافر وفيديو إيديتور. بشتغل على صناعة الصورة من لحظة التصوير، لحد المونتاج والموشن والـ Reels — عشان كل ثانية تخدم الفكرة وتوصل الإحساس.",
     process: "من الفكرة إلى المشهد",
     showreel: "شوف الشغل وهو بيتكلم.",
     play: "شغّل",
@@ -109,18 +109,18 @@ export const copy = {
     soon: "الشو ريل قريبًا",
   },
   en: {
-    discipline: "VIDEO EDITING · MOTION DESIGN · VISUAL STORYTELLING",
-    statement: "I turn ideas into scenes.",
+    discipline: "CINEMATOGRAPHY · VIDEOGRAPHY · VIDEO EDITING · MOTION DESIGN",
+    statement: "From the first frame to the final cut — make the story seen.",
     scroll: "SCROLL TO ENTER",
-    manifesto: ["Not every frame needs a cut.", "Not every idea needs to be loud.", "Sometimes, the details do the talking."],
+    manifesto: ["Cinematography creates the moment.", "Editing creates the rhythm.", "The idea connects them both."],
     selected: "Selected work",
-    selectedSub: "Every cut is a decision. Every movement has a reason.",
+    selectedSub: "Cinematography, editing, motion and reels built to keep the idea alive on screen.",
     people: "Along the way, I met people with something worth saying.",
     peopleSub: "Selected collaborators and creative relationships.",
     toolkit: "The toolkit",
-    toolkitSub: "Tools change. The eye stays.",
+    toolkitSub: "Premiere, After Effects, Photoshop, Illustrator — different tools, one visual language.",
     aboutTitle: "Behind every cut is a choice.",
-    aboutText: "Working at the intersection of editing, design, motion and storytelling. Looking for the rhythm that lets an idea be seen, not simply explained.",
+    aboutText: "A cinematographer, videographer and video editor shaping the whole visual journey — from capturing the frame to editing, motion and social-first reels.",
     process: "From idea to scene",
     showreel: "Let the work speak.",
     play: "Play",
