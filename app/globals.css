@@ -230,3 +230,6 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--accent); outlin
   .not-found-center h1 { font-size:48vw; }
   .not-found-no,.not-found-corner { font-size:7px; }
 }
+
+.adobe-mark img { width:38px; height:38px; object-fit:contain; display:block; }
+@media (max-width:700px) { .adobe-mark img { width:30px; height:30px; } }
