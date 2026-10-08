@@ -1,3 +1,3 @@
 "use client";
 import { useLanguage } from "@/components/LanguageProvider";
-export function Footer(){const {language,t,toggleLanguage}=useLanguage();return <footer className="footer"><div><strong>محمد عاصم</strong><span>{language==="ar"?"مصور · فيديوجرافر · محرر فيديو":"Cinematographer · Videographer · Video Editor"}</span></div><span>© 2026 MOHAMED ASSEM</span><button onClick={toggleLanguage}>{language==="ar"?"EN / عربي":"عربي / EN"}</button></footer>}
+export function Footer(){const {language,toggleLanguage}=useLanguage();return <footer className="footer"><div><strong>محمد عاصم</strong><span>{language==="ar"?"مصور · فيديوجرافر · محرر فيديو":"Cinematographer · Videographer · Video Editor"}</span></div><span>© 2026 MOHAMED ASSEM</span><button onClick={toggleLanguage}>{language==="ar"?"EN / عربي":"عربي / EN"}</button></footer>}

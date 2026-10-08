@@ -26,10 +26,6 @@ export function Services({ language }: { language: Language }) {
         y: 0, opacity: 1, stagger: .08, duration: .8, ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 75%" }
       });
-      gsap.fromTo(".service-row", { clipPath: "inset(0 0 100% 0)", y: 35 }, {
-        clipPath: "inset(0 0 0% 0)", y: 0, stagger: .11, duration: 1, ease: "power4.out",
-        scrollTrigger: { trigger: ".services-list", start: "top 78%" }
-      });
       gsap.utils.toArray<HTMLElement>(".service-row").forEach((row) => {
         const number = row.querySelector(".service-number");
         const symbol = row.querySelector(".service-symbol");

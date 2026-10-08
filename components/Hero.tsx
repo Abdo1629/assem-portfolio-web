@@ -28,5 +28,10 @@ export function Hero() {
     </div>
     <div className="hero-frame" aria-hidden="true"><div className="camera-lens" /><div className="frame-scan" /><div className="frame-grid" /><span className="frame-label">FRAME_001 / 024</span><span className="frame-time">00:00:03:12</span><span className="frame-center">MA<small>CAPTURE / EDIT / STORY</small></span></div>
     <div className="hero-foot"><span>{t.scroll}</span><span className="scroll-line" /><span>01 — 12</span></div>
+    <div className="hero-readout" aria-label={t.navLabel}>
+      <div><span>01</span><strong>{t.navLabel === "المشهد الحالي" ? "التقاط" : "CAPTURE"}</strong><i><b /></i></div>
+      <div><span>02</span><strong>{t.navLabel === "المشهد الحالي" ? "مونتاج" : "EDIT"}</strong><i><b /></i></div>
+      <div><span>03</span><strong>{t.navLabel === "المشهد الحالي" ? "حركة" : "MOTION"}</strong><i><b /></i></div>
+    </div>
   </section>;
 }

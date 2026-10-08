@@ -18,7 +18,7 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { CinematicDirector } from "@/components/motion/CinematicDirector";
 
 function Portfolio() {
-  const { language, dir, toggleLanguage } = useLanguage();
+  const { language, dir } = useLanguage();
   const [showReelOpen, setShowReelOpen] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ function Portfolio() {
         <CameraScene />
         <SoftwareScene />
         <Projects />
-        <Services />
+        <Services language={language} />
         <Collaborations />
         <Process />
         <Showreel open={showReelOpen} onOpen={() => setShowReelOpen(true)} onClose={() => setShowReelOpen(false)} />
