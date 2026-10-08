@@ -19,6 +19,7 @@ export function Navigation({ language, onLanguageChange }: { language: Language;
       </a>
       <div className="nav-right">
         <button className="language" onClick={onLanguageChange} aria-label="Switch language">{ar ? "EN" : "عربي"}<i /></button>
+        <a className="nav-link" href="#services">{ar ? "الخدمات" : "Services"}</a>
         <a className="nav-link" href="#contact">{ar ? "تواصل" : "Contact"}</a>
       </div>
     </header>
