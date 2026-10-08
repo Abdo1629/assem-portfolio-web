@@ -80,7 +80,7 @@ export const ar: LocaleContent = {
     servicesLabel: "06 / الخدمات",
     collaborationsLabel: "07 / COLLABORATIONS",
     processLabel: "08 / PROCESS",
-    showreelLabel: "09 / SHOWREEL",
+    showreelLabel: "09 / LAST FRAME",
     contactLabel: "10 / CONTACT",
     capture: "التقاط",
     edit: "مونتاج",

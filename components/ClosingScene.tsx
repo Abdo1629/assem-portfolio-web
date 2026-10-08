@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
+export function ClosingScene(){const {t}=useLanguage();return <section data-scene="closing" className="showreel section-pad"><div className="showreel-frame"><span className="section-index">{t.showreelLabel}</span><p className="closing-kicker">MOHAMED ASSEM <i/> VISUAL DIRECTOR</p><h2>{t.showreel}</h2><div className="showreel-actions"><Link className="hero-cta hero-cta-primary" href="/projects">{t.work}<span aria-hidden="true">↗</span></Link><Link className="hero-cta hero-cta-secondary" href="#contact">{t.start}<span aria-hidden="true">↗</span></Link></div><div className="showreel-time">24 FPS <i>·</i> {t.heroFootnote}</div><span className="closing-reticle" aria-hidden="true"><i/><b/></span></div></section>}

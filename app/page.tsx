@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { CameraScene } from "@/components/CameraScene";
 import { Collaborations } from "@/components/Collaborations";
 import { Contact } from "@/components/Contact";
@@ -10,7 +9,7 @@ import { Navigation } from "@/components/Navigation";
 import { Process } from "@/components/Process";
 import { Projects } from "@/components/Projects";
 import { Services } from "@/components/Services";
-import { Showreel } from "@/components/Showreel";
+import { ClosingScene } from "@/components/ClosingScene";
 import { SoftwareScene } from "@/components/SoftwareScene";
 import { Footer } from "@/components/Footer";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
@@ -19,7 +18,6 @@ import { CinematicDirector } from "@/components/motion/CinematicDirector";
 
 function Portfolio() {
   const { language, dir } = useLanguage();
-  const [showReelOpen, setShowReelOpen] = useState(false);
 
   return (
     <SmoothScroll>
@@ -35,7 +33,7 @@ function Portfolio() {
         <Services language={language} />
         <Collaborations />
         <Process />
-        <Showreel open={showReelOpen} onOpen={() => setShowReelOpen(true)} onClose={() => setShowReelOpen(false)} />
+        <ClosingScene />
         <Contact />
         <Footer />
       </main>

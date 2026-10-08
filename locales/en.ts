@@ -80,7 +80,7 @@ export const en: LocaleContent = {
     servicesLabel: "06 / SERVICES",
     collaborationsLabel: "07 / COLLABORATIONS",
     processLabel: "08 / PROCESS",
-    showreelLabel: "09 / SHOWREEL",
+    showreelLabel: "09 / LAST FRAME",
     contactLabel: "10 / CONTACT",
     capture: "CAPTURE",
     edit: "EDIT",

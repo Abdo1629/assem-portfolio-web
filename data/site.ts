@@ -25,6 +25,7 @@ export type Copy = {
   close: string;
   soon: string;
   navWork: string;
+  navHome: string;
   navAbout: string;
   navProjects: string;
   navServices: string;
