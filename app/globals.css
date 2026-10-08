@@ -202,3 +202,31 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--accent); outlin
   .contact h2 { margin-top:25vw; font-size:19vw; } .contact-actions { flex-direction:column; }
   .button { width:100%; } .footer { display:grid; gap:25px; padding:25px 6vw; }
 }
+
+.services { border-top:1px solid var(--border); }
+.service-intro { margin-bottom:5vw; }
+.service-intro h2 em { color:var(--accent); font-style:normal; }
+.services-list { border-top:1px solid var(--border); }
+.service-row { min-height:118px; display:grid; grid-template-columns:10% 1fr auto; align-items:center; gap:2vw; border-bottom:1px solid var(--border); }
+.service-number,.service-type,.service-symbol { color:var(--text-muted); font-size:9px; letter-spacing:.14em; }
+.service-main { display:flex; align-items:center; gap:3vw; }
+.service-main h3 { margin:0; font-size:clamp(36px,5vw,76px); line-height:.9; font-weight:400; letter-spacing:-.07em; }
+.service-symbol { width:62px; }
+.not-found { min-height:100svh; position:relative; overflow:hidden; display:grid; place-items:center; background:var(--bg); padding:8vw; }
+.not-found-grid { position:absolute; inset:10%; border:1px solid var(--border); background:linear-gradient(90deg,transparent 49.8%,var(--border) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,var(--border) 50%,transparent 50.2%); opacity:.45; }
+.not-found-center { position:relative; z-index:2; text-align:center; }
+.not-found-center h1 { margin:10px 0 15px; font-size:clamp(150px,28vw,420px); line-height:.68; font-weight:400; letter-spacing:-.13em; }
+.not-found-center > p:not(.eyebrow) { color:var(--text-muted); line-height:1.8; margin:30px auto 35px; }
+.not-found-no,.not-found-corner { position:absolute; z-index:3; color:var(--text-muted); font-size:9px; letter-spacing:.15em; }
+.not-found-no { top:30px; inset-inline-start:5vw; }
+.not-found-corner { bottom:30px; inset-inline-end:5vw; }
+@media (max-width:700px) {
+  .service-row { min-height:96px; grid-template-columns:12% 1fr; }
+  .service-type { display:none; }
+  .service-main { gap:12px; }
+  .service-symbol { width:45px; font-size:8px; }
+  .service-main h3 { font-size:34px; }
+  .not-found { padding:6vw; }
+  .not-found-center h1 { font-size:48vw; }
+  .not-found-no,.not-found-corner { font-size:7px; }
+}
