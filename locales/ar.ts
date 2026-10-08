@@ -65,6 +65,7 @@ export const ar: LocaleContent = {
     close: "إغلاق",
     soon: "سيُضاف الشو ريل قريبًا",
     navWork: "الأعمال",
+    navHome: "الرئيسية",
     navAbout: "عنّي",
     navProjects: "المشروعات",
     navServices: "الخدمات",
