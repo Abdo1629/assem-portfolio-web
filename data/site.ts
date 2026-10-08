@@ -50,6 +50,15 @@ export type Copy = {
   closeMenu: string;
   mobileNavigation: string;
   homeAria: string;
+  brandRole: string;
+  switchToLight: string;
+  switchToDark: string;
+  yearsExperience: string;
+  clients: string;
+  projectsCount: string;
+  primaryCta: string;
+  secondaryCta: string;
+  heroWatermark: string;
 };
 
 export type CameraSceneCopy = {

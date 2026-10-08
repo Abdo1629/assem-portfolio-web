@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ar" dir="rtl">
+      <head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('assem-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t}catch(e){}` }} /></head>
       <body>{children}</body>
     </html>
   );
