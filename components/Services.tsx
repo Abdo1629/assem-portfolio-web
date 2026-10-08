@@ -3,28 +3,24 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { services, type Language } from "@/data/site";
+import type { Language } from "@/data/site";
+import { useLanguage } from "@/components/LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const serviceMeta = [
-  { no: "01", ar: "مونتاج", en: "EDIT", symbol: "CUT" },
-  { no: "02", ar: "تصوير", en: "SHOOT", symbol: "REC" },
-  { no: "03", ar: "فيديوجرافر", en: "VIDEOGRAPHY", symbol: "CAM" },
-  { no: "04", ar: "موشن", en: "MOTION", symbol: "FX" },
-  { no: "05", ar: "ريلز", en: "REELS", symbol: "9:16" },
-  { no: "06", ar: "هوية بصرية", en: "VISUAL IDENTITY", symbol: "ID" },
-];
-
 export function Services({ language }: { language: Language }) {
   const ref = useRef<HTMLElement>(null);
+  const { content } = useLanguage();
+  const { copy, services, serviceMeta } = content;
+
   useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const element = ref.current;
+    if (!element) return;
+    const context = gsap.context(() => {
       gsap.fromTo(".service-intro > *", { y: 45, opacity: 0 }, {
         y: 0, opacity: 1, stagger: .08, duration: .8, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 75%" }
+        scrollTrigger: { trigger: element, start: "top 75%" },
       });
       gsap.utils.toArray<HTMLElement>(".service-row").forEach((row) => {
         const number = row.querySelector(".service-number");
@@ -34,30 +30,28 @@ export function Services({ language }: { language: Language }) {
         row.addEventListener("mouseenter", onEnter);
         row.addEventListener("mouseleave", onLeave);
       });
-    }, el);
-    return () => ctx.revert();
+    }, element);
+    return () => context.revert();
   }, [language]);
 
   return (
-    <section ref={ref} id="services" className="services section-pad">
+    <section ref={ref} id="services" data-scene="services" className="services section-pad">
       <div className="service-intro section-heading">
         <div>
-          <p className="eyebrow"><span className="signal" />06 / {language === "ar" ? "الخدمات" : "SERVICES"}</p>
-          <h2>{language === "ar" ? <>مش بقدّم <em>خدمة.</em><br />ببني تجربة.</> : <>Not a service.<br /><em>A visual experience.</em></>}</h2>
+          <p className="eyebrow"><span className="signal" />{copy.servicesLabel}</p>
+          <h2>{copy.servicesTitle}</h2>
         </div>
-        <p>{language === "ar"
-          ? "من أول التصوير لحد آخر Export، كل مرحلة بتخدم نفس الهدف: تخلي الفكرة أوضح، أمتع، وأقوى على الشاشة."
-          : "From the first frame to the final export, every stage serves one goal: make the idea clearer, sharper and impossible to ignore."}</p>
+        <p>{copy.servicesSub}</p>
       </div>
       <div className="services-list">
-        {services.map((item, i) => (
-          <article className="service-row" key={item.en}>
-            <span className="service-number">{serviceMeta[i].no}</span>
+        {services.map((item, index) => (
+          <article className="service-row" key={item}>
+            <span className="service-number">{serviceMeta[index].no}</span>
             <div className="service-main">
-              <span className="service-symbol">{serviceMeta[i].symbol}</span>
-              <h3>{item[language]}</h3>
+              <span className="service-symbol">{serviceMeta[index].symbol}</span>
+              <h3>{item}</h3>
             </div>
-            <span className="service-type">{language === "ar" ? serviceMeta[i].en : serviceMeta[i].ar}</span>
+            <span className="service-type">{serviceMeta[index].label}</span>
           </article>
         ))}
       </div>

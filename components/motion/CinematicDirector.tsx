@@ -10,9 +10,21 @@ export function CinematicDirector() {
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
+      let progressTrigger: ReturnType<typeof ScrollTrigger.create> | undefined;
       const ctx = gsap.context(() => {
+        const progress = document.querySelector<HTMLElement>(".director-progress-bar");
+        const progressLabel = document.querySelector<HTMLElement>(".director-progress-label");
+        progressTrigger = ScrollTrigger.create({
+          start: "top top",
+          end: "max",
+          onUpdate: (self) => {
+            const value = Math.round(self.progress * 100);
+            if (progress) progress.style.transform = `scaleX(${self.progress})`;
+            if (progressLabel) progressLabel.textContent = `${String(value).padStart(2, "0")} / 100`;
+          },
+        });
         const sections = gsap.utils.toArray<HTMLElement>("main > section:not(.hero):not(.story-scene)");
-        const isRtl = document.documentElement.dir === "rtl";
+        const isRtl = document.querySelector<HTMLElement>("main")?.dir === "rtl";
 
         sections.forEach((section) => {
           const index = section.querySelector<HTMLElement>(".section-index");
@@ -50,10 +62,10 @@ export function CinematicDirector() {
           scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
         });
       });
-      return () => ctx.revert();
+      return () => { progressTrigger?.kill(); ctx.revert(); };
     });
     return () => media.revert();
   }, []);
 
-  return <div className="scroll-director" aria-hidden="true" />;
+  return <div className="scroll-director" aria-hidden="true"><div className="director-progress"><span className="director-progress-label">00 / 100</span><i><b className="director-progress-bar" /></i><span>DIRECTOR / TIMELINE</span></div><div className="director-light" /></div>;
 }
