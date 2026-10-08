@@ -9,34 +9,40 @@ import { Manifesto } from "@/components/Manifesto";
 import { Navigation } from "@/components/Navigation";
 import { Process } from "@/components/Process";
 import { Projects } from "@/components/Projects";
-import { Showreel } from "@/components/Showreel";
 import { Services } from "@/components/Services";
+import { Showreel } from "@/components/Showreel";
 import { SoftwareScene } from "@/components/SoftwareScene";
 import { Footer } from "@/components/Footer";
+import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import type { Language } from "@/data/site";
+import { CinematicDirector } from "@/components/motion/CinematicDirector";
 
-export default function Home() {
-  const [language, setLanguage] = useState<Language>("ar");
+function Portfolio() {
+  const { language, dir, toggleLanguage } = useLanguage();
   const [showReelOpen, setShowReelOpen] = useState(false);
 
   return (
     <SmoothScroll>
-      <main dir={language === "ar" ? "rtl" : "ltr"} className={language === "ar" ? "site arabic" : "site"}>
+      <main dir={dir} className={language === "ar" ? "site arabic" : "site"}>
         <div className="grain" aria-hidden="true" />
-        <Navigation language={language} onLanguageChange={() => setLanguage(language === "ar" ? "en" : "ar")} />
-        <Hero language={language} />
-        <Manifesto language={language} />
-        <CameraScene language={language} />
-        <SoftwareScene language={language} />
-        <Projects language={language} />
-        <Services language={language} />
-        <Collaborations language={language} />
-        <Process language={language} />
-        <Showreel language={language} open={showReelOpen} onOpen={() => setShowReelOpen(true)} onClose={() => setShowReelOpen(false)} />
-        <Contact language={language} />
-        <Footer language={language} onLanguageChange={() => setLanguage(language === "ar" ? "en" : "ar")} />
+        <CinematicDirector />
+        <Navigation />
+        <Hero />
+        <Manifesto />
+        <CameraScene />
+        <SoftwareScene />
+        <Projects />
+        <Services />
+        <Collaborations />
+        <Process />
+        <Showreel open={showReelOpen} onOpen={() => setShowReelOpen(true)} onClose={() => setShowReelOpen(false)} />
+        <Contact />
+        <Footer />
       </main>
     </SmoothScroll>
   );
+}
+
+export default function Home() {
+  return <LanguageProvider><Portfolio /></LanguageProvider>;
 }
