@@ -13,12 +13,11 @@ import { Showreel } from "@/components/Showreel";
 import { SoftwareScene } from "@/components/SoftwareScene";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { copy, type Language } from "@/data/site";
+import type { Language } from "@/data/site";
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("ar");
   const [showReelOpen, setShowReelOpen] = useState(false);
-  const t = copy[language];
 
   return (
     <SmoothScroll>
