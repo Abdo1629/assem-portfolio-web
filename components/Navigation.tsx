@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const navigationItems = [
+  { key: "home", href: "/", section: "top" },
   { key: "about", href: "/about", section: "manifesto" },
   { key: "services", href: "/services", section: "services" },
   { key: "projects", href: "/projects", section: "work" },
@@ -47,6 +48,7 @@ export function Navigation() {
   const closeMenu = () => setMenuOpen(false);
   const switchLanguage = () => { closeMenu(); toggleLanguage(); };
   const itemLabel = (key: (typeof navigationItems)[number]["key"]) => ({
+    home: t.navHome,
     about: t.navAbout,
     services: t.navServices,
     projects: t.navProjects,
@@ -54,7 +56,7 @@ export function Navigation() {
   const isActive = (item: (typeof navigationItems)[number]) =>
     pathname === item.href || (pathname === "/" && activeSection === item.section);
 
-  return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`}>
+  return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`} data-nav-home={pathname === "/" ? "true" : "false"}>
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
         <span className="brand-mark" aria-hidden="true">م</span>
