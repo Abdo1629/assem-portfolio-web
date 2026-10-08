@@ -9,16 +9,15 @@ import { useLanguage } from "@/components/LanguageProvider";
 gsap.registerPlugin(ScrollTrigger);
 
 const floatingTools = [
-  { name: "Premiere Pro", short: "Pr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/premiere-pro-40.svg", x: "11%", y: "17%", size: 68, depth: 18, delay: 0 },
-  { name: "After Effects", short: "Ae", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/after-effects-40.svg", x: "28%", y: "10%", size: 58, depth: -22, delay: .12 },
-  { name: "Photoshop", short: "Ps", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/photoshop-40.svg", x: "47%", y: "22%", size: 64, depth: 28, delay: .2 },
-  { name: "Illustrator", short: "Ai", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", x: "69%", y: "12%", size: 60, depth: -16, delay: .08 },
-  { name: "Lightroom", short: "Lr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/lightroom-40.svg", x: "82%", y: "34%", size: 70, depth: 20, delay: .18 },
-  { name: "InDesign", short: "Id", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/indesign-40.svg", x: "15%", y: "58%", size: 56, depth: -24, delay: .28 },
-  { name: "Audition", short: "Au", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/audition-40.svg", x: "34%", y: "72%", size: 62, depth: 16, delay: .14 },
-  { name: "Capture", short: "Ca", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/capture-40.svg", x: "66%", y: "68%", size: 54, depth: -18, delay: .24 },
-  { name: "Firefly", short: "Ff", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/firefly.svg", x: "84%", y: "73%", size: 58, depth: 22, delay: .05 },
-] as const;
+  { name: "Premiere Pro", short: "Pr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/premiere-pro-40.svg", x: "6%", y: "10%", size: 56, depth: 18, delay: 0 },
+  { name: "After Effects", short: "Ae", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/after-effects-40.svg", x: "76%", y: "8%", size: 52, depth: -16, delay: .12 },
+  { name: "Photoshop", short: "Ps", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/photoshop-40.svg", x: "88%", y: "30%", size: 60, depth: 20, delay: .2 },
+  { name: "Illustrator", short: "Ai", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", x: "72%", y: "58%", size: 52, depth: -18, delay: .08 },
+  { name: "Lightroom", short: "Lr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/lightroom-40.svg", x: "10%", y: "72%", size: 58, depth: 16, delay: .18 },
+  { name: "InDesign", short: "Id", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/indesign-40.svg", x: "90%", y: "74%", size: 48, depth: -22, delay: .28 },
+  { name: "Audition", short: "Au", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/audition-40.svg", x: "2%", y: "40%", size: 50, depth: 14, delay: .14 },
+  { name: "Firefly", short: "Ff", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/firefly.svg", x: "84%", y: "88%", size: 48, depth: 22, delay: .05 },
+] as const;;
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -101,20 +100,20 @@ export function Hero() {
         </div>
       </div>
       <div className="hero-frame">
-        <div className="hero-floating-tools" aria-label="Creative tools">
+        <div className="hero-floating-tools" aria-hidden="true">
           {floatingTools.map((tool) => (
             <span
               key={tool.name}
               className="hero-floating-icon"
               data-depth={tool.depth}
               data-delay={tool.delay}
-              style={{ left: tool.x, top: tool.y, width: tool.size, height: tool.size, position: "absolute", zIndex: 7, display: "grid", placeItems: "center", perspective: "700px", transformStyle: "preserve-3d", borderRadius: "18px", background: "linear-gradient(145deg, rgba(255,255,255,.15), rgba(255,255,255,.035))", border: "1px solid rgba(255,255,255,.24)", boxShadow: "0 18px 45px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.2)", backdropFilter: "blur(9px)" }}
+              style={{ left: tool.x, top: tool.y, width: tool.size, height: tool.size }}
               title={tool.name}
             >
-              <span className="hero-floating-icon-face" style={{ width: "72%", height: "72%", display: "grid", placeItems: "center", borderRadius: "14px", transform: "translateZ(18px) rotateX(8deg) rotateY(-8deg)", background: "rgba(3,19,34,.52)", boxShadow: "0 8px 20px rgba(0,0,0,.28)" }}>
+              <span className="hero-floating-icon-face">
                 <Image src={tool.src} alt="" width={tool.size - 18} height={tool.size - 18} />
               </span>
-              <small style={{ position: "absolute", right: 7, bottom: 5, fontSize: 7, lineHeight: 1, letterSpacing: ".08em", color: "rgba(255,255,255,.72)", fontFamily: "Arial, sans-serif" }}>{tool.short}</small>
+              <small>{tool.short}</small>
             </span>
           ))}
         </div>
