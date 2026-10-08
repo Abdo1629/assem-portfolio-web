@@ -1,27 +1,22 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { type Language } from "@/data/site";
+import { useLanguage } from "@/components/LanguageProvider";
 
-export function Navigation({ language, onLanguageChange }: { language: Language; onLanguageChange: () => void }) {
+export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
-    fn();
-    window.addEventListener("scroll", fn, { passive: true });
+    fn(); window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-  const ar = language === "ar";
-  return (
-    <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
-      <a className="brand" href="#top" aria-label="Mohamed Assem home">
-        <span>م</span><span className="brand-name">MOHAMED ASSEM</span>
-      </a>
-      <div className="nav-right">
-        <button className="language" onClick={onLanguageChange} aria-label="Switch language">{ar ? "EN" : "عربي"}<i /></button>
-        <a className="nav-link" href="#services">{ar ? "الخدمات" : "Services"}</a>
-        <a className="nav-link" href="#contact">{ar ? "تواصل" : "Contact"}</a>
-      </div>
-    </header>
-  );
+  return <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
+    <a className="brand" href="#top" aria-label="Mohamed Assem home"><span>م</span><span className="brand-name">MOHAMED ASSEM</span></a>
+    <nav className="nav-right" aria-label="Primary navigation">
+      <a className="nav-link" href="#work">{t.navWork}</a>
+      <a className="nav-link" href="#services">{t.navServices}</a>
+      <button className="language" onClick={toggleLanguage} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}<i /></button>
+      <a className="nav-link nav-contact" href="#contact">{t.navContact}</a>
+    </nav>
+  </header>;
 }
