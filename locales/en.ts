@@ -98,7 +98,7 @@ export const en: LocaleContent = {
     heroFrameLabel: "VISUAL DIRECTOR",
     heroFootnote: "FROM FIRST IDEA TO FINAL CUT",
     homeAria: "Mohamed Assem home",
-    brandRole: "VISUAL DIRECTOR · DESIGNER · FILMMAKER",
+    brandRole: "VISUAL DIRECTOR",
     switchToLight: "Switch to light theme",
     switchToDark: "Switch to dark theme",
     yearsExperience: "YEARS EXPERIENCE",
