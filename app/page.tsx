@@ -10,6 +10,7 @@ import { Navigation } from "@/components/Navigation";
 import { Process } from "@/components/Process";
 import { Projects } from "@/components/Projects";
 import { Showreel } from "@/components/Showreel";
+import { Services } from "@/components/Services";
 import { SoftwareScene } from "@/components/SoftwareScene";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -29,6 +30,7 @@ export default function Home() {
         <CameraScene language={language} />
         <SoftwareScene language={language} />
         <Projects language={language} />
+        <Services language={language} />
         <Collaborations language={language} />
         <Process language={language} />
         <Showreel language={language} open={showReelOpen} onOpen={() => setShowReelOpen(true)} onClose={() => setShowReelOpen(false)} />
