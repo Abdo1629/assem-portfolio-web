@@ -59,7 +59,7 @@ export function Navigation() {
   return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`} data-nav-home={pathname === "/" ? "true" : "false"}>
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
-        <span className="brand-mark" aria-hidden="true">م</span>
+        <span className="brand-mark" aria-hidden="true">MA</span>
         <span className="brand-name"><strong>MOHAMED ASSEM</strong><small>{t.brandRole}</small></span>
       </Link>
       <nav className="nav-links" aria-label={t.primaryNavigation}>
