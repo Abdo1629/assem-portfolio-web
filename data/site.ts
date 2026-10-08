@@ -25,6 +25,8 @@ export type Copy = {
   close: string;
   soon: string;
   navWork: string;
+  navAbout: string;
+  navProjects: string;
   navServices: string;
   navContact: string;
   navLabel: string;
@@ -49,6 +51,8 @@ export type Copy = {
   menu: string;
   closeMenu: string;
   mobileNavigation: string;
+  primaryNavigation: string;
+  heroStatsLabel: string;
   homeAria: string;
   brandRole: string;
   switchToLight: string;
