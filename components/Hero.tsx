@@ -9,14 +9,14 @@ import { useLanguage } from "@/components/LanguageProvider";
 gsap.registerPlugin(ScrollTrigger);
 
 const floatingTools = [
-  { name: "Premiere Pro", short: "Pr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/premiere-pro-40.svg", x: "6%", y: "10%", size: 56, depth: 18, delay: 0 },
-  { name: "After Effects", short: "Ae", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/after-effects-40.svg", x: "76%", y: "8%", size: 52, depth: -16, delay: .12 },
-  { name: "Photoshop", short: "Ps", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/photoshop-40.svg", x: "88%", y: "30%", size: 60, depth: 20, delay: .2 },
-  { name: "Illustrator", short: "Ai", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", x: "72%", y: "58%", size: 52, depth: -18, delay: .08 },
-  { name: "Lightroom", short: "Lr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/lightroom-40.svg", x: "10%", y: "72%", size: 58, depth: 16, delay: .18 },
-  { name: "InDesign", short: "Id", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/indesign-40.svg", x: "90%", y: "74%", size: 48, depth: -22, delay: .28 },
-  { name: "Audition", short: "Au", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/audition-40.svg", x: "2%", y: "40%", size: 50, depth: 14, delay: .14 },
-  { name: "Firefly", short: "Ff", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/firefly.svg", x: "84%", y: "88%", size: 48, depth: 22, delay: .05 },
+  { name: "Premiere Pro", short: "Pr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/premiere-pro-40.svg", x: "58%", y: "17%", size: 56, depth: 18, delay: 0 },
+  { name: "After Effects", short: "Ae", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/after-effects-40.svg", x: "82%", y: "13%", size: 52, depth: -16, delay: .12 },
+  { name: "Photoshop", short: "Ps", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/photoshop-40.svg", x: "91%", y: "34%", size: 60, depth: 20, delay: .2 },
+  { name: "Illustrator", short: "Ai", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", x: "78%", y: "68%", size: 52, depth: -18, delay: .08 },
+  { name: "Lightroom", short: "Lr", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/lightroom-40.svg", x: "61%", y: "75%", size: 58, depth: 16, delay: .18 },
+  { name: "InDesign", short: "Id", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/indesign-40.svg", x: "93%", y: "68%", size: 48, depth: -22, delay: .28 },
+  { name: "Audition", short: "Au", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/audition-40.svg", x: "69%", y: "38%", size: 50, depth: 14, delay: .14 },
+  { name: "Firefly", short: "Ff", src: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/firefly.svg", x: "85%", y: "84%", size: 48, depth: 22, delay: .05 },
 ] as const;;
 
 export function Hero() {
