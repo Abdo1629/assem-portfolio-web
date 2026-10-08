@@ -58,7 +58,8 @@ export type Copy = {
   projectsCount: string;
   primaryCta: string;
   secondaryCta: string;
-  heroWatermark: string;
+  identityHeadline: string;
+  identitySubline: string;
 };
 
 export type CameraSceneCopy = {

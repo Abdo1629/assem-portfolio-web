@@ -27,7 +27,8 @@ export function Hero() {
     <div className="hero-brand-art" aria-hidden="true" />
     <div className="hero-copy">
       <p className="eyebrow hero-kicker"><span className="signal" />{t.discipline}</p>
-      <h1 className="hero-title"><span>محمد عاصم</span><span className="latin-title">MOHAMED ASSEM</span></h1>
+      <p className="hero-byline"><span>MOHAMED ASSEM</span><i aria-hidden="true">/</i>{language === "ar" ? "محمد عاصم" : "VISUAL DIRECTOR · DESIGNER · FILMMAKER"}</p>
+      <h1 className="hero-title"><span>{t.identityHeadline}</span><span className="latin-title">{t.identitySubline}</span></h1>
       <p className="hero-statement">{t.statement}</p>
       <div className="hero-actions">
         <a className="hero-cta hero-cta-primary" href="#contact">{t.primaryCta}<span aria-hidden="true">↗</span></a>
@@ -40,7 +41,6 @@ export function Hero() {
       </div>
     </div>
     <div className="hero-frame">
-      <div className="hero-frame-brand" aria-hidden="true"><span>{t.heroWatermark.split("·")[0]}</span><br /><i>{t.heroWatermark.split("·")[1]}</i></div>
       <Image className="hero-portrait" src="/images/mohamed-assem-portrait.jpg" alt={language === "ar" ? "محمد عاصم، مخرج بصري ومصمم وصانع أفلام" : "Mohamed Assem, visual director, designer and filmmaker"} fill priority sizes="(max-width: 620px) 82vw, (max-width: 860px) 38vw, 40vw" />
       <span className="frame-label">VISUAL DIRECTOR <i>·</i> 01 / 06</span>
       <span className="frame-time">MOHAMED ASSEM</span>

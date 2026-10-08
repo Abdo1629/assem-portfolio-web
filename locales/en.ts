@@ -98,6 +98,7 @@ export const en: LocaleContent = {
     projectsCount: "VISUAL PROJECTS",
     primaryCta: "Get in touch",
     secondaryCta: "View selected work",
-    heroWatermark: "YOUR VISION · MY DIRECTION",
+    identityHeadline: "YOUR VISION",
+    identitySubline: "MY DIRECTION",
   },
 };

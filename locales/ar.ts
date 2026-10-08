@@ -98,6 +98,7 @@ export const ar: LocaleContent = {
     projectsCount: "مشروع بصري",
     primaryCta: "تواصل معي",
     secondaryCta: "شاهد الأعمال",
-    heroWatermark: "رؤيتك · توجيهي",
+    identityHeadline: "رؤيتك",
+    identitySubline: "توجيهي البصري",
   },
 };
