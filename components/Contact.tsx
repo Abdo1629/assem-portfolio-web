@@ -1,3 +1,3 @@
 "use client";
-import { type Language, copy } from "@/data/site";
-export function Contact({language}:{language:Language}){const t=copy[language];return <section className="contact section-pad" id="contact"><p className="section-index">09 / CONTACT</p><h2>{t.contact}</h2><p className="contact-sub">{t.contactText}</p><div className="contact-actions"><a className="button button-fill" href="#contact">{t.start}<span>↗</span></a><a className="button" href="#work">{t.work}<span>↗</span></a></div></section>}
+import { useLanguage } from "@/components/LanguageProvider";
+export function Contact(){const {t}=useLanguage();return <section className="contact section-pad" id="contact"><p className="section-index">09 / CONTACT</p><h2>{t.contact}</h2><p className="contact-sub">{t.contactText}</p><div className="contact-actions"><a className="button button-fill" href="#contact">{t.start}<span>↗</span></a><a className="button" href="#work">{t.work}<span>↗</span></a></div></section>}
