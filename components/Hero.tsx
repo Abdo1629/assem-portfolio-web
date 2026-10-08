@@ -1,15 +1,13 @@
 "use client";
-
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import { type Language, copy } from "@/data/site";
+import { useLanguage } from "@/components/LanguageProvider";
 
-export function Hero({ language }: { language: Language }) {
+export function Hero() {
   const root = useRef<HTMLElement>(null);
-  const t = copy[language];
+  const { t } = useLanguage();
   useLayoutEffect(() => {
-    const el = root.current;
-    if (!el) return;
+    const el = root.current; if (!el) return;
     const ctx = gsap.context(() => {
       const q = gsap.utils.selector(el);
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -20,22 +18,15 @@ export function Hero({ language }: { language: Language }) {
         .from(q(".hero-foot"), { opacity: 0, duration: .5 }, "-=.5");
       gsap.to(q(".hero-frame"), { yPercent: -12, scale: .94, scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true } });
       gsap.to(q(".hero-title"), { yPercent: -16, scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true } });
-    }, el);
-    return () => ctx.revert();
+    }, el); return () => ctx.revert();
   }, []);
-  return (
-    <section ref={root} id="top" className="hero section-pad">
-      <div className="hero-copy">
-        <p className="eyebrow hero-kicker"><span className="signal" />{t.discipline}</p>
-        <h1 className="hero-title"><span>محمد عاصم</span><span className="latin-title">MOHAMED<br />ASSEM</span></h1>
-        <p className="hero-statement">{t.statement}</p>
-      </div>
-      <div className="hero-frame" aria-hidden="true">
-        <div className="camera-lens" /><div className="frame-scan" /><div className="frame-grid" />
-        <span className="frame-label">FRAME_001 / 024</span><span className="frame-time">00:00:03:12</span>
-        <span className="frame-center">MA<small>EDIT / MOTION / STORY</small></span>
-      </div>
-      <div className="hero-foot"><span>{t.scroll}</span><span className="scroll-line" /><span>01 — 12</span></div>
-    </section>
-  );
+  return <section ref={root} id="top" className="hero section-pad">
+    <div className="hero-copy">
+      <p className="eyebrow hero-kicker"><span className="signal" />{t.discipline}</p>
+      <h1 className="hero-title"><span>محمد عاصم</span><span className="latin-title">MOHAMED<br />ASSEM</span></h1>
+      <p className="hero-statement">{t.statement}</p>
+    </div>
+    <div className="hero-frame" aria-hidden="true"><div className="camera-lens" /><div className="frame-scan" /><div className="frame-grid" /><span className="frame-label">FRAME_001 / 024</span><span className="frame-time">00:00:03:12</span><span className="frame-center">MA<small>CAPTURE / EDIT / STORY</small></span></div>
+    <div className="hero-foot"><span>{t.scroll}</span><span className="scroll-line" /><span>01 — 12</span></div>
+  </section>;
 }
