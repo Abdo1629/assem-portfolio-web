@@ -4,7 +4,6 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "محمد عاصم — Video Editor & Visual Storyteller",
   description: "Mohamed Assem — Video Editor, Motion Designer and Visual Storyteller.",
-  metadataBase: new URL("https://example.com"),
   alternates: { canonical: "/", languages: { ar: "/", en: "/?lang=en" } },
   openGraph: {
     title: "محمد عاصم — Video Editor & Visual Storyteller",
