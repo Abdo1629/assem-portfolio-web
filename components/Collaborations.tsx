@@ -1,0 +1,3 @@
+"use client";
+import { collaborators, type Language } from "@/data/site";
+export function Collaborations({language}:{language:Language}){return <section className="collaborations section-pad"><div className="section-heading"><div><p className="section-index">06 / PEOPLE</p><h2>{language==="ar"?"في الطريق، قابلنا ناس كتير.":"Along the way, I met people with something worth saying."}</h2></div><p>{language==="ar"?"أشخاص عندهم حاجة تستاهل تتحكي.":"Selected collaborators and creative relationships."}</p></div><div className="names">{collaborators.map((person,i)=><span key={person.en} style={{"--delay":`${i*40}ms`} as React.CSSProperties}>{person[language]}</span>)}</div></section>}
