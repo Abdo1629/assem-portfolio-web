@@ -379,7 +379,12 @@ html[data-theme="light"] .site .hero { --bg: #f2f3f0; --bg-elevated: #e7ece9; --
 html[data-theme="light"] .nav { background: color-mix(in srgb, #f2f3f0 86%, transparent); }
 html[data-theme="light"] .nav-scrolled { background: color-mix(in srgb, #f2f3f0 94%, transparent); }
 html[data-theme="light"] .brand-mark { color: #087f88; }
-html[data-theme="light"] .hero { background: radial-gradient(ellipse at 16% 48%, rgba(27,165,178,.08), transparent 42%), var(--bg); }
+html[data-theme="light"] .site .hero { color: #092333; background: radial-gradient(ellipse at 16% 48%, rgba(27,165,178,.08), transparent 42%), #f2f3f0; }
+html[data-theme="light"] .site .hero-title,
+html[data-theme="light"] .site .hero-byline span,
+html[data-theme="light"] .site .hero-cta-secondary { color: #092333; }
+html[data-theme="light"] .site .hero-statement { color: #38505a; }
+html[data-theme="light"] .site .hero-stats small { color: #627680; }
 html[data-theme="light"] .hero-brand-art { opacity: .055; mix-blend-mode: multiply; }
 html[data-theme="light"] .hero-cta-primary:hover { color: #fff; }
 
