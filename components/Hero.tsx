@@ -108,13 +108,13 @@ export function Hero() {
               className="hero-floating-icon"
               data-depth={tool.depth}
               data-delay={tool.delay}
-              style={{ left: tool.x, top: tool.y, width: tool.size, height: tool.size }}
+              style={{ left: tool.x, top: tool.y, width: tool.size, height: tool.size, position: "absolute", zIndex: 7, display: "grid", placeItems: "center", perspective: "700px", transformStyle: "preserve-3d", borderRadius: "18px", background: "linear-gradient(145deg, rgba(255,255,255,.15), rgba(255,255,255,.035))", border: "1px solid rgba(255,255,255,.24)", boxShadow: "0 18px 45px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.2)", backdropFilter: "blur(9px)" }}
               title={tool.name}
             >
-              <span className="hero-floating-icon-face">
+              <span className="hero-floating-icon-face" style={{ width: "72%", height: "72%", display: "grid", placeItems: "center", borderRadius: "14px", transform: "translateZ(18px) rotateX(8deg) rotateY(-8deg)", background: "rgba(3,19,34,.52)", boxShadow: "0 8px 20px rgba(0,0,0,.28)" }}>
                 <Image src={tool.src} alt="" width={tool.size - 18} height={tool.size - 18} />
               </span>
-              <small>{tool.short}</small>
+              <small style={{ position: "absolute", right: 7, bottom: 5, fontSize: 7, lineHeight: 1, letterSpacing: ".08em", color: "rgba(255,255,255,.72)", fontFamily: "Arial, sans-serif" }}>{tool.short}</small>
             </span>
           ))}
         </div>
