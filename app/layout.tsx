@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "محمد عاصم — Video Editor & Visual Storyteller",
-  description: "Mohamed Assem — Video Editor, Motion Designer and Visual Storyteller.",
+  title: "Mohamed Assem Ahmed — Visual Director",
+  description: "Mohamed Assem Ahmed is a Visual Director working across cinematography, video editing, graphic design and brand identity.",
   alternates: { canonical: "/", languages: { ar: "/", en: "/?lang=en" } },
   openGraph: {
-    title: "محمد عاصم — Video Editor & Visual Storyteller",
-    description: "Editing ideas into impact.",
+    title: "Mohamed Assem Ahmed — Visual Director",
+    description: "Visual direction, storytelling and purposeful creative work.",
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Mohamed Assem — Video Editor & Visual Storyteller", description: "Editing ideas into impact." },
+  twitter: { card: "summary_large_image", title: "Mohamed Assem Ahmed — Visual Director", description: "Visual direction, storytelling and purposeful creative work." },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
