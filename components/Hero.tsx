@@ -69,7 +69,7 @@ export function Hero() {
         </div>
       </div>
       <div className="hero-frame">
-        <Image className="hero-portrait" src="/images/mohamed-assem-profile.jpg" alt={language === "ar" ? "محمد عاصم في بورتريه جانبي بالأبيض والأسود" : "Mohamed Assem in a black-and-white side portrait"} fill priority sizes="100vw" />
+        <Image className="hero-portrait" src="/images/assem-hero.png" alt={language === "ar" ? "محمد عاصم في بورتريه جانبي بالأبيض والأسود" : "Mohamed Assem in a black-and-white side portrait"} fill priority sizes="100vw" />
         <span className="frame-label"><i>REC</i><b />{t.heroFrameLabel}</span>
         <span className="frame-time">MA <i>·</i> 00:01:24</span>
         <span className="visual-reticle" aria-hidden="true"><i /><b /><span /></span>
