@@ -53,6 +53,10 @@ export type Copy = {
   mobileNavigation: string;
   primaryNavigation: string;
   heroStatsLabel: string;
+  heroSceneLabel: string;
+  heroCraftLine: string;
+  heroFrameLabel: string;
+  heroFootnote: string;
   homeAria: string;
   brandRole: string;
   switchToLight: string;
