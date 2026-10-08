@@ -54,11 +54,11 @@ export const projects = [
 
 export const services: Localized[] = [
   { ar: "مونتاج فيديو", en: "Video Editing" },
+  { ar: "تصوير سينمائي", en: "Cinematography" },
+  { ar: "فيديوجرافي", en: "Videography" },
   { ar: "موشن ديزاين", en: "Motion Design" },
-  { ar: "سرد بصري", en: "Visual Storytelling" },
-  { ar: "هوية بصرية", en: "Brand Visuals" },
-  { ar: "محتوى إبداعي", en: "Creative Content" },
-  { ar: "اتجاه إبداعي", en: "Creative Direction" },
+  { ar: "ريلز ومحتوى قصير", en: "Reels & Short-form" },
+  { ar: "هوية بصرية", en: "Visual Identity" },
 ];
 
 export const process: Localized[] = [
