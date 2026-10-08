@@ -98,7 +98,7 @@ export const ar: LocaleContent = {
     heroFrameLabel: "المخرج البصري",
     heroFootnote: "من الفكرة إلى النسخة النهائية",
     homeAria: "العودة إلى الصفحة الرئيسية لمحمد عاصم",
-    brandRole: "مخرج بصري · مصمم · صانع أفلام",
+    brandRole: "مخرج بصري",
     switchToLight: "التبديل إلى الوضع الفاتح",
     switchToDark: "التبديل إلى الوضع الداكن",
     yearsExperience: "سنوات خبرة",
