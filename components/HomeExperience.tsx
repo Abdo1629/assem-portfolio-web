@@ -21,6 +21,7 @@ export function HomeExperience() {
   const { language, dir, theme, content } = useLanguage();
   const ar = language === "ar";
   const logo = theme === "dark" ? "/images/assem-logo-dark.png" : "/images/assem-logo-light.png";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 
   useLayoutEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -155,7 +156,10 @@ export function HomeExperience() {
             <Link className="cta-text" href="#contact">{ar ? "ابدأ مشروعًا" : "Start a project"} <motion.span whileHover={{ x: 3, y: -3, rotate: 8 }} whileTap={{ scale: .88 }} transition={{ type: "spring", stiffness: 360, damping: 18 }}>↗</motion.span></Link>
           </div>
         </div>
-        <div className="hero-side-note assembly-piece"><span>06 · 250+ · 1,000+</span><small>{ar ? "سنوات في المجال · عميل · مشروع تقريبًا" : "YEARS IN MEDIA · CLIENTS · PROJECTS APPROX."}</small></div>
+        <div className="hero-side-note assembly-piece">
+          <span>{ar ? "توجيه بصري · تصوير · مونتاج" : "DIRECTION · CAMERA · EDIT"}</span>
+          <small>{ar ? "من أول فكرة إلى النسخة النهائية" : "FROM FIRST IDEA TO FINAL CUT"}</small>
+        </div>
         <div className="hero-bottom">
           <span>{ar ? "القاهرة، مصر · متاح للتعاون" : "CAIRO, EGYPT · OPEN TO SELECT COLLABORATIONS"}</span>
           <a href="#manifesto">{ar ? "ابدأ الرحلة" : "SCROLL TO EXPLORE"} <motion.span className="scroll-cue" animate={{ y: [0, 5, 0] }} transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}>↓</motion.span></a>
@@ -174,7 +178,7 @@ export function HomeExperience() {
       </section>
 
       <section id="selected-work" className="work-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />02 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "المشروعات المختارة تعرض هنا ضمن لغة بصرية موحدة، ويمكن استبدال التكوينات بصور كل مشروع عند تجهيزها." : "Selected projects sit within a unified visual language; their graphic treatments can be replaced with project imagery when it is ready."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />02 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "اختيار من مشروعات في السرد البصري والمونتاج والموشن والهوية؛ لكل عمل فكرته، ولكل قرار بصري سبب." : "A curated selection across visual storytelling, editing, motion and identity — each project shaped by a clear idea and intentional visual decisions."}</p></div>
         <div className="project-grid">
           {content.projects.map((project, i) => <article className={`project-card project-${project.tone}`} key={project.id}>
             <Link href="/projects" className="project-image-wrap" aria-label={`${ar ? "عرض المشروعات" : "Explore projects"}: ${project.title}`}>
@@ -201,7 +205,7 @@ export function HomeExperience() {
       
       <section id="services" data-scene="services" className="services-cinematic section-pad">
         <div className="services-cinematic-heading reveal-up">
-          <p className="eyebrow"><span className="signal" />06 / {ar ? "الخدمات" : "SERVICES"}</p>
+          <p className="eyebrow"><span className="signal" />04 / {ar ? "الخدمات" : "SERVICES"}</p>
           <h2>{ar ? <>من الفكرة،<br/><em>إلى الصورة النهائية.</em></> : <>From the first idea<br/><em>to the final frame.</em></>}</h2>
           <p>{ar ? "كل خدمة فصل مختلف في الحكاية البصرية؛ تتحرك الأدوات، ويتغير الإيقاع، وتظل الفكرة هي نقطة البداية." : "Each service is a different chapter in the visual story. The tools move, the rhythm changes, and the idea stays at the centre."}</p>
         </div>
@@ -217,7 +221,7 @@ export function HomeExperience() {
                 ) : (
                   <div className={"design-art design-art-" + index}><span className="design-window"><i /><i /><i /><b>{index === 3 ? "FX" : index === 4 ? "9:16" : "ID"}</b></span><span className="design-tile design-tile-a" /><span className="design-tile design-tile-b" /><span className="design-type">Aa</span></div>
                 )}
-                <span className="service-visual-caption">{content.serviceMeta[index]?.label ?? "VISUAL WORK"} / MA</span>
+                <span className="service-visual-caption">{content.serviceMeta[index]?.label ?? "VISUAL STUDY"} / MA</span>
               </div>
               <div className="service-scene-copy">
                 <p className="eyebrow">{content.serviceMeta[index]?.symbol ?? "CRAFT"} / 0{index + 1}</p>
@@ -233,14 +237,14 @@ export function HomeExperience() {
       </section>
 
       <section className="approach-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>04 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>05 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
         <div className="approach-steps">{[{n:"01",en:"Listen & Define",ar:"الفهم والتحديد",descEn:"Understand the brief, audience and intended outcome.",descAr:"فهم المتطلبات والجمهور والنتيجة المطلوبة."},{n:"02",en:"Shape the Concept",ar:"تطوير الفكرة",descEn:"Build the visual direction and establish the language.",descAr:"تحديد الاتجاه الإبداعي واللغة البصرية."},{n:"03",en:"Create & Refine",ar:"التنفيذ والتطوير",descEn:"Produce, edit and refine the work with intention.",descAr:"تنفيذ العمل ومراجعته وتحسين تفاصيله."},{n:"04",en:"Deliver with Purpose",ar:"التسليم والهدف",descEn:"Prepare the final assets for their intended use.",descAr:"تجهيز المخرجات النهائية للاستخدام المطلوب."}].map(s=><article className="approach-step reveal-up" key={s.n}><span className="step-number">{s.n}</span><div><h3>{ar?s.ar:s.en}</h3><p>{ar?s.descAr:s.descEn}</p></div><span className="step-arrow">↗</span></article>)}</div>
       </section>
 
       <section id="contact" className="contact-section section-pad">
         <div className="contact-ornament" aria-hidden="true">MA</div>
-        <div className="section-rail reveal-up"><span>05</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
-        <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p><a className="contact-mail" href="mailto:hello@mohamedassem.com">hello@mohamedassem.com <span>↗</span></a><p className="contact-note">{ar ? "البريد أعلاه تجريبي ويجب استبداله ببيانات التواصل الصحيحة قبل الإطلاق." : "PLACEHOLDER EMAIL — UPDATE BEFORE LAUNCH"}</p></div>
+        <div className="section-rail reveal-up"><span>06</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
+        <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p>{contactEmail ? <a className="contact-mail" href={"mailto:" + contactEmail}>{contactEmail} <span>↗</span></a> : <p className="contact-note contact-note-pending">{ar ? "سيُتاح رابط التواصل هنا فور تأكيد بيانات الاتصال." : "DIRECT CONTACT DETAILS WILL APPEAR HERE BEFORE LAUNCH."}</p>}</div>
       </section>
       <Footer />
         </div>
