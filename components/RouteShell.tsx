@@ -8,13 +8,14 @@ import { CinematicDirector } from "@/components/motion/CinematicDirector";
 
 function RouteContent({ children }: { children: ReactNode }) {
   const { language, dir } = useLanguage();
-  return <SmoothScroll><main dir={dir} className={language === "ar" ? "site arabic content-route" : "site content-route"}>
+  return <main dir={dir} className={language === "ar" ? "site arabic content-route" : "site content-route"}>
     <div className="grain" aria-hidden="true" />
     <CinematicDirector />
     <Navigation />
-    <div className="route-content">{children}</div>
-    <Footer />
-  </main></SmoothScroll>;
+    <SmoothScroll>
+      <div className="route-content">{children}<Footer /></div>
+    </SmoothScroll>
+  </main>;
 }
 
 export function RouteShell({ children }: { children: ReactNode }) {
