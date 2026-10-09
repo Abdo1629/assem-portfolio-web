@@ -94,13 +94,34 @@ export function Navigation() {
     className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`}
     data-nav-home={pathname === "/" ? "true" : "false"}
     onPointerMove={(event) => {
-      if (event.pointerType === "touch") return;
-      const rect = event.currentTarget.getBoundingClientRect();
-      event.currentTarget.style.setProperty("--cloud-x", `${event.clientX - rect.left}px`);
-      event.currentTarget.style.setProperty("--cloud-y", `${event.clientY - rect.top}px`);
-      event.currentTarget.style.setProperty("--cloud-opacity", "1");
+      if (event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const header = event.currentTarget;
+      const rect = header.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = Math.max(0, rect.height - 18);
+      const previousX = Number(header.dataset.smokeX ?? x);
+      const previousY = Number(header.dataset.smokeY ?? y);
+      const dx = x - previousX;
+      const dy = y - previousY;
+      const speed = Math.min(1, Math.hypot(dx, dy) / 26);
+      header.style.setProperty("--cloud-x", `${x}px`);
+      header.style.setProperty("--cloud-y", `${y}px`);
+      header.style.setProperty("--smoke-wake-x", `${Math.max(-18, Math.min(18, dx * .55))}px`);
+      header.style.setProperty("--cloud-opacity", "1");
+      header.dataset.smokeX = String(x);
+      header.dataset.smokeY = String(y);
+      document.getElementById("header-smoke-displacement-map")?.setAttribute("scale", String(34 + speed * 82));
+      document.getElementById("header-smoke-turbulence")?.setAttribute("baseFrequency", `${(.009 + speed * .016).toFixed(4)} ${(.028 + speed * .028).toFixed(4)}`);
     }}
-    onPointerLeave={(event) => event.currentTarget.style.setProperty("--cloud-opacity", "0.62")}
+    onPointerLeave={(event) => {
+      const header = event.currentTarget;
+      header.style.setProperty("--cloud-opacity", "0.78");
+      header.style.setProperty("--smoke-wake-x", "0px");
+      delete header.dataset.smokeX;
+      delete header.dataset.smokeY;
+      document.getElementById("header-smoke-displacement-map")?.setAttribute("scale", "42");
+      document.getElementById("header-smoke-turbulence")?.setAttribute("baseFrequency", "0.012 0.035");
+    }}
   >
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
