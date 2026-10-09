@@ -2152,8 +2152,7 @@ html[lang="en"] body :where(h1, h2, h3, h4, h5, h6) {
   animation: header-smoke-roll 8s ease-in-out infinite alternate;
   will-change: transform, opacity, filter;
 }
-.new-home .nav-inner,
-.new-home .mobile-navigation { position: relative; z-index: 3; }
+.new-home .nav-inner { position: relative; z-index: 3; }
 .new-home .nav::after { z-index: 2; }
 @keyframes header-smoke-roll {
   0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
@@ -2346,3 +2345,10 @@ html[lang="en"] body :where(h1, h2, h3, h4, h5, h6) {
 }
 .intro-orbit { top: calc(50% - 16px); }
 .intro-progress i { animation-duration: 6s; }
+
+
+/* Preserve the dropdown's absolute positioning and show the menu control only where needed. */
+.new-home .menu-toggle { display: none; }
+@media (max-width: 1100px) {
+  .new-home .menu-toggle { display: inline-grid; }
+}
