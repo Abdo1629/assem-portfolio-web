@@ -6,11 +6,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export function HomeExperience() {
   const root = useRef<HTMLElement>(null);
@@ -87,8 +88,13 @@ export function HomeExperience() {
   }, []);
 
   useLayoutEffect(() => {
-    if (!introDone || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!introDone) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
+      if (!reduced && document.querySelector("#smooth-wrapper") && document.querySelector("#smooth-content")) {
+        ScrollSmoother.create({ wrapper: "#smooth-wrapper", content: "#smooth-content", smooth: 1.05, effects: true, normalizeScroll: false, ignoreMobileResize: true });
+      }
+      if (reduced) return;
       gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
         gsap.fromTo(el, { y: 42, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
       });
@@ -101,9 +107,18 @@ export function HomeExperience() {
       gsap.utils.toArray<HTMLElement>(".discipline-row, .approach-step").forEach((el, index) => {
         gsap.fromTo(el, { x: dir === "rtl" ? 34 : -34, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .72, delay: index % 4 * .06, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
+      gsap.utils.toArray<HTMLElement>(".service-scene").forEach((scene, index) => {
+        const visual = scene.querySelector<HTMLElement>(".service-scene-visual");
+        const copy = scene.querySelector<HTMLElement>(".service-scene-copy");
+        const direction = dir === "rtl" ? 1 : -1;
+        const visualFrom = (index % 2 ? -1 : 1) * direction;
+        if (visual) gsap.fromTo(visual, { xPercent: visualFrom * 16, scale: .88, autoAlpha: 0 }, { xPercent: 0, scale: 1, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: scene, start: "top 82%", end: "center center", scrub: .65 } });
+        if (copy) gsap.fromTo(copy, { xPercent: visualFrom * -10, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: scene, start: "top 76%", end: "center 48%", scrub: .5 } });
+        gsap.fromTo(scene.querySelector(".service-scene-index"), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .5, ease: "power2.out", scrollTrigger: { trigger: scene, start: "top 80%", once: true } });
+      });
     }, root);
-    return () => ctx.revert();
-  }, [introDone]);
+    return () => { ScrollSmoother.get()?.kill(); ctx.revert(); };
+  }, [introDone, dir]);
 
   return (
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
@@ -116,6 +131,8 @@ export function HomeExperience() {
       <div className="grain" aria-hidden="true" />
       <div className="ink-bloom" aria-hidden="true"><span /></div>
       <Navigation />
+      <div id="smooth-wrapper" className="smooth-wrapper">
+        <div id="smooth-content" className="smooth-content">
       <section id="top" className="new-hero">
         <div className="hero-index assembly-piece" data-piece="01"><span>MA / 001</span><i />{ar ? "الرؤية قبل الإطار" : "VISION BEFORE THE FRAME"}</div>
         <div className="hero-media assembly-piece" aria-hidden="true">
@@ -181,6 +198,40 @@ export function HomeExperience() {
         <div className="discipline-list reveal-up">{[{n:"01",en:"Cinematography & Photography",ar:"التصوير السينمائي والفوتوغرافي"},{n:"02",en:"Video Editing & Post-Production",ar:"مونتاج الفيديو وما بعد الإنتاج"},{n:"03",en:"Graphic Design",ar:"التصميم الجرافيكي"},{n:"04",en:"Brand Identity",ar:"الهوية البصرية"}].map(s=><div className="discipline-row" key={s.n}><span>{s.n}</span><strong>{ar?s.ar:s.en}</strong><span>↗</span></div>)}</div>
       </section>
 
+      
+      <section id="services" data-scene="services" className="services-cinematic section-pad">
+        <div className="services-cinematic-heading reveal-up">
+          <p className="eyebrow"><span className="signal" />06 / {ar ? "الخدمات" : "SERVICES"}</p>
+          <h2>{ar ? <>من الفكرة،<br/><em>إلى الصورة النهائية.</em></> : <>From the first idea<br/><em>to the final frame.</em></>}</h2>
+          <p>{ar ? "كل خدمة فصل مختلف في الحكاية البصرية؛ تتحرك الأدوات، ويتغير الإيقاع، وتظل الفكرة هي نقطة البداية." : "Each service is a different chapter in the visual story. The tools move, the rhythm changes, and the idea stays at the centre."}</p>
+        </div>
+        <div className="service-scenes">
+          {content.services.map((service, index) => (
+            <article className={"service-scene service-scene-" + (index + 1)} key={service}>
+              <div className="service-scene-index"><span>0{index + 1}</span><i />{ar ? "الخدمة" : "THE SERVICE"}</div>
+              <div className="service-scene-visual" aria-hidden="true">
+                {index === 0 || index === 1 ? (
+                  <div className="camera-art"><span className="camera-art-top" /><span className="camera-art-grip" /><span className="camera-art-body"><i className="camera-art-lens"><b /></i><i className="camera-art-dial" /></span><span className="camera-art-light" /></div>
+                ) : index === 2 ? (
+                  <div className="viewfinder-art"><span className="viewfinder-frame" /><span className="viewfinder-play">▶</span><i /><b /></div>
+                ) : (
+                  <div className={"design-art design-art-" + index}><span className="design-window"><i /><i /><i /><b>{index === 3 ? "FX" : index === 4 ? "9:16" : "ID"}</b></span><span className="design-tile design-tile-a" /><span className="design-tile design-tile-b" /><span className="design-type">Aa</span></div>
+                )}
+                <span className="service-visual-caption">{content.serviceMeta[index]?.label ?? "VISUAL WORK"} / MA</span>
+              </div>
+              <div className="service-scene-copy">
+                <p className="eyebrow">{content.serviceMeta[index]?.symbol ?? "CRAFT"} / 0{index + 1}</p>
+                <h3>{service}</h3>
+                <p>{ar
+                  ? ["نصنع الإيقاع والمعنى من اللقطات، ونحوّل المادة الخام إلى حكاية متماسكة.","نختار الضوء والزاوية والحركة لنصنع كادرات تخدم الفكرة قبل أن تكتفي بجمالها.","نلتقط اللحظات ونبني تغطية بصرية واضحة تناسب طبيعة كل مشروع.","نمنح العناصر البصرية حياة وحركة تخدم الرسالة، لا الحركة من أجل الحركة.","محتوى رأسي سريع الإيقاع مصمم ليجذب الانتباه ويحافظ على جوهر الحكاية.","نصنع لغة بصرية متماسكة تمنح العلامة حضورًا يمكن تمييزه وتذكّره."][index]
+                  : ["Shape rhythm and meaning from raw footage, turning individual shots into a coherent story.","Use light, angle and movement to create frames that serve the idea, not just the aesthetic.","Capture moments and build a considered visual record shaped around each brief.","Give visual elements purposeful movement that supports the message rather than distracting from it.","Create vertical, fast-moving content designed to earn attention without losing the story.","Build a coherent visual language that gives a brand a recognisable, memorable presence."][index]}</p>
+                <span className="service-scene-rule"><i />{ar ? "الفكرة تقود التنفيذ" : "IDEA LEADS EXECUTION"}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="approach-section section-pad">
         <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>04 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
         <div className="approach-steps">{[{n:"01",en:"Listen & Define",ar:"الفهم والتحديد",descEn:"Understand the brief, audience and intended outcome.",descAr:"فهم المتطلبات والجمهور والنتيجة المطلوبة."},{n:"02",en:"Shape the Concept",ar:"تطوير الفكرة",descEn:"Build the visual direction and establish the language.",descAr:"تحديد الاتجاه الإبداعي واللغة البصرية."},{n:"03",en:"Create & Refine",ar:"التنفيذ والتطوير",descEn:"Produce, edit and refine the work with intention.",descAr:"تنفيذ العمل ومراجعته وتحسين تفاصيله."},{n:"04",en:"Deliver with Purpose",ar:"التسليم والهدف",descEn:"Prepare the final assets for their intended use.",descAr:"تجهيز المخرجات النهائية للاستخدام المطلوب."}].map(s=><article className="approach-step reveal-up" key={s.n}><span className="step-number">{s.n}</span><div><h3>{ar?s.ar:s.en}</h3><p>{ar?s.descAr:s.descEn}</p></div><span className="step-arrow">↗</span></article>)}</div>
@@ -192,6 +243,8 @@ export function HomeExperience() {
         <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p><a className="contact-mail" href="mailto:hello@mohamedassem.com">hello@mohamedassem.com <span>↗</span></a><p className="contact-note">{ar ? "البريد أعلاه تجريبي ويجب استبداله ببيانات التواصل الصحيحة قبل الإطلاق." : "PLACEHOLDER EMAIL — UPDATE BEFORE LAUNCH"}</p></div>
       </section>
       <Footer />
+        </div>
+      </div>
     </main>
   );
 }
