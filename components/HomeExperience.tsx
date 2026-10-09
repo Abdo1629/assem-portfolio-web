@@ -27,7 +27,7 @@ export function HomeExperience() {
     const mark = introMark.current;
     const target = document.querySelector<HTMLElement>(".brand-logo");
     if (!overlay || !mark || !target) { setIntroDone(true); return; }
-    if (reduced || window.sessionStorage.getItem("assem-intro-seen") === "1") {
+    if (reduced) {
       gsap.set(overlay, { autoAlpha: 0, pointerEvents: "none" });
       setIntroDone(true);
       return;
@@ -41,7 +41,6 @@ export function HomeExperience() {
       const tl = gsap.timeline({
         defaults: { ease: "power3.inOut" },
         onComplete: () => {
-          window.sessionStorage.setItem("assem-intro-seen", "1");
           document.documentElement.classList.remove("intro-running");
           setIntroDone(true);
         },
