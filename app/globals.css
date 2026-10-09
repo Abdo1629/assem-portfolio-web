@@ -1718,7 +1718,7 @@ html { scrollbar-gutter: stable; }
 .new-home .nav .mobile-navigation { border-radius: 22px; }
 @keyframes smoke-drift {
   0% { background-position: 50% 0%, 48% 12%, 0% 0%, 100% 10%, 10% 0%, 90% 20%, 50% 0%; transform: translate3d(-.6%, -4px, 0) scale(1.02); }
-  50% { background-position: 55% 12%, 40% 0%, 12% 12%, 72% 0%, 28% 16%, 100% 0%, 44% 18%; transform: translate3d(calc(.7% + var(--smoke-flow-x, 0) * 9px), calc(6px + var(--smoke-flow-y, 0) * 12px), 0) scale(1.045); }
+  50% { background-position: 55% 12%, 40% 0%, 12% 12%, 72% 0%, 28% 16%, 100% 0%, 44% 18%; transform: translate3d(calc(.7% + var(--smoke-flow-x, 0px)), calc(6px + var(--smoke-flow-y, 0px)), 0) scale(1.045); }
   100% { background-position: 47% 0%, 52% 18%, 5% 0%, 88% 18%, 12% 4%, 76% 10%, 58% 0%; transform: translate3d(-.3%, -2px, 0) scale(1.025); }
 }
 
