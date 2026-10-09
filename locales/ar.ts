@@ -20,9 +20,9 @@ export const ar: LocaleContent = {
     { name: "Illustrator", short: "AI", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", detail: "رسوم وهوية وعناصر متجهة قابلة للتطوير والتحريك." },
   ],
   projects: [
-    { id: "tedx-tabary", number: "01", title: "عود على بدء", client: "TEDx Tabary", meta: "الموسم الثالث", category: "مونتاج • موشن • هوية بصرية", tone: "ember" },
-    { id: "mounir-academy", number: "02", title: "منير أكاديمي", client: "مع د. أمير منير", meta: "محتوى بصري", category: "مونتاج • سرد بصري", tone: "gold" },
-    { id: "moving-identities", number: "03", title: "هويات تتحرك", client: "مشروعات وهوية ومحتوى بصري", meta: "اتجاه إبداعي", category: "هوية بصرية • موشن • محتوى", tone: "steel" },
+    { id: "tedx-tabary", number: "01", title: "عود على بدء", client: "TEDx Tabary", meta: "الموسم الثالث", category: "مونتاج • موشن • هوية بصرية", tone: "ember", summary: "لغة بصرية للموسم الثالث تجمع المونتاج والموشن وسرد تجربة الحدث." },
+    { id: "mounir-academy", number: "02", title: "منير أكاديمي", client: "مع د. أمير منير", meta: "محتوى بصري", category: "مونتاج • سرد بصري", tone: "gold", summary: "محتوى تعليمي بصري يعتمد على الوضوح والإيقاع ولغة بصرية متماسكة." },
+    { id: "moving-identities", number: "03", title: "الهوية البصرية والموشن", client: "مختارات من أعمال الهوية", meta: "اتجاه إبداعي", category: "هوية بصرية • موشن • محتوى", tone: "steel", summary: "مجموعة من أعمال الهوية والمحتوى تستكشف انتقال اللغة البصرية بين الصيغ المختلفة." },
   ],
   services: ["مونتاج الفيديو", "التصوير السينمائي", "الفيديوجرافي", "الموشن جرافيك", "الريلز والمحتوى القصير", "الهوية البصرية"],
   process: ["نفهم الفكرة", "نصنع الكادر", "نبني الإيقاع", "نصقل التفاصيل", "نُخرج النسخة"],
