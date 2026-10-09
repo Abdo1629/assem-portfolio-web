@@ -98,7 +98,8 @@ export function Navigation() {
       const header = event.currentTarget;
       const rect = header.getBoundingClientRect();
       const x = event.clientX - rect.left;
-      const y = Math.max(0, rect.height - 18);
+      const smokeHeight = window.innerWidth <= 700 ? 36 : 43;
+      const y = Math.max(0, Math.min(smokeHeight, event.clientY - rect.top - (rect.height - smokeHeight)));
       const previousX = Number(header.dataset.smokeX ?? x);
       const previousY = Number(header.dataset.smokeY ?? y);
       const dx = x - previousX;
