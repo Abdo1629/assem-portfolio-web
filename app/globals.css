@@ -1781,3 +1781,14 @@ html { scrollbar-gutter: stable; }
   .new-home .nav::before { animation: none !important; }
   .smooth-content { will-change: auto; }
 }
+
+/* The cloud's centre follows the pointer without becoming a hard spotlight. */
+.new-home .nav::before {
+  background:
+    radial-gradient(ellipse 250px 112px at var(--cloud-x, 50%) var(--cloud-y, 0px), color-mix(in srgb, var(--brand-primary) 22%, transparent), transparent 78%),
+    radial-gradient(ellipse 34% 105px at 15% 5%, color-mix(in srgb, var(--brand-primary) 28%, transparent), transparent 76%),
+    radial-gradient(ellipse 30% 112px at 39% 8%, color-mix(in srgb, var(--brand-secondary) 25%, transparent), transparent 78%),
+    radial-gradient(ellipse 36% 130px at 68% 2%, color-mix(in srgb, var(--brand-primary) 23%, transparent), transparent 79%),
+    radial-gradient(ellipse 27% 100px at 91% 15%, color-mix(in srgb, var(--brand-secondary) 22%, transparent), transparent 79%),
+    radial-gradient(ellipse 48% 85px at 51% 25%, color-mix(in srgb, var(--home-panel) 62%, transparent), transparent 83%);
+}
