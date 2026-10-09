@@ -57,7 +57,18 @@ export function Navigation() {
   const isActive = (item: (typeof navigationItems)[number]) =>
     pathname === item.href || (pathname === "/" && activeSection === item.section);
 
-  return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`} data-nav-home={pathname === "/" ? "true" : "false"}>
+  return <header
+    className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`}
+    data-nav-home={pathname === "/" ? "true" : "false"}
+    onPointerMove={(event) => {
+      if (event.pointerType === "touch") return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      event.currentTarget.style.setProperty("--cloud-x", `${event.clientX - rect.left}px`);
+      event.currentTarget.style.setProperty("--cloud-y", `${event.clientY - rect.top}px`);
+      event.currentTarget.style.setProperty("--cloud-opacity", "1");
+    }}
+    onPointerLeave={(event) => event.currentTarget.style.setProperty("--cloud-opacity", "0.62")}
+  >
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
         <span className="brand-mark" aria-hidden="true"><Image className="brand-logo" src={theme === "dark" ? "/images/assem-logo-dark.png" : "/images/assem-logo-light.png"} alt="" width={72} height={48} priority /></span>
