@@ -1692,20 +1692,20 @@ html { scrollbar-gutter: stable; }
 }
 .new-home .nav::before {
   inset: -76px -9vw -68px;
-  opacity: var(--cloud-opacity, .72);
+  opacity: var(--cloud-opacity, .78);
   background:
-    radial-gradient(ellipse 185px 118px at var(--cloud-x, 50%) var(--cloud-y, 0px), color-mix(in srgb, var(--brand-primary) 44%, transparent) 0%, color-mix(in srgb, var(--brand-primary) 20%, transparent) 36%, transparent 76%),
-    radial-gradient(ellipse 300px 116px at calc(var(--cloud-x, 50%) - 120px) calc(var(--cloud-y, 0px) + 10px), color-mix(in srgb, var(--brand-secondary) 38%, transparent) 0%, color-mix(in srgb, var(--brand-secondary) 14%, transparent) 42%, transparent 80%),
-    radial-gradient(ellipse 340px 145px at 15% 5%, color-mix(in srgb, var(--brand-primary) 28%, transparent), transparent 77%),
-    radial-gradient(ellipse 320px 148px at 39% 8%, color-mix(in srgb, var(--brand-secondary) 27%, transparent), transparent 78%),
-    radial-gradient(ellipse 390px 160px at 68% 2%, color-mix(in srgb, var(--brand-primary) 25%, transparent), transparent 79%),
-    radial-gradient(ellipse 300px 128px at 91% 15%, color-mix(in srgb, var(--brand-secondary) 26%, transparent), transparent 78%),
-    radial-gradient(ellipse 58% 100px at 51% 25%, color-mix(in srgb, var(--home-panel) 56%, transparent), transparent 84%);
-  filter: url(#header-smoke-displacement) saturate(128%);
+    radial-gradient(ellipse 230px 145px at var(--cloud-x, 50%) var(--cloud-y, 0px), color-mix(in srgb, var(--brand-primary) 55%, transparent) 0%, color-mix(in srgb, var(--brand-primary) 31%, transparent) 36%, transparent 76%),
+    radial-gradient(ellipse 360px 148px at calc(var(--cloud-x, 50%) - 120px) calc(var(--cloud-y, 0px) + 10px), color-mix(in srgb, var(--brand-secondary) 48%, transparent) 0%, color-mix(in srgb, var(--brand-secondary) 35%, transparent) 42%, transparent 80%),
+    radial-gradient(ellipse 390px 175px at 15% 5%, color-mix(in srgb, var(--brand-primary) 38%, transparent), transparent 77%),
+    radial-gradient(ellipse 360px 170px at 39% 8%, color-mix(in srgb, var(--brand-secondary) 36%, transparent), transparent 78%),
+    radial-gradient(ellipse 430px 180px at 68% 2%, color-mix(in srgb, var(--brand-primary) 34%, transparent), transparent 79%),
+    radial-gradient(ellipse 340px 150px at 91% 15%, color-mix(in srgb, var(--brand-secondary) 26%, transparent), transparent 78%),
+    radial-gradient(ellipse 64% 122px at 51% 25%, color-mix(in srgb, var(--home-panel) 66%, transparent), transparent 84%);
+  filter: url(#header-smoke-displacement) saturate(145%);
   transform: translate3d(0,0,0);
   animation: smoke-drift 19s ease-in-out infinite alternate;
-  transition: opacity .5s ease;
-  will-change: background-position, transform;
+  transition: opacity .35s ease;
+  will-change: background-position, transform, filter;
 }
 .new-home .nav::after { display: none !important; }
 .new-home .nav-inner { z-index: 3; }
@@ -1718,7 +1718,7 @@ html { scrollbar-gutter: stable; }
 .new-home .nav .mobile-navigation { border-radius: 22px; }
 @keyframes smoke-drift {
   0% { background-position: 50% 0%, 48% 12%, 0% 0%, 100% 10%, 10% 0%, 90% 20%, 50% 0%; transform: translate3d(-.6%, -4px, 0) scale(1.02); }
-  50% { background-position: 55% 12%, 40% 0%, 12% 12%, 72% 0%, 28% 16%, 100% 0%, 44% 18%; transform: translate3d(.7%, 6px, 0) scale(1.045); }
+  50% { background-position: 55% 12%, 40% 0%, 12% 12%, 72% 0%, 28% 16%, 100% 0%, 44% 18%; transform: translate3d(calc(.7% + var(--smoke-flow-x, 0) * 9px), calc(6px + var(--smoke-flow-y, 0) * 12px), 0) scale(1.045); }
   100% { background-position: 47% 0%, 52% 18%, 5% 0%, 88% 18%, 12% 4%, 76% 10%, 58% 0%; transform: translate3d(-.3%, -2px, 0) scale(1.025); }
 }
 
