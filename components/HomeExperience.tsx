@@ -12,14 +12,6 @@ import { Footer } from "@/components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const floatingTools = [
-  { code: "Pr", name: "Premiere Pro", style: "tool-pr", left: "56%", top: "25%" },
-  { code: "Ae", name: "After Effects", style: "tool-ae", left: "84%", top: "25%" },
-  { code: "Ps", name: "Photoshop", style: "tool-ps", left: "91%", top: "50%" },
-  { code: "Ai", name: "Illustrator", style: "tool-ai", left: "78%", top: "76%" },
-  { code: "Id", name: "InDesign", style: "tool-id", left: "57%", top: "77%" },
-] as const;
-
 export function HomeExperience() {
   const root = useRef<HTMLElement>(null);
   const intro = useRef<HTMLDivElement>(null);
@@ -137,18 +129,17 @@ export function HomeExperience() {
           <p className="hero-kicker hero-copy-line"><span className="signal" />{ar ? "مخرج بصري · صناعة الحكايات بالصورة" : "VISUAL DIRECTOR · VISUAL STORYTELLING"}</p>
           <div className="hero-title-wrap">
             <h1>
-              <span className="hero-copy-line">{ar ? "الفكرة لها" : "Every idea"}</span>
-              <span className="hero-copy-line hero-title-accent">{ar ? "شكلها الخاص." : "has a visual form."}</span>
+              <span className="hero-copy-line">{ar ? "كل فكرة تستحق" : "Ideas deserve"}</span>
+              <span className="hero-copy-line hero-title-accent">{ar ? "رؤية تميّزها." : "a point of view."}</span>
             </h1>
           </div>
-          <p className="hero-description hero-copy-line">{ar ? "أنا محمد عاصم أحمد. أعمل عند تقاطع الرؤية البصرية، والتصوير، والمونتاج، والتصميم؛ لأحوّل الأفكار إلى أعمال لها شخصية وهدف." : "I’m Mohamed Assem Ahmed. I work across visual direction, cinematography, editing and design to turn ideas into work with character, clarity and purpose."}</p>
+          <p className="hero-description hero-copy-line">{ar ? "أنا محمد عاصم أحمد؛ أعمل في الإخراج البصري والتصوير والمونتاج والتصميم، لأمنح كل فكرة لغة بصرية واضحة تناسب قصتها وهدفها." : "I’m Mohamed Assem Ahmed, a visual director working across cinematography, editing and design to give each story a clear, considered visual identity."}</p>
           <div className="hero-cta-row hero-copy-line">
             <Link className="cta-primary" href="#selected-work">{ar ? "اكتشف الأعمال" : "Explore selected work"} <motion.span whileHover={{ x: 3, y: -3, rotate: 8 }} whileTap={{ scale: .88 }} transition={{ type: "spring", stiffness: 360, damping: 18 }}>↗</motion.span></Link>
             <Link className="cta-text" href="#contact">{ar ? "ابدأ مشروعًا" : "Start a project"} <motion.span whileHover={{ x: 3, y: -3, rotate: 8 }} whileTap={{ scale: .88 }} transition={{ type: "spring", stiffness: 360, damping: 18 }}>↗</motion.span></Link>
           </div>
         </div>
-        <div className="hero-side-note assembly-piece"><span>06 / 25 / 1000</span><small>{ar ? "سنوات خبرة / عميل / مشروع تقريبًا" : "YEARS / CLIENTS / PROJECTS APPROX."}</small></div>
-        <div className="hero-tools" aria-hidden="true">{floatingTools.map((tool, index) => <span key={tool.code} className={`hero-tool ${tool.style}`} data-tool={index} title={tool.name} style={{ left: tool.left, top: tool.top }}><b>{tool.code}</b><small>{tool.name}</small></span>)}</div>
+        <div className="hero-side-note assembly-piece"><span>06 · 250+ · 1,000+</span><small>{ar ? "سنوات في المجال · عميل · مشروع تقريبًا" : "YEARS IN MEDIA · CLIENTS · PROJECTS APPROX."}</small></div>
         <div className="hero-bottom">
           <span>{ar ? "القاهرة، مصر · متاح للتعاون" : "CAIRO, EGYPT · OPEN TO SELECT COLLABORATIONS"}</span>
           <a href="#manifesto">{ar ? "ابدأ الرحلة" : "SCROLL TO EXPLORE"} <motion.span className="scroll-cue" animate={{ y: [0, 5, 0] }} transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}>↓</motion.span></a>
