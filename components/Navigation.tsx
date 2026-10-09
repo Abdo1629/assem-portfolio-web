@@ -62,12 +62,43 @@ export function Navigation() {
     data-nav-home={pathname === "/" ? "true" : "false"}
     onPointerMove={(event) => {
       if (event.pointerType === "touch") return;
-      const rect = event.currentTarget.getBoundingClientRect();
-      event.currentTarget.style.setProperty("--cloud-x", `${event.clientX - rect.left}px`);
-      event.currentTarget.style.setProperty("--cloud-y", `${event.clientY - rect.top}px`);
-      event.currentTarget.style.setProperty("--cloud-opacity", "1");
+      const header = event.currentTarget;
+      const rect = header.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const previousX = Number(header.dataset.smokeX ?? x);
+      const previousY = Number(header.dataset.smokeY ?? y);
+      const dx = x - previousX;
+      const dy = y - previousY;
+      const speed = Math.min(1, Math.hypot(dx, dy) / 28);
+      header.dataset.smokeX = String(x);
+      header.dataset.smokeY = String(y);
+      header.style.setProperty("--cloud-x", `${x}px`);
+      header.style.setProperty("--cloud-y", `${y}px`);
+      header.style.setProperty("--smoke-flow-x", `${Math.max(-1, Math.min(1, dx / 18))}`);
+      header.style.setProperty("--smoke-flow-y", `${Math.max(-1, Math.min(1, dy / 18))}`);
+      header.style.setProperty("--smoke-force", String(speed));
+      header.style.setProperty("--cloud-opacity", "1");
+
+      // Pointer velocity changes the smoke's actual displacement field, not just its brightness.
+      const displacement = document.getElementById("header-smoke-displacement-map");
+      const turbulence = document.getElementById("header-smoke-turbulence");
+      if (displacement) displacement.setAttribute("scale", String(34 + speed * 92));
+      if (turbulence) {
+        turbulence.setAttribute("baseFrequency", `${(0.010 + speed * 0.018).toFixed(4)} ${(0.036 + speed * 0.038).toFixed(4)}`);
+      }
     }}
-    onPointerLeave={(event) => event.currentTarget.style.setProperty("--cloud-opacity", "0.62")}
+    onPointerLeave={(event) => {
+      const header = event.currentTarget;
+      header.style.setProperty("--cloud-opacity", "0.78");
+      header.style.setProperty("--smoke-force", "0");
+      header.dataset.smokeX = "";
+      header.dataset.smokeY = "";
+      const displacement = document.getElementById("header-smoke-displacement-map");
+      const turbulence = document.getElementById("header-smoke-turbulence");
+      if (displacement) displacement.setAttribute("scale", "48");
+      if (turbulence) turbulence.setAttribute("baseFrequency", "0.014 0.044");
+    }}
   >
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
