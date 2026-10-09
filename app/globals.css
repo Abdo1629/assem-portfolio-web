@@ -1792,3 +1792,20 @@ html { scrollbar-gutter: stable; }
     radial-gradient(ellipse 27% 100px at 91% 15%, color-mix(in srgb, var(--brand-secondary) 22%, transparent), transparent 79%),
     radial-gradient(ellipse 48% 85px at 51% 25%, color-mix(in srgb, var(--home-panel) 62%, transparent), transparent 83%);
 }
+
+/* Clear, intentionally restrained fallback until the owner's real contact channel is configured. */
+.new-home .contact-note-pending {
+  max-width: 48ch;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: .035em;
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid var(--brand-secondary);
+}
+.new-home .service-scene-copy,
+.new-home .service-scene-visual { backface-visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .new-home .scroll-cue { animation: none !important; transform: none !important; }
+  .new-home .service-scene-visual,
+  .new-home .service-scene-copy { will-change: auto; }
+}
