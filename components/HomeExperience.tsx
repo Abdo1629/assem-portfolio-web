@@ -241,8 +241,23 @@ export function HomeExperience() {
         <div className="manifesto-number" aria-hidden="true">01</div>
       </section>
 
+      <section id="director-intro" className="director-intro section-pad">
+        <div className="director-intro-visual reveal-up">
+          <Image src="/images/mohamed-assem-portrait.jpg" alt={ar ? "محمد عاصم أحمد، مخرج بصري" : "Mohamed Assem Ahmed, visual director"} fill sizes="(max-width: 700px) 88vw, 42vw" />
+          <span className="director-photo-index">MA / 002</span>
+          <span className="director-photo-caption">{ar ? "الرؤية تبدأ قبل التصوير" : "THE VISION STARTS BEFORE THE SHOOT"}</span>
+        </div>
+        <div className="director-intro-copy reveal-up">
+          <p className="eyebrow"><span className="signal" />02 / {ar ? "عن المخرج" : "THE DIRECTOR"}</p>
+          <h2>{ar ? <>أفكر في الحكاية<br/><em>قبل أن أختار الكادر.</em></> : <>Think about the story<br/><em>before the frame.</em></>}</h2>
+          <p>{ar ? "أنا محمد عاصم أحمد؛ أعمل بين الإخراج البصري والتصوير والمونتاج والموشن والهوية البصرية. أبدأ بفهم الفكرة والجمهور، ثم أختار اللغة البصرية والإيقاع المناسبين حتى يخدم كل تفصيل الهدف." : "I’m Mohamed Assem Ahmed, working across visual direction, cinematography, editing, motion and identity. I start by understanding the idea and its audience, then shape the visual language and rhythm so every decision serves the purpose."}</p>
+          <Link className="cta-text" href="/about">{ar ? "تعرّف على طريقتي في العمل" : "Discover my approach"} <span>↗</span></Link>
+          <div className="director-intro-foot"><span>{ar ? "الرؤية" : "DIRECTION"}</span><i /><span>{ar ? "التنفيذ" : "EXECUTION"}</span><i /><span>{ar ? "الأثر" : "IMPACT"}</span></div>
+        </div>
+      </section>
+
       <section id="selected-work" className="work-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />02 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "اختيار من مشروعات في السرد البصري والمونتاج والموشن والهوية؛ لكل عمل فكرته، ولكل قرار بصري سبب." : "A curated selection across visual storytelling, editing, motion and identity — each project shaped by a clear idea and intentional visual decisions."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />03 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "اختيار من مشروعات في السرد البصري والمونتاج والموشن والهوية؛ لكل عمل فكرته، ولكل قرار بصري سبب." : "A curated selection across visual storytelling, editing, motion and identity — each project shaped by a clear idea and intentional visual decisions."}</p></div>
         <div className="project-grid">
           {content.projects.map((project, i) => <article className={`project-card project-${project.tone}`} key={project.id}>
             <Link href="/projects" className="project-image-wrap" aria-label={`${ar ? "عرض المشروعات" : "Explore projects"}: ${project.title}`}>
@@ -258,7 +273,7 @@ export function HomeExperience() {
       </section>
 
       <section className="craft-section section-pad">
-        <div className="craft-top reveal-up"><div className="section-rail"><span>03</span><i />{ar ? "مجالات العمل" : "THE CRAFT"}</div><p className="eyebrow">{ar ? "من الفكرة إلى التنفيذ" : "FROM INTENT TO EXECUTION"}</p></div>
+        <div className="craft-top reveal-up"><div className="section-rail"><span>04</span><i />{ar ? "مجالات العمل" : "THE CRAFT"}</div><p className="eyebrow">{ar ? "من الفكرة إلى التنفيذ" : "FROM INTENT TO EXECUTION"}</p></div>
         <div className="craft-layout">
           <div className="craft-copy reveal-up"><h2>{ar ? <>رؤية واحدة.<br/><em>أدوات متعددة.</em></> : <>One vision.<br/><em>Many disciplines.</em></>}</h2><p>{ar ? "ليست كل المشروعات متشابهة؛ لذلك تتغير الأدوات بحسب القصة والهدف والجمهور، بينما تظل الرؤية هي نقطة البداية." : "No two briefs are the same. The tools change with the story, the audience and the goal — the point of view brings them together."}</p><Link className="cta-text" href="/services">{ar ? "استكشف الخدمات" : "EXPLORE SERVICES"} <span>↗</span></Link></div>
           <div className="craft-visual"><div className="story-orbit"><div className="orbit-ring orbit-ring-one"/><div className="orbit-ring orbit-ring-two"/><div className="orbit-core"><span>MA</span><small>VISUAL<br/>DIRECTION</small></div><span className="orbit-label orbit-label-a">01 / FRAME</span><span className="orbit-label orbit-label-b">02 / EDIT</span><span className="orbit-label orbit-label-c">03 / IDENTITY</span></div></div>
@@ -269,7 +284,7 @@ export function HomeExperience() {
       
       <section id="services" data-scene="services" className="services-cinematic section-pad">
         <div className="services-cinematic-heading reveal-up">
-          <p className="eyebrow"><span className="signal" />04 / {ar ? "الخدمات" : "SERVICES"}</p>
+          <p className="eyebrow"><span className="signal" />05 / {ar ? "الخدمات" : "SERVICES"}</p>
           <h2>{ar ? <>من الفكرة،<br/><em>إلى الصورة النهائية.</em></> : <>From the first idea<br/><em>to the final frame.</em></>}</h2>
           <p>{ar ? "كل خدمة فصل مختلف في الحكاية البصرية؛ تتحرك الأدوات، ويتغير الإيقاع، وتظل الفكرة هي نقطة البداية." : "Each service is a different chapter in the visual story. The tools move, the rhythm changes, and the idea stays at the centre."}</p>
         </div>
@@ -301,14 +316,14 @@ export function HomeExperience() {
       </section>
 
       <section className="approach-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>05 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>06 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
         <div className="approach-steps">{[{n:"01",en:"Listen & Define",ar:"الفهم والتحديد",descEn:"Understand the brief, audience and intended outcome.",descAr:"فهم المتطلبات والجمهور والنتيجة المطلوبة."},{n:"02",en:"Shape the Concept",ar:"تطوير الفكرة",descEn:"Build the visual direction and establish the language.",descAr:"تحديد الاتجاه الإبداعي واللغة البصرية."},{n:"03",en:"Create & Refine",ar:"التنفيذ والتطوير",descEn:"Produce, edit and refine the work with intention.",descAr:"تنفيذ العمل ومراجعته وتحسين تفاصيله."},{n:"04",en:"Deliver with Purpose",ar:"التسليم والهدف",descEn:"Prepare the final assets for their intended use.",descAr:"تجهيز المخرجات النهائية للاستخدام المطلوب."}].map(s=><article className="approach-step reveal-up" key={s.n}><span className="step-number">{s.n}</span><div><h3>{ar?s.ar:s.en}</h3><p>{ar?s.descAr:s.descEn}</p></div><span className="step-arrow">↗</span></article>)}</div>
       </section>
 
       <section id="collaborations" className="proof-section section-pad">
         <div className="section-heading proof-heading reveal-up">
           <div>
-            <p className="eyebrow"><span className="signal" />06 / {ar ? "الخبرة والتعاون" : "EXPERIENCE & COLLABORATION"}</p>
+            <p className="eyebrow"><span className="signal" />07 / {ar ? "الخبرة والتعاون" : "EXPERIENCE & COLLABORATION"}</p>
             <h2>{ar ? <>خبرة تُبنى<br/><em>بالتعاون والثقة.</em></> : <>Experience built<br/><em>through collaboration.</em></>}</h2>
           </div>
           <p>{ar ? "من الفكرة الأولى إلى النسخة النهائية، تتشكل كل تجربة من فهم الهدف، واحترام القصة، والعمل مع أشخاص يؤمنون بقوة الصورة." : "From the first idea to the final cut, every collaboration starts with a clear brief, respect for the story and a shared belief in the power of visual work."}</p>
@@ -338,7 +353,7 @@ export function HomeExperience() {
 
       <section id="contact" className="contact-section section-pad">
         <div className="contact-ornament" aria-hidden="true">MA</div>
-        <div className="section-rail reveal-up"><span>07</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
+        <div className="section-rail reveal-up"><span>08</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
         <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p>{contactEmail ? <a className="contact-mail" href={"mailto:" + contactEmail}>{contactEmail} <span>↗</span></a> : <p className="contact-note contact-note-pending">{ar ? "سيُتاح رابط التواصل هنا فور تأكيد بيانات الاتصال." : "DIRECT CONTACT DETAILS WILL APPEAR HERE BEFORE LAUNCH."}</p>}</div>
       </section>
       <Footer />
