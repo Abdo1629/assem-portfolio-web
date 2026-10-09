@@ -60,8 +60,7 @@ export function HomeExperience() {
           scale: .18, autoAlpha: 0, rotation: (i) => i % 2 ? 90 : -90,
           duration: .72, stagger: .035, ease: "power3.in"
         }, ">-.08")
-        .to(".intro-orbit", { autoAlpha: 0, duration: .01 }, "<")
-        .to(".intro-wordmark", { autoAlpha: 1, y: 0, duration: .42 }, "-=.08")
+        .to(".intro-wordmark", { autoAlpha: 1, y: 0, duration: .42 }, ">")
         .to(mark, { x: dx, y: dy, scale: targetRect.width / markRect.width, duration: .92, ease: "power4.inOut" }, "+=.28")
         .to(".intro-wordmark", { autoAlpha: 0, y: -10, duration: .28 }, "<")
         .to(overlay, { autoAlpha: 0, duration: .52, onStart: () => gsap.to(".nav", { y: 0, autoAlpha: 1, duration: .5, ease: "power3.out" }) }, "-=.16")
