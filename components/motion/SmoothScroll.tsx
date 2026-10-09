@@ -1,29 +1,36 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-import Lenis from "lenis";
+import { useLayoutEffect, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ autoRaf: false, duration: 1.15, smoothWheel: true, lerp: 0.08 });
-    const onScroll = () => ScrollTrigger.update();
-    const raf = (time: number) => lenis.raf(time * 1000);
-    lenis.on("scroll", onScroll);
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
+    const wrapper = document.querySelector<HTMLElement>("#route-smooth-wrapper");
+    const content = document.querySelector<HTMLElement>("#route-smooth-content");
+    if (!wrapper || !content) return;
+    const smoother = ScrollSmoother.create({
+      wrapper,
+      content,
+      smooth: 1.05,
+      effects: true,
+      normalizeScroll: false,
+      ignoreMobileResize: true,
+    });
     const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 100);
     return () => {
-      gsap.ticker.remove(raf);
       window.clearTimeout(refresh);
-      lenis.off("scroll", onScroll);
-      lenis.destroy();
+      smoother.kill();
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <div id="route-smooth-wrapper" className="smooth-wrapper">
+      <div id="route-smooth-content" className="smooth-content">{children}</div>
+    </div>
+  );
 }

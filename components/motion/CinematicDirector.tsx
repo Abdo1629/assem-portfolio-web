@@ -23,7 +23,7 @@ export function CinematicDirector() {
             if (progressLabel) progressLabel.textContent = `${String(value).padStart(2, "0")} / 100`;
           },
         });
-        const sections = gsap.utils.toArray<HTMLElement>("main > section:not(.hero):not(.story-scene)");
+        const sections = gsap.utils.toArray<HTMLElement>("main section:not(.hero):not(.story-scene):not(.new-hero)");
         const isRtl = document.querySelector<HTMLElement>("main")?.dir === "rtl";
 
         sections.forEach((section) => {
