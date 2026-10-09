@@ -117,10 +117,40 @@ export function HomeExperience() {
       gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
         gsap.fromTo(el, { y: 42, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
       });
+      gsap.utils.toArray<HTMLElement>(".section-heading h2, .manifesto-content h2, .craft-copy h2, .services-cinematic-heading h2, .contact-content h2").forEach((heading) => {
+        gsap.fromTo(heading, { y: 34, autoAlpha: 0, clipPath: "inset(0 0 14% 0)" }, {
+          y: 0, autoAlpha: 1, clipPath: "inset(0 0 0% 0)", duration: .9, ease: "power4.out",
+          scrollTrigger: { trigger: heading, start: "top 84%", once: true }
+        });
+      });
+      gsap.fromTo(".project-card", { y: 42, autoAlpha: 0, scale: .985 }, {
+        y: 0, autoAlpha: 1, scale: 1, duration: .85, stagger: .14, ease: "power3.out",
+        scrollTrigger: { trigger: ".project-grid", start: "top 78%", once: true }
+      });
+      gsap.utils.toArray<HTMLElement>(".proof-value").forEach((el) => {
+        const targetValue = Number(el.dataset.count || 0);
+        const suffix = el.dataset.suffix || "";
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: targetValue, duration: 1.35, ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(counter.value).toLocaleString("en-US") + suffix; },
+          scrollTrigger: { trigger: el, start: "top 86%", once: true }
+        });
+      });
+      gsap.utils.toArray<HTMLElement>(".collaborator-name").forEach((el, index) => {
+        gsap.fromTo(el, { y: 14, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: .48, delay: (index % 5) * .035, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 91%", once: true }
+        });
+      });
       gsap.utils.toArray<HTMLElement>(".project-card").forEach((el) => {
         const image = el.querySelector(".project-image");
         if (image) gsap.fromTo(image, { scale: 1.12 }, { scale: 1, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "center center", scrub: .7 } });
         gsap.fromTo(el.querySelector(".project-details"), { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 76%", once: true } });
+      });
+      gsap.to(".hero-media img", {
+        yPercent: 7, scale: 1.06, ease: "none",
+        scrollTrigger: { trigger: ".new-hero", start: "top top", end: "bottom top", scrub: .7 }
       });
       gsap.fromTo(".story-orbit", { rotate: -18, scale: .86 }, { rotate: 12, scale: 1.04, ease: "none", scrollTrigger: { trigger: ".craft-section", start: "top bottom", end: "bottom top", scrub: 1 } });
       gsap.utils.toArray<HTMLElement>(".discipline-row, .approach-step").forEach((el, index) => {
@@ -141,15 +171,7 @@ export function HomeExperience() {
 
   return (
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
-      <svg className="smoke-filter-defs" aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="header-smoke-displacement" x="-8%" y="-30%" width="116%" height="160%" colorInterpolationFilters="sRGB">
-            <feTurbulence id="header-smoke-turbulence" type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="3" seed="8" result="smokeNoise" />
-            <feDisplacementMap id="header-smoke-displacement-map" in="SourceGraphic" in2="smokeNoise" scale="54" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-      </svg>
-      <div ref={intro} className="intro-overlay" aria-hidden="true">
+<div ref={intro} className="intro-overlay" aria-hidden="true">
         <div className="intro-grid" />
         <div className="intro-orbit">
           {[
@@ -229,7 +251,7 @@ export function HomeExperience() {
               <span className="project-index">{project.number} / 03</span><motion.span className="project-arrow" whileHover={{ scale: 1.1, rotate: 45 }} whileTap={{ scale: .9 }} transition={{ type: "spring", stiffness: 320, damping: 18 }}>↗</motion.span>
               <span className="project-placeholder">{ar ? "مختار من الأعمال" : "SELECTED VISUAL WORK"}</span>
             </Link>
-            <div className="project-details"><div><p>{project.client}</p><h3>{project.title}</h3><span>{project.category}</span></div><span className="project-count">0{i + 1}</span></div>
+            <div className="project-details"><div><p>{project.client}</p><h3>{project.title}</h3><span>{project.category}</span>{project.summary ? <p className="project-summary">{project.summary}</p> : null}</div><span className="project-count">0{i + 1}</span></div>
           </article>)}
         </div>
         <div className="work-footer reveal-up"><span>{ar ? "كل مشروع يبدأ من فكرته، وتُصاغ صورته لخدمة أثرها." : "Each project begins with its idea; every image is shaped to serve its impact."}</span><Link href="/projects">{ar ? "كل الأعمال" : "ALL PROJECTS"} <span>↗</span></Link></div>
@@ -283,9 +305,40 @@ export function HomeExperience() {
         <div className="approach-steps">{[{n:"01",en:"Listen & Define",ar:"الفهم والتحديد",descEn:"Understand the brief, audience and intended outcome.",descAr:"فهم المتطلبات والجمهور والنتيجة المطلوبة."},{n:"02",en:"Shape the Concept",ar:"تطوير الفكرة",descEn:"Build the visual direction and establish the language.",descAr:"تحديد الاتجاه الإبداعي واللغة البصرية."},{n:"03",en:"Create & Refine",ar:"التنفيذ والتطوير",descEn:"Produce, edit and refine the work with intention.",descAr:"تنفيذ العمل ومراجعته وتحسين تفاصيله."},{n:"04",en:"Deliver with Purpose",ar:"التسليم والهدف",descEn:"Prepare the final assets for their intended use.",descAr:"تجهيز المخرجات النهائية للاستخدام المطلوب."}].map(s=><article className="approach-step reveal-up" key={s.n}><span className="step-number">{s.n}</span><div><h3>{ar?s.ar:s.en}</h3><p>{ar?s.descAr:s.descEn}</p></div><span className="step-arrow">↗</span></article>)}</div>
       </section>
 
+      <section id="collaborations" className="proof-section section-pad">
+        <div className="section-heading proof-heading reveal-up">
+          <div>
+            <p className="eyebrow"><span className="signal" />06 / {ar ? "الخبرة والتعاون" : "EXPERIENCE & COLLABORATION"}</p>
+            <h2>{ar ? <>خبرة تُبنى<br/><em>بالتعاون والثقة.</em></> : <>Experience built<br/><em>through collaboration.</em></>}</h2>
+          </div>
+          <p>{ar ? "من الفكرة الأولى إلى النسخة النهائية، تتشكل كل تجربة من فهم الهدف، واحترام القصة، والعمل مع أشخاص يؤمنون بقوة الصورة." : "From the first idea to the final cut, every collaboration starts with a clear brief, respect for the story and a shared belief in the power of visual work."}</p>
+        </div>
+        <div className="proof-metrics">
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="6" data-suffix="+">6+</strong>
+            <span>{ar ? "سنوات من الخبرة" : "YEARS OF EXPERIENCE"}</span>
+            <p>{ar ? "خبرة عملية في صناعة المحتوى والإنتاج البصري." : "Hands-on experience across visual content and production."}</p>
+          </article>
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="250" data-suffix="+">250+</strong>
+            <span>{ar ? "عميلًا" : "CLIENTS"}</span>
+            <p>{ar ? "تعاونات مع صُنّاع محتوى ومؤسسات ومشروعات متنوعة." : "Work across creators, organisations and varied briefs."}</p>
+          </article>
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="1000" data-suffix="+">1,000+</strong>
+            <span>{ar ? "مشروع بصري" : "VISUAL PROJECTS"}</span>
+            <p>{ar ? "من الأعمال القصيرة إلى مشروعات المحتوى المتكاملة." : "From short-form pieces to broader visual-content projects."}</p>
+          </article>
+        </div>
+        <div className="collaborator-rail reveal-up"><span>{ar ? "أسماء من رحلات العمل" : "SELECTED COLLABORATIONS"}</span><i /></div>
+        <div className="collaborator-list">
+          {content.collaborators.map((name) => <span className="collaborator-name" key={name}>{name}</span>)}
+        </div>
+      </section>
+
       <section id="contact" className="contact-section section-pad">
         <div className="contact-ornament" aria-hidden="true">MA</div>
-        <div className="section-rail reveal-up"><span>06</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
+        <div className="section-rail reveal-up"><span>07</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
         <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p>{contactEmail ? <a className="contact-mail" href={"mailto:" + contactEmail}>{contactEmail} <span>↗</span></a> : <p className="contact-note contact-note-pending">{ar ? "سيُتاح رابط التواصل هنا فور تأكيد بيانات الاتصال." : "DIRECT CONTACT DETAILS WILL APPEAR HERE BEFORE LAUNCH."}</p>}</div>
       </section>
       <Footer />
