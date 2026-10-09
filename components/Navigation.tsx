@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,8 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const { toggleLanguage, toggleTheme, theme, t } = useLanguage();
 
@@ -28,11 +30,33 @@ export function Navigation() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (menuOpen && event.target instanceof Node && !headerRef.current?.contains(event.target)) setMenuOpen(false);
     };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (menuOpen) return;
+    // A closed menu must never retain keyboard focus inside its hidden links.
+    if (headerRef.current?.contains(document.activeElement) && document.activeElement instanceof HTMLElement && document.activeElement.closest(".mobile-navigation")) {
+      menuButtonRef.current?.focus();
+    }
+  }, [menuOpen]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id], main section[data-scene]"));
@@ -83,12 +107,12 @@ export function Navigation() {
         <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === "dark" ? t.switchToLight : t.switchToDark} aria-pressed={theme === "light"} title={theme === "dark" ? t.switchToLight : t.switchToDark}>
           {theme === "light" ? <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"/></svg>}
         </button>
-        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? t.closeMenu : t.menu} onClick={() => setMenuOpen((open) => !open)}>
-          <span aria-hidden="true">{menuOpen ? "×" : "☰"}</span><small>{menuOpen ? t.closeMenu : t.menu}</small>
+        <button ref={menuButtonRef} className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? t.closeMenu : t.menu} onClick={() => setMenuOpen((open) => !open)}>
+          <span className={`menu-icon ${menuOpen ? "is-open" : ""}`} aria-hidden="true"><i /><i /><i /></span><small>{menuOpen ? t.closeMenu : t.menu}</small>
         </button>
       </div>
     </div>
-    <nav id="mobile-navigation" className="mobile-navigation" aria-label={t.mobileNavigation} aria-hidden={!menuOpen}>
+    <nav id="mobile-navigation" className="mobile-navigation" aria-label={t.mobileNavigation} aria-hidden={!menuOpen} inert={!menuOpen}>
       <p className="eyebrow"><span className="signal" />{t.navLabel}</p>
       {navigationItems.map((item, index) => <Link key={item.key} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={closeMenu}><span>{itemLabel(item.key)}</span><small>0{index + 1}</small></Link>)}
       <Link href="/#contact" onClick={closeMenu}><span>{t.navContact}</span><small>04</small></Link>
