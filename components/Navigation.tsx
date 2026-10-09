@@ -97,31 +97,15 @@ export function Navigation() {
       if (event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const header = event.currentTarget;
       const rect = header.getBoundingClientRect();
+      const bandHeight = window.innerWidth <= 700 ? 48 : 58;
       const x = event.clientX - rect.left;
-      const smokeHeight = window.innerWidth <= 700 ? 36 : 43;
-      const y = Math.max(0, Math.min(smokeHeight, event.clientY - rect.top - (rect.height - smokeHeight)));
-      const previousX = Number(header.dataset.smokeX ?? x);
-      const previousY = Number(header.dataset.smokeY ?? y);
-      const dx = x - previousX;
-      const dy = y - previousY;
-      const speed = Math.min(1, Math.hypot(dx, dy) / 26);
-      header.style.setProperty("--cloud-x", `${x}px`);
-      header.style.setProperty("--cloud-y", `${y}px`);
-      header.style.setProperty("--smoke-wake-x", `${Math.max(-18, Math.min(18, dx * .55))}px`);
-      header.style.setProperty("--cloud-opacity", "1");
-      header.dataset.smokeX = String(x);
-      header.dataset.smokeY = String(y);
-      document.getElementById("header-smoke-displacement-map")?.setAttribute("scale", String(34 + speed * 82));
-      document.getElementById("header-smoke-turbulence")?.setAttribute("baseFrequency", `${(.009 + speed * .016).toFixed(4)} ${(.028 + speed * .028).toFixed(4)}`);
+      const y = Math.max(0, Math.min(bandHeight, event.clientY - (rect.bottom - bandHeight)));
+      header.style.setProperty("--cloud-x", String(x) + "px");
+      header.style.setProperty("--cloud-y", String(y) + "px");
+      header.style.setProperty("--cloud-opacity", "0.92");
     }}
     onPointerLeave={(event) => {
-      const header = event.currentTarget;
-      header.style.setProperty("--cloud-opacity", "0.78");
-      header.style.setProperty("--smoke-wake-x", "0px");
-      delete header.dataset.smokeX;
-      delete header.dataset.smokeY;
-      document.getElementById("header-smoke-displacement-map")?.setAttribute("scale", "42");
-      document.getElementById("header-smoke-turbulence")?.setAttribute("baseFrequency", "0.012 0.035");
+      event.currentTarget.style.setProperty("--cloud-opacity", "0.68");
     }}
   >
     <div className="nav-inner">
