@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -19,6 +19,7 @@ export function HomeExperience() {
   const introMark = useRef<HTMLImageElement>(null);
   const [introDone, setIntroDone] = useState(false);
   const { language, dir, theme, content } = useLanguage();
+  const prefersReducedMotion = useReducedMotion();
   const ar = language === "ar";
   const logo = theme === "dark" ? "/images/assem-logo-dark.png" : "/images/assem-logo-light.png";
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
@@ -162,7 +163,7 @@ export function HomeExperience() {
         </div>
         <div className="hero-bottom">
           <span>{ar ? "القاهرة، مصر · متاح للتعاون" : "CAIRO, EGYPT · OPEN TO SELECT COLLABORATIONS"}</span>
-          <a href="#manifesto">{ar ? "ابدأ الرحلة" : "SCROLL TO EXPLORE"} <motion.span className="scroll-cue" animate={{ y: [0, 5, 0] }} transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}>↓</motion.span></a>
+          <a href="#manifesto">{ar ? "ابدأ الرحلة" : "SCROLL TO EXPLORE"} <motion.span className="scroll-cue" animate={prefersReducedMotion ? {} : { y: [0, 5, 0] }} transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}>↓</motion.span></a>
           <span>30° 02′ N / 31° 13′ E</span>
         </div>
       </section>
