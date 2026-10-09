@@ -90,6 +90,7 @@ export function Navigation() {
     pathname === item.href || (pathname === "/" && activeSection === item.section);
 
   return <header
+    ref={headerRef}
     className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`}
     data-nav-home={pathname === "/" ? "true" : "false"}
     onPointerMove={(event) => {
