@@ -133,10 +133,10 @@ export function HomeExperience() {
       <svg className="smoke-filter-defs" aria-hidden="true" focusable="false" width="0" height="0">
         <defs>
           <filter id="header-smoke-displacement" x="-20%" y="-70%" width="140%" height="240%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.045" numOctaves="3" seed="8" result="smokeNoise">
+            <feTurbulence id="header-smoke-turbulence" type="fractalNoise" baseFrequency="0.014 0.044" numOctaves="4" seed="8" result="smokeNoise">
               {!prefersReducedMotion && <animate attributeName="baseFrequency" values="0.012 0.045;0.018 0.035;0.009 0.052;0.012 0.045" dur="19s" repeatCount="indefinite" />}
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="smokeNoise" scale="30" xChannelSelector="R" yChannelSelector="G">
+            <feDisplacementMap id="header-smoke-displacement-map" in="SourceGraphic" in2="smokeNoise" scale="48" xChannelSelector="R" yChannelSelector="G">
               {!prefersReducedMotion && <animate attributeName="scale" values="22;38;26;44;22" dur="13s" repeatCount="indefinite" />}
             </feDisplacementMap>
           </filter>
