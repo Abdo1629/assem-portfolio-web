@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -59,7 +60,7 @@ export function Navigation() {
   return <header className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`} data-nav-home={pathname === "/" ? "true" : "false"}>
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
-        <span className="brand-mark" aria-hidden="true">MA</span>
+        <span className="brand-mark" aria-hidden="true"><Image className="brand-logo" src={theme === "dark" ? "/images/assem-logo-dark.png" : "/images/assem-logo-light.png"} alt="" width={72} height={48} priority /></span>
         <span className="brand-name"><strong>MOHAMED ASSEM</strong><small>{t.brandRole}</small></span>
       </Link>
       <nav className="nav-links" aria-label={t.primaryNavigation}>

@@ -81,7 +81,6 @@ export function Hero() {
   return <div id="top" className="hero-pin-track">
     <section ref={root} className="hero section-pad">
       <div className="hero-brand-art" aria-hidden="true" />
-      <div className="hero-meta" aria-hidden="true"><span>01</span><i /><span>VISUAL DIRECTION / FRAME STUDY</span></div>
       <p className="hero-scene-label"><span>01</span><i />{t.heroSceneLabel}</p>
       <div className="hero-copy">
         <p className="eyebrow hero-kicker"><span className="signal" />{t.discipline}</p>
