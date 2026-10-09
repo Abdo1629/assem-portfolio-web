@@ -59,6 +59,14 @@ export function Navigation() {
   }, [pathname]);
 
   useEffect(() => {
+    const closeOnDesktop = () => {
+      if (window.innerWidth > 1100) setMenuOpen(false);
+    };
+    window.addEventListener("resize", closeOnDesktop, { passive: true });
+    return () => window.removeEventListener("resize", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id], main section[data-scene]"));
     if (!sections.length) return;
     const observer = new IntersectionObserver((entries) => {
