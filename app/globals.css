@@ -1519,3 +1519,150 @@ html[dir="rtl"] .new-home .hero-media-shade {
   .new-home .nav, .new-home .nav-link::after, .new-home .cta-primary { transition: none !important; }
   .new-home .hero-bottom .scroll-cue { animation: none !important; }
 }
+
+
+/* Identity cloud header — pointer-reactive, touch-safe, accessible navigation */
+.new-home .nav {
+  --cloud-x: 50%;
+  --cloud-y: 0px;
+  --cloud-opacity: .62;
+  isolation: isolate;
+  overflow: visible;
+  padding-block: 10px;
+  background: color-mix(in srgb, var(--home-bg) 68%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  box-shadow: 0 10px 34px color-mix(in srgb, var(--home-bg) 14%, transparent);
+  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.new-home .nav::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -38px -4vw -24px;
+  pointer-events: none;
+  opacity: var(--cloud-opacity);
+  background:
+    radial-gradient(ellipse 170px 78px at var(--cloud-x) var(--cloud-y), color-mix(in srgb, var(--brand-primary) 32%, transparent), transparent 76%),
+    radial-gradient(ellipse 270px 96px at calc(var(--cloud-x) + 100px) calc(var(--cloud-y) + 6px), color-mix(in srgb, var(--brand-secondary) 24%, transparent), transparent 78%),
+    radial-gradient(ellipse 320px 88px at calc(var(--cloud-x) - 170px) calc(var(--cloud-y) + 16px), color-mix(in srgb, var(--brand-primary) 18%, transparent), transparent 80%);
+  filter: blur(18px);
+  transition: opacity .3s ease;
+}
+.new-home .nav::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brand-primary), var(--brand-secondary), transparent);
+  opacity: .7;
+}
+.new-home .nav.nav-scrolled {
+  background: color-mix(in srgb, var(--home-bg) 86%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--brand-primary) 30%, transparent);
+  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+}
+.new-home .nav-inner { position: relative; z-index: 2; }
+.new-home .brand-mark {
+  border-radius: 14px;
+  border-color: color-mix(in srgb, var(--brand-primary) 55%, var(--home-line));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--brand-primary) 12%, transparent), inset 0 0 20px color-mix(in srgb, var(--brand-secondary) 12%, transparent);
+  transition: border-radius .35s ease, box-shadow .35s ease, transform .35s ease;
+}
+.new-home .brand:hover .brand-mark {
+  border-radius: 50%;
+  transform: rotate(-5deg);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--brand-primary) 24%, transparent);
+}
+.new-home .nav-links .nav-link::after { height: 2px; border-radius: 99px; box-shadow: 0 0 12px var(--brand-primary-soft); }
+.new-home .nav-actions .nav-contact {
+  border-radius: 999px;
+  border-color: color-mix(in srgb, var(--brand-primary) 45%, var(--home-line));
+  background: linear-gradient(120deg, color-mix(in srgb, var(--brand-primary) 12%, transparent), color-mix(in srgb, var(--brand-secondary) 10%, transparent));
+}
+.new-home .language, .new-home .theme-toggle {
+  border-radius: 999px;
+  border-color: color-mix(in srgb, var(--brand-secondary) 34%, var(--home-line));
+}
+.new-home .menu-toggle {
+  display: none;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 42px;
+  border-radius: 999px;
+  border-color: color-mix(in srgb, var(--brand-primary) 48%, var(--home-line));
+  background: color-mix(in srgb, var(--home-panel) 72%, transparent);
+  color: var(--home-text);
+}
+.new-home .menu-toggle span {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  border: 0;
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  line-height: 1;
+}
+.new-home .mobile-navigation {
+  display: none;
+  color: var(--home-text);
+  background: color-mix(in srgb, var(--home-bg) 91%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 28%, var(--home-line));
+  box-shadow: 0 26px 80px rgba(0,0,0,.24), 0 0 36px color-mix(in srgb, var(--brand-secondary) 10%, transparent);
+  backdrop-filter: blur(26px) saturate(135%);
+  -webkit-backdrop-filter: blur(26px) saturate(135%);
+}
+.new-home .mobile-navigation > a { transition: color .2s ease, padding-inline .2s ease; }
+.new-home .mobile-navigation > a:hover { color: var(--brand-primary); padding-inline: 7px; }
+.new-home .mobile-navigation > a small { color: var(--brand-secondary); }
+.new-home .mobile-navigation .mobile-language,
+.new-home .mobile-navigation .mobile-theme { color: var(--home-text); border-color: var(--home-line); }
+
+@media (max-width: 1100px) {
+  .new-home .nav-inner { grid-template-columns: minmax(0, 1fr) auto; }
+  .new-home .nav-links { display: none; }
+  .new-home .nav-actions { grid-column: 2; }
+  .new-home .nav-contact { display: none; }
+  .new-home .menu-toggle { display: inline-flex; align-items: center; gap: 5px; }
+  .new-home .mobile-navigation {
+    position: absolute;
+    top: calc(100% + 12px);
+    inset-inline: clamp(16px, 4vw, 38px);
+    bottom: auto;
+    z-index: 5;
+    width: auto;
+    max-height: min(72svh, 620px);
+    overflow-y: auto;
+    padding: 22px clamp(20px, 4vw, 36px) 26px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(.985);
+    transition: opacity .24s ease, transform .32s var(--ease-cinematic), visibility .24s;
+  }
+  .new-home .nav-menu-open .mobile-navigation,
+  .new-home.nav-menu-open .mobile-navigation { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
+  .new-home .mobile-navigation .eyebrow { margin: 0 0 12px; }
+  .new-home .mobile-navigation > a { min-height: 54px; padding: 12px 0; font-size: clamp(19px, 3vw, 27px); }
+  .new-home .mobile-navigation > a small { font-size: 10px; }
+}
+@media (max-width: 700px) {
+  .new-home .nav { padding-block: 8px; }
+  .new-home .nav-inner { padding-inline: 16px; gap: 10px; }
+  .new-home .brand { gap: 9px; }
+  .new-home .brand-mark { width: 38px; height: 38px; flex-basis: 38px; }
+  .new-home .brand-name strong { font-size: 9px; letter-spacing: .1em; }
+  .new-home .brand-name small { display: none; }
+  .new-home .nav-actions { gap: 6px; }
+  .new-home .language, .new-home .theme-toggle { min-width: 34px; height: 34px; padding-inline: 8px; }
+  .new-home .menu-toggle { min-width: 36px; min-height: 36px; padding-inline: 9px; }
+  .new-home .mobile-navigation { inset-inline: 10px; top: calc(100% + 8px); padding: 20px 20px 24px; border-radius: 20px; }
+  .new-home .nav::before { inset-inline: -10px; filter: blur(20px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .new-home .nav::before, .new-home .brand-mark, .new-home .mobile-navigation { transition: none !important; }
+}
