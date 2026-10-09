@@ -52,8 +52,17 @@ export function HomeExperience() {
       gsap.set(".assembly-piece", { autoAlpha: 0 });
       gsap.set(".hero-copy-line", { yPercent: 120, autoAlpha: 0 });
       tl.fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
-        .fromTo(".intro-orbit-icon", { autoAlpha: 0, scale: .3, rotate: -18 }, { autoAlpha: 1, scale: 1, rotate: 0, duration: .42, stagger: .055, ease: "back.out(1.7)" }, "-=.12")
-        .to(".intro-orbit", { rotation: 360, duration: 1.1, ease: "none" }, "<")
+        .fromTo(".intro-orbit-icon", {
+          autoAlpha: 0,
+          x: (i, el) => Number((el as HTMLElement).dataset.enterX || 0) * window.innerWidth,
+          y: (i, el) => Number((el as HTMLElement).dataset.enterY || 0) * window.innerHeight,
+          scale: .28,
+          rotate: (i) => i % 2 ? -24 : 24
+        }, {
+          autoAlpha: 1, x: 0, y: 0, scale: 1, rotate: 0,
+          duration: .86, stagger: .075, ease: "power3.out"
+        }, "-=.08")
+        .to(".intro-orbit", { rotation: 360, duration: 1.25, ease: "none" }, ">")
         .to(".intro-orbit-icon", {
           x: (i, el) => Number((el as HTMLElement).dataset.exitX || 0) * window.innerWidth,
           y: (i, el) => Number((el as HTMLElement).dataset.exitY || 0) * window.innerHeight,
@@ -132,20 +141,28 @@ export function HomeExperience() {
 
   return (
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
+      <svg className="smoke-filter-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="header-smoke-displacement" x="-8%" y="-30%" width="116%" height="160%" colorInterpolationFilters="sRGB">
+            <feTurbulence id="header-smoke-turbulence" type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="3" seed="8" result="smokeNoise" />
+            <feDisplacementMap id="header-smoke-displacement-map" in="SourceGraphic" in2="smokeNoise" scale="54" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
       <div ref={intro} className="intro-overlay" aria-hidden="true">
         <div className="intro-grid" />
         <div className="intro-orbit">
           {[
-            { label: "Pr", name: "Premiere Pro", x: -154, y: -34, exitX: -1.2, exitY: -1.1 },
-            { label: "Ae", name: "After Effects", x: -112, y: -112, exitX: -0.5, exitY: -1.35 },
-            { label: "Ps", name: "Photoshop", x: 0, y: -146, exitX: 0.1, exitY: -1.3 },
-            { label: "Ai", name: "Illustrator", x: 116, y: -108, exitX: 0.65, exitY: -1.2 },
-            { label: "Lr", name: "Lightroom", x: 158, y: -22, exitX: 1.2, exitY: -0.6 },
-            { label: "Id", name: "InDesign", x: 118, y: 90, exitX: 1.2, exitY: 0.75 },
-            { label: "Au", name: "Audition", x: 6, y: 142, exitX: 0.15, exitY: 1.25 },
-            { label: "Ff", name: "Firefly", x: -116, y: 92, exitX: -1.05, exitY: 1.0 },
+            { label: "Pr", name: "Premiere Pro", x: -154, y: -34, enterX: -1.2, enterY: -.7, exitX: -1.2, exitY: -1.1 },
+            { label: "Ae", name: "After Effects", x: -112, y: -112, enterX: -.75, enterY: -1.2, exitX: -0.5, exitY: -1.35 },
+            { label: "Ps", name: "Photoshop", x: 0, y: -146, enterX: 0, enterY: -1.25, exitX: 0.1, exitY: -1.3 },
+            { label: "Ai", name: "Illustrator", x: 116, y: -108, enterX: .8, enterY: -1.1, exitX: 0.65, exitY: -1.2 },
+            { label: "Lr", name: "Lightroom", x: 158, y: -22, enterX: 1.25, enterY: -.45, exitX: 1.2, exitY: -0.6 },
+            { label: "Id", name: "InDesign", x: 118, y: 90, enterX: 1.15, enterY: .7, exitX: 1.2, exitY: 0.75 },
+            { label: "Au", name: "Audition", x: 6, y: 142, enterX: 0, enterY: 1.25, exitX: 0.15, exitY: 1.25 },
+            { label: "Ff", name: "Firefly", x: -116, y: 92, enterX: -1.05, enterY: .85, exitX: -1.05, exitY: 1.0 },
           ].map((tool) => (
-            <span key={tool.name} className="intro-orbit-icon" data-exit-x={tool.exitX} data-exit-y={tool.exitY} style={{ left: tool.x, top: tool.y }} title={tool.name}>
+            <span key={tool.name} className="intro-orbit-icon" data-enter-x={tool.enterX} data-enter-y={tool.enterY} data-exit-x={tool.exitX} data-exit-y={tool.exitY} style={{ left: tool.x, top: tool.y }} title={tool.name}>
               <b>{tool.label}</b><small>{tool.name}</small>
             </span>
           ))}
