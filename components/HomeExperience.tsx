@@ -130,6 +130,18 @@ export function HomeExperience() {
         <div className="intro-caption"><span>{ar ? "ممارسة بصرية مستقلة" : "INDEPENDENT VISUAL PRACTICE"}</span><span>{ar ? "القاهرة · مصر" : "CAIRO · EGYPT"}</span></div>
         <div className="intro-progress"><i /></div>
       </div>
+      <svg className="smoke-filter-defs" aria-hidden="true" focusable="false" width="0" height="0">
+        <defs>
+          <filter id="header-smoke-displacement" x="-20%" y="-70%" width="140%" height="240%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.045" numOctaves="3" seed="8" result="smokeNoise">
+              <animate attributeName="baseFrequency" values="0.012 0.045;0.018 0.035;0.009 0.052;0.012 0.045" dur="19s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="smokeNoise" scale="30" xChannelSelector="R" yChannelSelector="G">
+              <animate attributeName="scale" values="22;38;26;44;22" dur="13s" repeatCount="indefinite" />
+            </feDisplacementMap>
+          </filter>
+        </defs>
+      </svg>
       <div className="grain" aria-hidden="true" />
       <div className="ink-bloom" aria-hidden="true"><span /></div>
       <Navigation />
