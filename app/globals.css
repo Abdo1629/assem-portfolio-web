@@ -1785,7 +1785,7 @@ html { scrollbar-gutter: stable; }
   .camera-art { width: min(72%, 330px); }
   .design-art { height: 285px; }
   .service-scene-visual::before { inset: 5%; }
-  .new-home .nav::before { inset: -50px -12vw -42px; filter: blur(24px); }
+  .new-home .nav::before { inset: -50px -12vw -42px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .new-home .nav::before { animation: none !important; }
