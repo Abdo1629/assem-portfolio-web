@@ -52,6 +52,15 @@ export function HomeExperience() {
       gsap.set(".assembly-piece", { autoAlpha: 0 });
       gsap.set(".hero-copy-line", { yPercent: 120, autoAlpha: 0 });
       tl.fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
+        .fromTo(".intro-orbit-icon", { autoAlpha: 0, scale: .3, rotate: -18 }, { autoAlpha: 1, scale: 1, rotate: 0, duration: .42, stagger: .055, ease: "back.out(1.7)" }, "-=.12")
+        .to(".intro-orbit", { rotation: 360, duration: 1.1, ease: "none" }, "<")
+        .to(".intro-orbit-icon", {
+          x: (i, el) => Number((el as HTMLElement).dataset.exitX || 0) * window.innerWidth,
+          y: (i, el) => Number((el as HTMLElement).dataset.exitY || 0) * window.innerHeight,
+          scale: .18, autoAlpha: 0, rotation: (i) => i % 2 ? 90 : -90,
+          duration: .72, stagger: .035, ease: "power3.in"
+        }, ">-.08")
+        .to(".intro-orbit", { autoAlpha: 0, duration: .01 }, "<")
         .to(".intro-wordmark", { autoAlpha: 1, y: 0, duration: .42 }, "-=.08")
         .to(mark, { x: dx, y: dy, scale: targetRect.width / markRect.width, duration: .92, ease: "power4.inOut" }, "+=.28")
         .to(".intro-wordmark", { autoAlpha: 0, y: -10, duration: .28 }, "<")
@@ -126,6 +135,22 @@ export function HomeExperience() {
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
       <div ref={intro} className="intro-overlay" aria-hidden="true">
         <div className="intro-grid" />
+        <div className="intro-orbit">
+          {[
+            { label: "Pr", name: "Premiere Pro", x: -154, y: -34, exitX: -1.2, exitY: -1.1 },
+            { label: "Ae", name: "After Effects", x: -112, y: -112, exitX: -0.5, exitY: -1.35 },
+            { label: "Ps", name: "Photoshop", x: 0, y: -146, exitX: 0.1, exitY: -1.3 },
+            { label: "Ai", name: "Illustrator", x: 116, y: -108, exitX: 0.65, exitY: -1.2 },
+            { label: "Lr", name: "Lightroom", x: 158, y: -22, exitX: 1.2, exitY: -0.6 },
+            { label: "Id", name: "InDesign", x: 118, y: 90, exitX: 1.2, exitY: 0.75 },
+            { label: "Au", name: "Audition", x: 6, y: 142, exitX: 0.15, exitY: 1.25 },
+            { label: "Ff", name: "Firefly", x: -116, y: 92, exitX: -1.05, exitY: 1.0 },
+          ].map((tool) => (
+            <span key={tool.name} className="intro-orbit-icon" data-exit-x={tool.exitX} data-exit-y={tool.exitY} style={{ left: tool.x, top: tool.y }} title={tool.name}>
+              <b>{tool.label}</b><small>{tool.name}</small>
+            </span>
+          ))}
+        </div>
         <div className="intro-mark"><Image ref={introMark} className="intro-logo" src={logo} alt="" width={220} height={146} priority /><span className="intro-wordmark">MOHAMED ASSEM</span></div>
         <div className="intro-caption"><span>{ar ? "ممارسة بصرية مستقلة" : "INDEPENDENT VISUAL PRACTICE"}</span><span>{ar ? "القاهرة · مصر" : "CAIRO · EGYPT"}</span></div>
         <div className="intro-progress"><i /></div>
