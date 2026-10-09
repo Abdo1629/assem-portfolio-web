@@ -2330,3 +2330,19 @@ html[lang="en"] body :where(h1, h2, h3, h4, h5, h6) {
   .new-home .menu-icon i { transition: none !important; }
   .intro-orbit { display: none !important; }
 }
+
+
+/* Final alignment: the cursor coordinates are local to the cropped smoke band. */
+.smoke-filter-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.new-home .nav { --cloud-y: 28px; }
+@media (max-width: 700px) {
+  .new-home .nav { --cloud-y: 22px; }
+}
+.intro-orbit { top: calc(50% - 16px); }
+.intro-progress i { animation-duration: 6s; }
