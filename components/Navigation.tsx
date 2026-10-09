@@ -75,8 +75,8 @@ export function Navigation() {
       header.dataset.smokeY = String(y);
       header.style.setProperty("--cloud-x", `${x}px`);
       header.style.setProperty("--cloud-y", `${y}px`);
-      header.style.setProperty("--smoke-flow-x", `${Math.max(-1, Math.min(1, dx / 18))}`);
-      header.style.setProperty("--smoke-flow-y", `${Math.max(-1, Math.min(1, dy / 18))}`);
+      header.style.setProperty("--smoke-flow-x", `${Math.max(-10, Math.min(10, dx * 0.35))}px`);
+      header.style.setProperty("--smoke-flow-y", `${Math.max(-12, Math.min(12, dy * 0.4))}px`);
       header.style.setProperty("--smoke-force", String(speed));
       header.style.setProperty("--cloud-opacity", "1");
 
@@ -92,8 +92,8 @@ export function Navigation() {
       const header = event.currentTarget;
       header.style.setProperty("--cloud-opacity", "0.78");
       header.style.setProperty("--smoke-force", "0");
-      header.dataset.smokeX = "";
-      header.dataset.smokeY = "";
+      delete header.dataset.smokeX;
+      delete header.dataset.smokeY;
       const displacement = document.getElementById("header-smoke-displacement-map");
       const turbulence = document.getElementById("header-smoke-turbulence");
       if (displacement) displacement.setAttribute("scale", "48");
