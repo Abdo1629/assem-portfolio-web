@@ -1776,10 +1776,10 @@ html { scrollbar-gutter: stable; }
   .camera-art { width: min(72%, 330px); }
   .design-art { height: 285px; }
   .service-scene-visual::before { inset: 5%; }
-  .new-home .nav::before { inset: -50px -12vw -42px; filter: blur(24px); }
+
 }
 @media (prefers-reduced-motion: reduce) {
-  .new-home .nav::before { animation: none !important; }
+
   .smooth-content { will-change: auto; }
 }
 
@@ -2121,123 +2121,6 @@ html[lang="en"] body :where(h1, h2, h3, h4, h5, h6) {
 .intro-logo { display: block; flex: 0 0 auto; }
 .intro-wordmark { text-align: center; }
 
-/* Restored soft drifting smoke, clipped to the header edge so it never washes over the hero. */
-.new-home .nav,
-.new-home .nav.nav-scrolled {
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-.new-home .nav {
-  isolation: isolate;
-  overflow: visible;
-  --cloud-x: 50%;
-  --cloud-y: 18px;
-  --cloud-opacity: .68;
-}
-.new-home .nav::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: auto 0 -1px;
-  height: 58px;
-  pointer-events: none;
-  clip-path: inset(0);
-  opacity: var(--cloud-opacity, .68);
-  background:
-    radial-gradient(ellipse 250px 72px at var(--cloud-x, 50%) var(--cloud-y, 18px), color-mix(in srgb, var(--brand-primary) 24%, transparent), transparent 78%),
-    radial-gradient(ellipse 34% 105px at 15% 100%, color-mix(in srgb, var(--brand-primary) 28%, transparent), transparent 76%),
-    radial-gradient(ellipse 30% 112px at 39% 100%, color-mix(in srgb, var(--brand-secondary) 25%, transparent), transparent 78%),
-    radial-gradient(ellipse 36% 130px at 68% 96%, color-mix(in srgb, var(--brand-primary) 23%, transparent), transparent 79%),
-    radial-gradient(ellipse 27% 100px at 91% 100%, color-mix(in srgb, var(--brand-secondary) 22%, transparent), transparent 79%),
-    radial-gradient(ellipse 48% 85px at 51% 100%, color-mix(in srgb, var(--home-panel) 62%, transparent), transparent 83%);
-  filter: blur(22px) saturate(115%);
-  transform: translate3d(0, 0, 0);
-  animation: smoke-drift 17s ease-in-out infinite alternate;
-  transition: opacity .5s ease;
-  will-change: transform, opacity;
-}
-.new-home .nav::after { display: none !important; }
-.new-home .nav-inner { position: relative; z-index: 3; }
-.new-home .nav .brand-mark,
-.new-home .nav .language,
-.new-home .nav .theme-toggle,
-.new-home .nav .menu-toggle,
-.new-home .nav .nav-contact { border-radius: 999px; }
-.new-home .nav .brand-mark { background: color-mix(in srgb, var(--home-bg) 16%, transparent); }
-.new-home .nav .mobile-navigation { border-radius: 22px; }
-@media (max-width: 700px) {
-  .new-home .nav::before { height: 48px; filter: blur(19px) saturate(112%); }
-}
-/* Matching, tactile language/theme/menu controls; the open menu becomes a true X. */
-.new-home .nav-actions { gap: clamp(6px, .8vw, 10px); }
-.new-home .language,
-.new-home .theme-toggle,
-.new-home .menu-toggle {
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
-  padding: 0;
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 40px;
-  border: 1px solid color-mix(in srgb, var(--brand-primary) 25%, var(--home-line));
-  border-radius: 12px;
-  color: var(--home-text);
-  background: color-mix(in srgb, var(--home-panel) 35%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
-  transition: background .2s ease, border-color .2s ease, transform .2s ease;
-}
-.new-home .language { font-size: 10px; letter-spacing: .04em; }
-.new-home .language i { display: none; }
-.new-home .theme-toggle svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.7; }
-.new-home .language:hover,
-.new-home .theme-toggle:hover,
-.new-home .menu-toggle:hover {
-  border-color: color-mix(in srgb, var(--brand-primary) 72%, var(--brand-secondary));
-  background: color-mix(in srgb, var(--brand-primary) 9%, var(--home-panel));
-}
-.new-home .language:active,
-.new-home .theme-toggle:active,
-.new-home .menu-toggle:active { transform: scale(.96); }
-.new-home .menu-icon {
-  position: relative;
-  display: block;
-  width: 19px;
-  height: 19px;
-  flex: 0 0 19px;
-}
-.new-home .menu-icon i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 1.6px;
-  border: 0;
-  border-radius: 10px;
-  background: currentColor;
-  transform: translate(-50%, -50%);
-  transition: transform .22s ease, opacity .16s ease, width .18s ease;
-}
-.new-home .menu-icon i:first-child { margin-top: -5px; }
-.new-home .menu-icon i:nth-child(2) { width: 12px; margin-top: 0; }
-.new-home .menu-icon i:last-child { margin-top: 5px; }
-.new-home .menu-icon.is-open i:first-child {
-  width: 19px;
-  margin-top: 0;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-.new-home .menu-icon.is-open i:nth-child(2) { opacity: 0; width: 0; }
-.new-home .menu-icon.is-open i:last-child {
-  width: 19px;
-  margin-top: 0;
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
 /* The mobile English hero is full-width, padded, and no longer trapped in a narrow grid column. */
 @media (max-width: 700px) {
   .new-home .new-hero {
@@ -2347,13 +2230,6 @@ html[lang="en"] body :where(h1, h2, h3, h4, h5, h6) {
 /* Keep the opening orbit centred on the logo and its progress indicator in sync. */
 .intro-orbit { top: calc(50% - 16px); }
 .intro-progress i { animation-duration: 6s; }
-
-/* Preserve the dropdown's absolute positioning and show the menu control only where needed. */
-.new-home .menu-toggle { display: none; }
-@media (max-width: 1100px) {
-  .new-home .menu-toggle { display: inline-grid; }
-}
-
 
 /* Homepage completion: stronger editorial hierarchy, more deliberate motion, and a real footer. */
 .new-home .new-hero {
