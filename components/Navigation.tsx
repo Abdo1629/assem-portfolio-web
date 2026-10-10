@@ -94,19 +94,13 @@ export function Navigation() {
     className={`nav ${scrolled ? "nav-scrolled" : ""} ${menuOpen ? "nav-menu-open" : ""}`}
     data-nav-home={pathname === "/" ? "true" : "false"}
     onPointerMove={(event) => {
-      if (event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const header = event.currentTarget;
-      const rect = header.getBoundingClientRect();
-      const bandHeight = window.innerWidth <= 700 ? 48 : 58;
-      const x = event.clientX - rect.left;
-      const y = Math.max(0, Math.min(bandHeight, event.clientY - (rect.bottom - bandHeight)));
-      header.style.setProperty("--cloud-x", String(x) + "px");
-      header.style.setProperty("--cloud-y", String(y) + "px");
-      header.style.setProperty("--cloud-opacity", "0.92");
+      if (event.pointerType === "touch") return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      event.currentTarget.style.setProperty("--cloud-x", `${event.clientX - rect.left}px`);
+      event.currentTarget.style.setProperty("--cloud-y", `${event.clientY - rect.top}px`);
+      event.currentTarget.style.setProperty("--cloud-opacity", "1");
     }}
-    onPointerLeave={(event) => {
-      event.currentTarget.style.setProperty("--cloud-opacity", "0.68");
-    }}
+    onPointerLeave={(event) => event.currentTarget.style.setProperty("--cloud-opacity", "0.62")}
   >
     <div className="nav-inner">
       <Link className="brand" href="/" aria-label={t.homeAria} onClick={closeMenu}>
