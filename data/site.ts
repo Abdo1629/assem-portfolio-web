@@ -86,6 +86,7 @@ export type Project = {
   meta: string;
   category: string;
   tone: string;
+  summary?: string;
 };
 
 export type SoftwareItem = {
