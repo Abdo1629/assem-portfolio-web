@@ -2094,9 +2094,9 @@ html[dir="rtl"] .new-home .hero-media-shade {
 
 
 /* Homepage concept-fixture art direction: real local poster artwork, not placeholder CSS gradients. */
-.new-home .project-image { isolation: isolate; background: var(--home-panel); }
+.new-home .project-image { z-index: 1; isolation: isolate; background: var(--home-panel); }
 .new-home .project-poster {
-  z-index: -1;
+  z-index: 0;
   object-fit: cover;
   object-position: center;
   transition: transform 900ms var(--ease-cinematic), filter 500ms ease;
