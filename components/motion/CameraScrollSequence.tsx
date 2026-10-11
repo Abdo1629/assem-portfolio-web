@@ -30,6 +30,9 @@ export function CameraScrollSequence() {
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
+            pin: section.querySelector<HTMLElement>(".camera-sequence-stage") ?? undefined,
+            pinSpacing: false,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
