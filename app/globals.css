@@ -2091,3 +2091,121 @@ html[dir="rtl"] .new-home .hero-media-shade {
   .intro-orbit { display: none !important; }
   .intro-orbit-icon { will-change: auto; }
 }
+
+
+/* Homepage concept-fixture art direction: real local poster artwork, not placeholder CSS gradients. */
+.new-home .project-image { isolation: isolate; background: var(--home-panel); }
+.new-home .project-poster {
+  z-index: -1;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 900ms var(--ease-cinematic), filter 500ms ease;
+  filter: saturate(.82) contrast(1.02);
+}
+.new-home .project-image-wrap:hover .project-poster,
+.new-home .project-image-wrap:focus-visible .project-poster {
+  transform: scale(1.045);
+  filter: saturate(1.05) contrast(1.03);
+}
+.new-home .project-title-art {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(58%, 520px);
+  color: rgba(250,248,242,.86);
+  text-shadow: 0 2px 18px rgba(0,0,0,.18);
+}
+.new-home .project-title-art small {
+  display: block;
+  font: 500 8px/1.5 var(--english-display);
+  letter-spacing: .18em;
+  color: rgba(250,248,242,.7);
+}
+.new-home .project-frame-mark { z-index: 1; }
+.new-home .project-orbit { z-index: 1; opacity: .42; transition: transform 900ms var(--ease-cinematic), opacity 500ms ease; }
+.new-home .project-image-wrap:hover .project-orbit { transform: rotate(18deg) scale(1.05); opacity: .68; }
+.new-home .project-light { z-index: 1; }
+.new-home .project-image-overlay {
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg,rgba(4,13,18,.68),transparent 58%);
+}
+.new-home .project-index,
+.new-home .project-placeholder,
+.new-home .project-arrow { z-index: 2; }
+.new-home .project-index {
+  padding: 7px 9px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(5,16,22,.22);
+  backdrop-filter: blur(10px);
+}
+.new-home .project-placeholder {
+  padding: 7px 9px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(5,16,22,.22);
+  backdrop-filter: blur(10px);
+  letter-spacing: .1em;
+}
+.new-home .project-paper .project-title-art,
+.new-home .project-paper .project-index,
+.new-home .project-paper .project-placeholder { color: #102832; text-shadow: none; }
+.new-home .project-paper .project-title-art small { color: rgba(16,40,50,.72); }
+.new-home .project-paper .project-image-overlay { background: linear-gradient(0deg,rgba(240,235,221,.2),transparent 55%); }
+.new-home .project-paper .project-index,
+.new-home .project-paper .project-placeholder {
+  border-color: rgba(16,40,50,.3);
+  background: rgba(240,235,221,.25);
+}
+.new-home .project-details { align-items: flex-start; }
+.new-home .project-details > div { min-width: 0; flex: 1; }
+.new-home .project-details .project-summary {
+  max-width: 54ch;
+  margin: 14px 0 0;
+  color: var(--home-muted);
+  font: 400 11px/1.85 var(--english-display);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.new-home .project-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 13px;
+}
+.new-home .project-meta-row span {
+  color: var(--home-muted);
+  font-size: 8px;
+  letter-spacing: .07em;
+}
+.new-home .project-count {
+  padding-top: 3px;
+  color: var(--brand-primary);
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+.new-home .service-scene-copy > p:not(.eyebrow) { max-width: 44ch; }
+.new-home .service-scene-visual { isolation: isolate; }
+.new-home .service-scene-visual::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  z-index: -1;
+  border: 1px solid var(--home-line);
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .new-home .project-title-art { max-width: 70%; top: 18%; font-size: 11px; }
+  .new-home .project-title-art small { font-size: 7px; }
+  .new-home .project-index { top: 12px; left: 12px; font-size: 7px; }
+  .new-home .project-placeholder { left: 12px; bottom: 12px; font-size: 7px; }
+  .new-home .project-details { gap: 8px; padding-top: 14px; }
+  .new-home .project-details h3 { font-size: clamp(24px, 7vw, 34px); }
+  .new-home .project-details .project-summary { font-size: 10px; }
+  .new-home .project-meta-row { gap: 7px 12px; }
+  .new-home .project-meta-row span { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .new-home .project-poster,
+  .new-home .project-orbit { transition: none !important; }
+}
