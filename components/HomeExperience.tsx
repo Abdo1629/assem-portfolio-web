@@ -10,6 +10,8 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { AssemAssistant } from "@/components/AssemAssistant";
+import { CameraScrollSequence } from "@/components/motion/CameraScrollSequence";
 import { homepageFixture } from "@/data/homepage-fixture";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -194,6 +196,8 @@ export function HomeExperience() {
         </div>
       </section>
 
+      <CameraScrollSequence />
+
       <section id="manifesto" className="manifesto-section section-pad">
         <div className="section-rail reveal-up"><span>01</span><i />{ar ? "الرؤية" : "THE POINT OF VIEW"}</div>
         <div className="manifesto-content reveal-up">
@@ -274,6 +278,7 @@ export function HomeExperience() {
       <Footer />
         </div>
       </div>
+      <AssemAssistant />
     </main>
   );
 }
