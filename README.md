@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mohamed Assem — Visual Director Portfolio
 
-## Getting Started
+A bilingual (Arabic RTL / English LTR) portfolio built with Next.js App Router, React, GSAP/ScrollTrigger, Framer Motion and a CSS 3D camera sequence.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Set these in a local `.env.local` file and in the hosting provider when the corresponding feature is needed. Never commit secret values.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Used by | Notes |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Assem AI assistant | Server-side Gemini API key. Without it, the assistant displays a clear not-connected message. |
+| `GEMINI_MODEL` | Assem AI assistant | Optional model override; defaults to `gemini-2.5-flash`. |
+| `ADMIN_PASSWORD` | Admin Studio | Strong, unique password for `/admin`. |
+| `ADMIN_SESSION_SECRET` | Admin Studio | Long random secret used to sign an 8-hour HttpOnly session cookie. Use at least 32 random characters. |
+| `GITHUB_TOKEN` | Admin Studio | Fine-grained GitHub token with **Contents: read and write** access to this repository. It is used server-side only. |
+| `GITHUB_REPOSITORY` | Admin Studio | Optional repository override; defaults to `Abdo1629/assem-portfolio-web`. |
+| `ADMIN_CONTENT_BRANCH` | Admin Studio | Optional publishing branch; defaults to `main`. A publish creates a Git commit on this branch and may trigger a deployment. |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact section | Optional public email address; only set after Assem confirms the correct contact email. |
 
-## Learn More
+Generate an admin session secret locally with:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+openssl rand -base64 48
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The admin editor currently manages bilingual project copy in `data/project-content.json`. It validates the payload and writes a versioned commit through the GitHub Contents API. Keep the token in server-side environment variables; do not prefix it with `NEXT_PUBLIC_`. Before enabling the editor on production, restrict the token to this repository and review the configured branch.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content accuracy
 
-## Deploy on Vercel
+The four included projects are clearly marked as fictional concept studies in both languages. They are presentation fixtures, not claims of commissioned client work. Replace them with approved case studies and real media when the owner supplies verified material.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## AI assistant grounding
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The assistant API uses a server-side Gemini key and passes only approved portfolio copy, services, process and project metadata as context. It is instructed not to invent client names, awards, outcomes, pricing or contact details. Review the prompt and privacy requirements before production use; add a durable rate limiter / abuse protection before promoting the assistant to a high-traffic public site.
+
+## Verification
+
+`npm run lint` and `npm run build` are the available repository scripts. Review the branch's CI and Vercel preview before merging; a successful file write is not a substitute for a verified build, keyboard/mobile QA, or visual review.
