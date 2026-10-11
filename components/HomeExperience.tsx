@@ -208,7 +208,7 @@ export function HomeExperience() {
         <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />02 / {home.work.eyebrow}</p><h2><>{home.work.title}<br/><em>{home.work.accent}</em></></h2></div><p>{home.work.description}</p></div>
         <div className="project-grid">
           {home.projects.map((project, i) => <article className={`project-card project-${project.tone}`} key={project.id}>
-            <Link href="/projects" className="project-image-wrap" aria-label={`${ar ? "عرض المشروعات" : "Explore projects"}: ${project.title}`}>
+            <Link href={`/projects/${project.id}`} className="project-image-wrap" aria-label={`${ar ? "عرض المشروعات" : "Explore projects"}: ${project.title}`}>
               <div className="project-image" aria-hidden="true"><Image className="project-poster" src={project.poster} alt="" fill sizes="(max-width: 700px) 100vw, 50vw" priority={i === 0} /><span className="project-frame-mark">{project.number}</span><span className="project-orbit"/><span className="project-light"/><span className="project-title-art">{project.visualTitle}<small>{project.visualSubline}</small></span></div>
               <div className="project-image-overlay" />
               <span className="project-index">{project.year}</span><motion.span className="project-arrow" whileHover={{ scale: 1.1, rotate: 45 }} whileTap={{ scale: .9 }} transition={{ type: "spring", stiffness: 320, damping: 18 }}>↗</motion.span>
