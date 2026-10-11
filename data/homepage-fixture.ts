@@ -1,3 +1,5 @@
+import projectContent from "@/data/project-content.json";
+
 /**
  * Temporary bilingual content fixture for finalizing the homepage UX.
  * All four portfolio projects below are fictional concept studies, not verified client work.
@@ -103,36 +105,7 @@ export const homepageFixture = {
       description: "احكِ عن الفكرة والجمهور والنتيجة التي تريد الوصول إليها. سنبدأ من هناك.",
       pending: "ستظهر بيانات التواصل هنا بعد تأكيدها.",
     },
-    projects: [
-      {
-        id: "after-the-last-light", number: "01", title: "بعد آخر ضوء", client: "مشروع قصير · افتراضي",
-        category: "سرد بصري · تصوير · مونتاج", format: "فيلم قصير", role: "اتجاه إبداعي · دراسة تصوير",
-        summary: "دراسة سينمائية عن انتقال الضوء وتغيّر الإحساس بالمكان خلال لحظة هادئة.",
-        conceptLabel: "دراسة فيلمية", tone: "ember", poster: "/images/concept-after-light.svg",
-        visualTitle: "AFTER THE LIGHT", visualSubline: "A STUDY IN ATMOSPHERE", year: "CONCEPT / 01",
-      },
-      {
-        id: "form-in-motion", number: "02", title: "الشكل في حركة", client: "دراسة هوية · افتراضية",
-        category: "هوية بصرية · موشن", format: "نظام بصري", role: "تصميم اتجاه بصري",
-        summary: "تجربة تجريدية تختبر كيف تتحول الأشكال الهندسية إلى نظام بصري مرن ومتحرك.",
-        conceptLabel: "دراسة هوية", tone: "gold", poster: "/images/concept-form-motion.svg",
-        visualTitle: "FORM / MOTION", visualSubline: "IDENTITY IN TRANSITION", year: "CONCEPT / 02",
-      },
-      {
-        id: "human-frequency", number: "03", title: "تردد إنساني", client: "دراسة بورتريه · افتراضية",
-        category: "بورتريه · قصة قصيرة", format: "سلسلة صور", role: "تصور بصري · معالجة",
-        summary: "تصور بصري افتراضي يضع الشخصية والملمس والتباين في مركز الحكاية.",
-        conceptLabel: "دراسة بورتريه", tone: "steel", poster: "/images/concept-human-frequency.svg",
-        visualTitle: "HUMAN FREQUENCY", visualSubline: "CHARACTER / TEXTURE / LIGHT", year: "CONCEPT / 03",
-      },
-      {
-        id: "signal-to-story", number: "04", title: "من الإشارة إلى الحكاية", client: "دراسة محتوى · افتراضية",
-        category: "محتوى قصير · مونتاج", format: "حملة رقمية", role: "سرد · إيقاع · معالجة",
-        summary: "نموذج لحملة رقمية قصيرة تنتقل من فكرة واحدة إلى مجموعة أصول متناسقة.",
-        conceptLabel: "دراسة حملة", tone: "paper", poster: "/images/concept-signal-story.svg",
-        visualTitle: "SIGNAL TO STORY", visualSubline: "SHORT-FORM SYSTEM", year: "CONCEPT / 04",
-      },
-    ] satisfies HomeProjectFixture[],
+    projects: projectContent.ar,
   },
   en: {
     hero: {
@@ -208,35 +181,6 @@ export const homepageFixture = {
       description: "Tell me about the idea, the audience and the outcome you want to achieve. We’ll take it from there.",
       pending: "Contact details will appear here once confirmed.",
     },
-    projects: [
-      {
-        id: "after-the-last-light", number: "01", title: "After the Last Light", client: "Short film · Fictional concept",
-        category: "Visual storytelling · Camera · Edit", format: "Short film", role: "Creative direction · Cinematography study",
-        summary: "A cinematic study of fading light and the way atmosphere can change our reading of a quiet place.",
-        conceptLabel: "FILM STUDY", tone: "ember", poster: "/images/concept-after-light.svg",
-        visualTitle: "AFTER THE LIGHT", visualSubline: "A STUDY IN ATMOSPHERE", year: "CONCEPT / 01",
-      },
-      {
-        id: "form-in-motion", number: "02", title: "Form in Motion", client: "Identity study · Fictional",
-        category: "Visual identity · Motion", format: "Visual system", role: "Visual art direction",
-        summary: "An abstract exploration of how geometric forms can become a flexible, moving visual system.",
-        conceptLabel: "IDENTITY STUDY", tone: "gold", poster: "/images/concept-form-motion.svg",
-        visualTitle: "FORM / MOTION", visualSubline: "IDENTITY IN TRANSITION", year: "CONCEPT / 02",
-      },
-      {
-        id: "human-frequency", number: "03", title: "Human Frequency", client: "Portrait study · Fictional",
-        category: "Portraiture · Short narrative", format: "Photo series", role: "Visual concept · Treatment",
-        summary: "A fictional visual concept placing character, texture and contrast at the centre of the story.",
-        conceptLabel: "PORTRAIT STUDY", tone: "steel", poster: "/images/concept-human-frequency.svg",
-        visualTitle: "HUMAN FREQUENCY", visualSubline: "CHARACTER / TEXTURE / LIGHT", year: "CONCEPT / 03",
-      },
-      {
-        id: "signal-to-story", number: "04", title: "Signal to Story", client: "Content study · Fictional",
-        category: "Short-form · Editing", format: "Digital campaign", role: "Narrative · Rhythm · Treatment",
-        summary: "A model for a short digital campaign that grows one central idea into a coherent set of assets.",
-        conceptLabel: "CAMPAIGN STUDY", tone: "paper", poster: "/images/concept-signal-story.svg",
-        visualTitle: "SIGNAL TO STORY", visualSubline: "SHORT-FORM SYSTEM", year: "CONCEPT / 04",
-      },
-    ] satisfies HomeProjectFixture[],
+    projects: projectContent.en,
   },
 } as const;
