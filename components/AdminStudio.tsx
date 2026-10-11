@@ -38,7 +38,7 @@ export function AdminStudio() {
       const response = await fetch("/api/admin/projects", { cache: "no-store" });
       const data = await response.json();
       if (!response.ok) {
-        if (response.status === 401) setSignedIn(false);
+        if (response.status === 401) { setSignedIn(false); setError(""); return; }
         throw new Error(data.error || "Could not load project content.");
       }
       setContent(data.content as ProjectContent);
