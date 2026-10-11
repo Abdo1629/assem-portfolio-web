@@ -52,8 +52,17 @@ export function HomeExperience() {
       gsap.set(".assembly-piece", { autoAlpha: 0 });
       gsap.set(".hero-copy-line", { yPercent: 120, autoAlpha: 0 });
       tl.fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
-        .fromTo(".intro-orbit-icon", { autoAlpha: 0, scale: .3, rotate: -18 }, { autoAlpha: 1, scale: 1, rotate: 0, duration: .42, stagger: .055, ease: "back.out(1.7)" }, "-=.12")
-        .to(".intro-orbit", { rotation: 360, duration: 1.1, ease: "none" }, "<")
+        .fromTo(".intro-orbit-icon", {
+          autoAlpha: 0,
+          x: (i, el) => Number((el as HTMLElement).dataset.enterX || 0) * window.innerWidth,
+          y: (i, el) => Number((el as HTMLElement).dataset.enterY || 0) * window.innerHeight,
+          scale: .28,
+          rotate: (i) => i % 2 ? -24 : 24
+        }, {
+          autoAlpha: 1, x: 0, y: 0, scale: 1, rotate: 0,
+          duration: .86, stagger: .075, ease: "power3.out"
+        }, "-=.08")
+        .to(".intro-orbit", { rotation: 360, duration: 1.25, ease: "none" }, ">")
         .to(".intro-orbit-icon", {
           x: (i, el) => Number((el as HTMLElement).dataset.exitX || 0) * window.innerWidth,
           y: (i, el) => Number((el as HTMLElement).dataset.exitY || 0) * window.innerHeight,
@@ -108,10 +117,40 @@ export function HomeExperience() {
       gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
         gsap.fromTo(el, { y: 42, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
       });
+      gsap.utils.toArray<HTMLElement>(".section-heading h2, .manifesto-content h2, .craft-copy h2, .services-cinematic-heading h2, .contact-content h2").forEach((heading) => {
+        gsap.fromTo(heading, { y: 34, autoAlpha: 0, clipPath: "inset(0 0 14% 0)" }, {
+          y: 0, autoAlpha: 1, clipPath: "inset(0 0 0% 0)", duration: .9, ease: "power4.out",
+          scrollTrigger: { trigger: heading, start: "top 84%", once: true }
+        });
+      });
+      gsap.fromTo(".project-card", { y: 42, autoAlpha: 0, scale: .985 }, {
+        y: 0, autoAlpha: 1, scale: 1, duration: .85, stagger: .14, ease: "power3.out",
+        scrollTrigger: { trigger: ".project-grid", start: "top 78%", once: true }
+      });
+      gsap.utils.toArray<HTMLElement>(".proof-value").forEach((el) => {
+        const targetValue = Number(el.dataset.count || 0);
+        const suffix = el.dataset.suffix || "";
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: targetValue, duration: 1.35, ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(counter.value).toLocaleString("en-US") + suffix; },
+          scrollTrigger: { trigger: el, start: "top 86%", once: true }
+        });
+      });
+      gsap.utils.toArray<HTMLElement>(".collaborator-name").forEach((el, index) => {
+        gsap.fromTo(el, { y: 14, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: .48, delay: (index % 5) * .035, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 91%", once: true }
+        });
+      });
       gsap.utils.toArray<HTMLElement>(".project-card").forEach((el) => {
         const image = el.querySelector(".project-image");
         if (image) gsap.fromTo(image, { scale: 1.12 }, { scale: 1, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "center center", scrub: .7 } });
         gsap.fromTo(el.querySelector(".project-details"), { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 76%", once: true } });
+      });
+      gsap.to(".hero-media img", {
+        yPercent: 7, scale: 1.06, ease: "none",
+        scrollTrigger: { trigger: ".new-hero", start: "top top", end: "bottom top", scrub: .7 }
       });
       gsap.fromTo(".story-orbit", { rotate: -18, scale: .86 }, { rotate: 12, scale: 1.04, ease: "none", scrollTrigger: { trigger: ".craft-section", start: "top bottom", end: "bottom top", scrub: 1 } });
       gsap.utils.toArray<HTMLElement>(".discipline-row, .approach-step").forEach((el, index) => {
@@ -132,20 +171,20 @@ export function HomeExperience() {
 
   return (
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
-      <div ref={intro} className="intro-overlay" aria-hidden="true">
+<div ref={intro} className="intro-overlay" aria-hidden="true">
         <div className="intro-grid" />
         <div className="intro-orbit">
           {[
-            { label: "Pr", name: "Premiere Pro", x: -154, y: -34, exitX: -1.2, exitY: -1.1 },
-            { label: "Ae", name: "After Effects", x: -112, y: -112, exitX: -0.5, exitY: -1.35 },
-            { label: "Ps", name: "Photoshop", x: 0, y: -146, exitX: 0.1, exitY: -1.3 },
-            { label: "Ai", name: "Illustrator", x: 116, y: -108, exitX: 0.65, exitY: -1.2 },
-            { label: "Lr", name: "Lightroom", x: 158, y: -22, exitX: 1.2, exitY: -0.6 },
-            { label: "Id", name: "InDesign", x: 118, y: 90, exitX: 1.2, exitY: 0.75 },
-            { label: "Au", name: "Audition", x: 6, y: 142, exitX: 0.15, exitY: 1.25 },
-            { label: "Ff", name: "Firefly", x: -116, y: 92, exitX: -1.05, exitY: 1.0 },
+            { label: "Pr", name: "Premiere Pro", x: -154, y: -34, enterX: -1.2, enterY: -.7, exitX: -1.2, exitY: -1.1 },
+            { label: "Ae", name: "After Effects", x: -112, y: -112, enterX: -.75, enterY: -1.2, exitX: -0.5, exitY: -1.35 },
+            { label: "Ps", name: "Photoshop", x: 0, y: -146, enterX: 0, enterY: -1.25, exitX: 0.1, exitY: -1.3 },
+            { label: "Ai", name: "Illustrator", x: 116, y: -108, enterX: .8, enterY: -1.1, exitX: 0.65, exitY: -1.2 },
+            { label: "Lr", name: "Lightroom", x: 158, y: -22, enterX: 1.25, enterY: -.45, exitX: 1.2, exitY: -0.6 },
+            { label: "Id", name: "InDesign", x: 118, y: 90, enterX: 1.15, enterY: .7, exitX: 1.2, exitY: 0.75 },
+            { label: "Au", name: "Audition", x: 6, y: 142, enterX: 0, enterY: 1.25, exitX: 0.15, exitY: 1.25 },
+            { label: "Ff", name: "Firefly", x: -116, y: 92, enterX: -1.05, enterY: .85, exitX: -1.05, exitY: 1.0 },
           ].map((tool) => (
-            <span key={tool.name} className="intro-orbit-icon" data-exit-x={tool.exitX} data-exit-y={tool.exitY} style={{ left: tool.x, top: tool.y }} title={tool.name}>
+            <span key={tool.name} className="intro-orbit-icon" data-enter-x={tool.enterX} data-enter-y={tool.enterY} data-exit-x={tool.exitX} data-exit-y={tool.exitY} style={{ left: tool.x, top: tool.y }} title={tool.name}>
               <b>{tool.label}</b><small>{tool.name}</small>
             </span>
           ))}
@@ -202,8 +241,23 @@ export function HomeExperience() {
         <div className="manifesto-number" aria-hidden="true">01</div>
       </section>
 
+      <section id="director-intro" className="director-intro section-pad">
+        <div className="director-intro-visual reveal-up">
+          <Image src="/images/mohamed-assem-portrait.jpg" alt={ar ? "محمد عاصم أحمد، مخرج بصري" : "Mohamed Assem Ahmed, visual director"} fill sizes="(max-width: 700px) 88vw, 42vw" />
+          <span className="director-photo-index">MA / 002</span>
+          <span className="director-photo-caption">{ar ? "الرؤية تبدأ قبل التصوير" : "THE VISION STARTS BEFORE THE SHOOT"}</span>
+        </div>
+        <div className="director-intro-copy reveal-up">
+          <p className="eyebrow"><span className="signal" />02 / {ar ? "عن المخرج" : "THE DIRECTOR"}</p>
+          <h2>{ar ? <>أفكر في الحكاية<br/><em>قبل أن أختار الكادر.</em></> : <>Think about the story<br/><em>before the frame.</em></>}</h2>
+          <p>{ar ? "أنا محمد عاصم أحمد؛ أعمل بين الإخراج البصري والتصوير والمونتاج والموشن والهوية البصرية. أبدأ بفهم الفكرة والجمهور، ثم أختار اللغة البصرية والإيقاع المناسبين حتى يخدم كل تفصيل الهدف." : "I’m Mohamed Assem Ahmed, working across visual direction, cinematography, editing, motion and identity. I start by understanding the idea and its audience, then shape the visual language and rhythm so every decision serves the purpose."}</p>
+          <Link className="cta-text" href="/about">{ar ? "تعرّف على طريقتي في العمل" : "Discover my approach"} <span>↗</span></Link>
+          <div className="director-intro-foot"><span>{ar ? "الرؤية" : "DIRECTION"}</span><i /><span>{ar ? "التنفيذ" : "EXECUTION"}</span><i /><span>{ar ? "الأثر" : "IMPACT"}</span></div>
+        </div>
+      </section>
+
       <section id="selected-work" className="work-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />02 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "اختيار من مشروعات في السرد البصري والمونتاج والموشن والهوية؛ لكل عمل فكرته، ولكل قرار بصري سبب." : "A curated selection across visual storytelling, editing, motion and identity — each project shaped by a clear idea and intentional visual decisions."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal" />03 / {ar ? "أعمال مختارة" : "SELECTED WORK"}</p><h2>{ar ? <>أفكار تتحول<br/><em>إلى أثر بصري.</em></> : <>Ideas, shaped<br/><em>into imagery.</em></>}</h2></div><p>{ar ? "اختيار من مشروعات في السرد البصري والمونتاج والموشن والهوية؛ لكل عمل فكرته، ولكل قرار بصري سبب." : "A curated selection across visual storytelling, editing, motion and identity — each project shaped by a clear idea and intentional visual decisions."}</p></div>
         <div className="project-grid">
           {content.projects.map((project, i) => <article className={`project-card project-${project.tone}`} key={project.id}>
             <Link href="/projects" className="project-image-wrap" aria-label={`${ar ? "عرض المشروعات" : "Explore projects"}: ${project.title}`}>
@@ -212,14 +266,14 @@ export function HomeExperience() {
               <span className="project-index">{project.number} / 03</span><motion.span className="project-arrow" whileHover={{ scale: 1.1, rotate: 45 }} whileTap={{ scale: .9 }} transition={{ type: "spring", stiffness: 320, damping: 18 }}>↗</motion.span>
               <span className="project-placeholder">{ar ? "مختار من الأعمال" : "SELECTED VISUAL WORK"}</span>
             </Link>
-            <div className="project-details"><div><p>{project.client}</p><h3>{project.title}</h3><span>{project.category}</span></div><span className="project-count">0{i + 1}</span></div>
+            <div className="project-details"><div><p>{project.client}</p><h3>{project.title}</h3><span>{project.category}</span>{project.summary ? <p className="project-summary">{project.summary}</p> : null}</div><span className="project-count">0{i + 1}</span></div>
           </article>)}
         </div>
         <div className="work-footer reveal-up"><span>{ar ? "كل مشروع يبدأ من فكرته، وتُصاغ صورته لخدمة أثرها." : "Each project begins with its idea; every image is shaped to serve its impact."}</span><Link href="/projects">{ar ? "كل الأعمال" : "ALL PROJECTS"} <span>↗</span></Link></div>
       </section>
 
       <section className="craft-section section-pad">
-        <div className="craft-top reveal-up"><div className="section-rail"><span>03</span><i />{ar ? "مجالات العمل" : "THE CRAFT"}</div><p className="eyebrow">{ar ? "من الفكرة إلى التنفيذ" : "FROM INTENT TO EXECUTION"}</p></div>
+        <div className="craft-top reveal-up"><div className="section-rail"><span>04</span><i />{ar ? "مجالات العمل" : "THE CRAFT"}</div><p className="eyebrow">{ar ? "من الفكرة إلى التنفيذ" : "FROM INTENT TO EXECUTION"}</p></div>
         <div className="craft-layout">
           <div className="craft-copy reveal-up"><h2>{ar ? <>رؤية واحدة.<br/><em>أدوات متعددة.</em></> : <>One vision.<br/><em>Many disciplines.</em></>}</h2><p>{ar ? "ليست كل المشروعات متشابهة؛ لذلك تتغير الأدوات بحسب القصة والهدف والجمهور، بينما تظل الرؤية هي نقطة البداية." : "No two briefs are the same. The tools change with the story, the audience and the goal — the point of view brings them together."}</p><Link className="cta-text" href="/services">{ar ? "استكشف الخدمات" : "EXPLORE SERVICES"} <span>↗</span></Link></div>
           <div className="craft-visual"><div className="story-orbit"><div className="orbit-ring orbit-ring-one"/><div className="orbit-ring orbit-ring-two"/><div className="orbit-core"><span>MA</span><small>VISUAL<br/>DIRECTION</small></div><span className="orbit-label orbit-label-a">01 / FRAME</span><span className="orbit-label orbit-label-b">02 / EDIT</span><span className="orbit-label orbit-label-c">03 / IDENTITY</span></div></div>
@@ -230,7 +284,7 @@ export function HomeExperience() {
       
       <section id="services" data-scene="services" className="services-cinematic section-pad">
         <div className="services-cinematic-heading reveal-up">
-          <p className="eyebrow"><span className="signal" />04 / {ar ? "الخدمات" : "SERVICES"}</p>
+          <p className="eyebrow"><span className="signal" />05 / {ar ? "الخدمات" : "SERVICES"}</p>
           <h2>{ar ? <>من الفكرة،<br/><em>إلى الصورة النهائية.</em></> : <>From the first idea<br/><em>to the final frame.</em></>}</h2>
           <p>{ar ? "كل خدمة فصل مختلف في الحكاية البصرية؛ تتحرك الأدوات، ويتغير الإيقاع، وتظل الفكرة هي نقطة البداية." : "Each service is a different chapter in the visual story. The tools move, the rhythm changes, and the idea stays at the centre."}</p>
         </div>
@@ -262,13 +316,44 @@ export function HomeExperience() {
       </section>
 
       <section className="approach-section section-pad">
-        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>05 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
+        <div className="section-heading reveal-up"><div><p className="eyebrow"><span className="signal"/>06 / {ar ? "طريقة العمل" : "THE APPROACH"}</p><h2>{ar ? <>من أول سؤال،<br/><em>إلى آخر تفصيلة.</em></> : <>From first question<br/><em>to final frame.</em></>}</h2></div><p>{ar ? "عملية واضحة تساعد الفكرة على الوصول إلى تنفيذ بصري متماسك." : "A considered process keeps the idea clear from the first conversation to the final delivery."}</p></div>
         <div className="approach-steps">{[{n:"01",en:"Listen & Define",ar:"الفهم والتحديد",descEn:"Understand the brief, audience and intended outcome.",descAr:"فهم المتطلبات والجمهور والنتيجة المطلوبة."},{n:"02",en:"Shape the Concept",ar:"تطوير الفكرة",descEn:"Build the visual direction and establish the language.",descAr:"تحديد الاتجاه الإبداعي واللغة البصرية."},{n:"03",en:"Create & Refine",ar:"التنفيذ والتطوير",descEn:"Produce, edit and refine the work with intention.",descAr:"تنفيذ العمل ومراجعته وتحسين تفاصيله."},{n:"04",en:"Deliver with Purpose",ar:"التسليم والهدف",descEn:"Prepare the final assets for their intended use.",descAr:"تجهيز المخرجات النهائية للاستخدام المطلوب."}].map(s=><article className="approach-step reveal-up" key={s.n}><span className="step-number">{s.n}</span><div><h3>{ar?s.ar:s.en}</h3><p>{ar?s.descAr:s.descEn}</p></div><span className="step-arrow">↗</span></article>)}</div>
+      </section>
+
+      <section id="collaborations" className="proof-section section-pad">
+        <div className="section-heading proof-heading reveal-up">
+          <div>
+            <p className="eyebrow"><span className="signal" />07 / {ar ? "الخبرة والتعاون" : "EXPERIENCE & COLLABORATION"}</p>
+            <h2>{ar ? <>خبرة تُبنى<br/><em>بالتعاون والثقة.</em></> : <>Experience built<br/><em>through collaboration.</em></>}</h2>
+          </div>
+          <p>{ar ? "من الفكرة الأولى إلى النسخة النهائية، تتشكل كل تجربة من فهم الهدف، واحترام القصة، والعمل مع أشخاص يؤمنون بقوة الصورة." : "From the first idea to the final cut, every collaboration starts with a clear brief, respect for the story and a shared belief in the power of visual work."}</p>
+        </div>
+        <div className="proof-metrics">
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="6" data-suffix="+">6+</strong>
+            <span>{ar ? "سنوات من الخبرة" : "YEARS OF EXPERIENCE"}</span>
+            <p>{ar ? "خبرة عملية في صناعة المحتوى والإنتاج البصري." : "Hands-on experience across visual content and production."}</p>
+          </article>
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="250" data-suffix="+">250+</strong>
+            <span>{ar ? "عميلًا" : "CLIENTS"}</span>
+            <p>{ar ? "تعاونات مع صُنّاع محتوى ومؤسسات ومشروعات متنوعة." : "Work across creators, organisations and varied briefs."}</p>
+          </article>
+          <article className="proof-metric reveal-up">
+            <strong className="proof-value" data-count="1000" data-suffix="+">1,000+</strong>
+            <span>{ar ? "مشروع بصري" : "VISUAL PROJECTS"}</span>
+            <p>{ar ? "من الأعمال القصيرة إلى مشروعات المحتوى المتكاملة." : "From short-form pieces to broader visual-content projects."}</p>
+          </article>
+        </div>
+        <div className="collaborator-rail reveal-up"><span>{ar ? "أسماء من رحلات العمل" : "SELECTED COLLABORATIONS"}</span><i /></div>
+        <div className="collaborator-list">
+          {content.collaborators.map((name) => <span className="collaborator-name" key={name}>{name}</span>)}
+        </div>
       </section>
 
       <section id="contact" className="contact-section section-pad">
         <div className="contact-ornament" aria-hidden="true">MA</div>
-        <div className="section-rail reveal-up"><span>06</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
+        <div className="section-rail reveal-up"><span>08</span><i />{ar ? "الخطوة التالية" : "THE NEXT FRAME"}</div>
         <div className="contact-content reveal-up"><p className="eyebrow">{ar ? "لديك فكرة؟" : "HAVE A PROJECT IN MIND?"}</p><h2>{ar ? <>لنصنع شيئًا<br/><em>يستحق أن يُرى.</em></> : <>Let’s make<br/><em>something worth seeing.</em></>}</h2><p className="contact-copy">{ar ? "احكِ لي عن الفكرة، والجمهور، وما تريد أن تحققه. سنبدأ من هناك." : "Tell me about the idea, the audience and what you want to achieve. We’ll take it from there."}</p>{contactEmail ? <a className="contact-mail" href={"mailto:" + contactEmail}>{contactEmail} <span>↗</span></a> : <p className="contact-note contact-note-pending">{ar ? "سيُتاح رابط التواصل هنا فور تأكيد بيانات الاتصال." : "DIRECT CONTACT DETAILS WILL APPEAR HERE BEFORE LAUNCH."}</p>}</div>
       </section>
       <Footer />

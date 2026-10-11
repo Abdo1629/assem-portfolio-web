@@ -20,9 +20,9 @@ export const en: LocaleContent = {
     { name: "Illustrator", short: "AI", logo: "https://main--cc--adobecom.aem.live/cc-shared/assets/img/product-icons/svg/illustrator-40.svg", detail: "Illustration, identity systems and scalable motion-ready assets." },
   ],
   projects: [
-    { id: "tedx-tabary", number: "01", title: "Back to the Beginning", client: "TEDx Tabary", meta: "Season 03", category: "Editing • Motion • Visual Identity", tone: "ember" },
-    { id: "mounir-academy", number: "02", title: "Mounir Academy", client: "With Dr. Amir Mounir", meta: "Visual Content", category: "Editing • Visual Storytelling", tone: "gold" },
-    { id: "moving-identities", number: "03", title: "Moving Identities", client: "Identity & visual-content work", meta: "Creative Direction", category: "Visual Identity • Motion • Content", tone: "steel" },
+    { id: "tedx-tabary", number: "01", title: "Back to the Beginning", client: "TEDx Tabary", meta: "Season 03", category: "Editing • Motion • Visual Identity", tone: "ember", summary: "A season identity carried through editing, motion and event storytelling for TEDx Tabary." },
+    { id: "mounir-academy", number: "02", title: "Mounir Academy", client: "With Dr. Amir Mounir", meta: "Visual Content", category: "Editing • Visual Storytelling", tone: "gold", summary: "Education-led visual content shaped around clarity, pacing and a recognisable on-screen language." },
+    { id: "moving-identities", number: "03", title: "Visual Identity & Motion", client: "Selected identity work", meta: "Creative Direction", category: "Visual Identity • Motion • Content", tone: "steel", summary: "A curated body of identity and content work exploring how visual systems translate across formats." },
   ],
   services: ["Video Editing", "Cinematography", "Videography", "Motion Design", "Reels & Short-form", "Visual Identity"],
   process: ["Understand", "Frame", "Edit", "Refine", "Deliver"],
