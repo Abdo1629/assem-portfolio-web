@@ -2348,7 +2348,7 @@ html[dir="rtl"] .new-home .hero-media-shade {
 
 /* Scroll-driven camera sequence — perspective built with CSS 3D faces */
 .camera-sequence { position: relative; height: 300vh; background: var(--bg); border-block: 1px solid var(--border); }
-.camera-sequence-stage { position: sticky; top: 0; height: 100vh; min-height: 680px; overflow: hidden; perspective: 1400px; perspective-origin: 50% 48%; isolation: isolate; }
+.camera-sequence-stage { position: relative; top: 0; height: 100vh; min-height: 680px; overflow: hidden; perspective: 1400px; perspective-origin: 50% 48%; isolation: isolate; }
 .camera-sequence-grid { position: absolute; inset: -20%; z-index: -2; opacity: .32; background-image: linear-gradient(rgba(135,167,177,.09) 1px, transparent 1px),linear-gradient(90deg,rgba(135,167,177,.09) 1px,transparent 1px); background-size: 5.2vw 5.2vw; transform: perspective(700px) rotateX(61deg) translateY(15%); transform-origin: center 70%; mask-image: linear-gradient(transparent,black 20%,black 78%,transparent); }
 .camera-sequence-stage::before { content: ""; position: absolute; z-index: -1; width: 60vw; height: 60vw; left: 50%; top: 50%; transform: translate(-50%,-50%); background: radial-gradient(circle,rgba(27,165,178,.12),transparent 66%); pointer-events: none; }
 .camera-sequence-frame { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(44vw,650px); aspect-ratio: 1.52; transform: translate(-50%,-50%) rotate(-4deg) scale(.88); border: 1px solid rgba(129,193,198,.5); box-shadow: 0 0 0 24px rgba(27,165,178,.025),0 0 0 72px rgba(27,165,178,.02); }
