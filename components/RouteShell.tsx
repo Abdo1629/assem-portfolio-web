@@ -5,6 +5,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { CinematicDirector } from "@/components/motion/CinematicDirector";
+import { AssemAssistant } from "@/components/AssemAssistant";
 
 function RouteContent({ children }: { children: ReactNode }) {
   const { language, dir } = useLanguage();
@@ -15,6 +16,7 @@ function RouteContent({ children }: { children: ReactNode }) {
     <SmoothScroll>
       <div className="route-content">{children}<Footer /></div>
     </SmoothScroll>
+    <AssemAssistant />
   </main>;
 }
 
