@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { HomeProjectFixture } from "@/data/homepage-fixture";
 
 type ProjectContent = { ar: HomeProjectFixture[]; en: HomeProjectFixture[] };
-type EditableField = "title" | "client" | "category" | "format" | "role" | "summary" | "conceptLabel" | "visualTitle" | "visualSubline" | "year";
+type EditableField = "title" | "client" | "category" | "format" | "role" | "summary" | "conceptLabel" | "visualTitle" | "visualSubline" | "year" | "poster";
 
 const fields: { key: EditableField; label: string; multiline?: boolean }[] = [
   { key: "title", label: "Project title / عنوان المشروع" },
@@ -18,6 +18,7 @@ const fields: { key: EditableField; label: string; multiline?: boolean }[] = [
   { key: "visualTitle", label: "Artwork title / عنوان العمل البصري" },
   { key: "visualSubline", label: "Artwork subtitle / العنوان الفرعي" },
   { key: "year", label: "Index label / رقم الدراسة" },
+  { key: "poster", label: "Poster artwork / الصورة المستخدمة" },
 ];
 
 export function AdminStudio() {
@@ -80,6 +81,39 @@ export function AdminStudio() {
     } finally { setBusy(false); }
   };
 
+  const addProject = () => {
+    setContent((current) => {
+      if (!current) return current;
+      const id = `concept-${Date.now().toString(36)}`;
+      const number = String(current.en.length + 1).padStart(2, "0");
+      const base: HomeProjectFixture = {
+        id, number, title: "عنوان الدراسة الجديدة", client: "دراسة مفاهيمية · افتراضية",
+        category: "تصنيف العمل", format: "صيغة العمل", role: "الدور الإبداعي",
+        summary: "أضف وصفًا واضحًا للفكرة والاتجاه البصري في هذه الدراسة.",
+        conceptLabel: "دراسة مفاهيمية", tone: "ember", poster: "/images/concept-after-light.svg",
+        visualTitle: "NEW CONCEPT", visualSubline: "ART DIRECTION STUDY", year: `CONCEPT / ${number}`,
+      };
+      const english: HomeProjectFixture = {
+        ...base, title: "New concept study", client: "Concept study · Fictional",
+        category: "Project category", format: "Project format", role: "Creative role",
+        summary: "Describe the premise, intended feeling and visual direction of this study.",
+        conceptLabel: "CONCEPT STUDY",
+      };
+      return { ar: [...current.ar, base], en: [...current.en, english] };
+    });
+    setMessage("");
+    setError("");
+  };
+
+  const removeProject = (projectId: string, title: string) => {
+    if (!window.confirm(`Remove "${title}" from both languages? Publishing is required to make this permanent.`)) return;
+    setContent((current) => current ? ({
+      ar: current.ar.filter((project) => project.id !== projectId),
+      en: current.en.filter((project) => project.id !== projectId),
+    }) : current);
+    setMessage("");
+  };
+
   const publish = async () => {
     if (!content) return;
     if (!window.confirm("Publish these bilingual project changes to the configured Git branch? This creates a Git commit and may trigger a deployment.")) return;
@@ -133,7 +167,7 @@ export function AdminStudio() {
       <section className="admin-workspace">
         <div className="admin-workspace-heading">
           <div><p className="admin-eyebrow">CONTENT MANAGEMENT / PROJECTS</p><h1>Project <em>editor.</em></h1><p>Edit copy in both languages, then publish a versioned update.</p></div>
-          <button type="button" className="admin-publish-button" onClick={publish} disabled={busy || !content}>{busy ? "Publishing…" : "Publish changes ↗"}</button>
+          <div className="admin-heading-actions"><button type="button" className="admin-add-button" onClick={addProject} disabled={!content || currentProjects.length >= 20}>+ Add project</button><button type="button" className="admin-publish-button" onClick={publish} disabled={busy || !content}>{busy ? "Publishing…" : "Publish changes ↗"}</button></div>
         </div>
         <div className="admin-toolbar">
           <div className="admin-language-switch" role="group" aria-label="Content language">
@@ -153,9 +187,11 @@ export function AdminStudio() {
                   <span>{field.label}</span>
                   {field.multiline
                     ? <textarea rows={3} maxLength={2400} value={project[field.key]} onChange={(event) => updateField(project.id, field.key, event.target.value)} />
-                    : <input maxLength={2400} value={project[field.key]} onChange={(event) => updateField(project.id, field.key, event.target.value)} />}
+                    : field.key === "poster"
+                      ? <select value={project.poster} onChange={(event) => updateField(project.id, "poster", event.target.value)}><option value="/images/concept-after-light.svg">After the Last Light — ember</option><option value="/images/concept-form-motion.svg">Form in Motion — gold</option><option value="/images/concept-human-frequency.svg">Human Frequency — steel</option><option value="/images/concept-signal-story.svg">Signal to Story — paper</option></select>
+                      : <input maxLength={2400} value={project[field.key]} onChange={(event) => updateField(project.id, field.key, event.target.value)} />}
                 </label>)}
-                <div className="admin-readonly"><span>SLUG / {project.id}</span><span>POSTER / {project.poster}</span><Link href={`/projects/${project.id}`} target="_blank">Preview case study ↗</Link></div>
+                <div className="admin-readonly"><span>SLUG / {project.id}</span><span>POSTER / {project.poster}</span><Link href={`/projects/${project.id}`} target="_blank">Preview case study ↗</Link><button type="button" className="admin-remove-button" onClick={() => removeProject(project.id, project.title)}>Remove project</button></div>
               </div>
             </details>
           ))}
