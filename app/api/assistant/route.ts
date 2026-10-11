@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { homepageFixture } from "@/data/homepage-fixture";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
