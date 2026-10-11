@@ -33,10 +33,10 @@ export function HomeExperience() {
     const overlay = intro.current;
     const mark = introMark.current;
     const target = document.querySelector<HTMLElement>(".brand-logo");
-    if (!overlay || !mark || !target) { setIntroDone(true); return; }
+    if (!overlay || !mark || !target) { window.requestAnimationFrame(() => setIntroDone(true)); return; }
     if (reduced) {
       gsap.set(overlay, { autoAlpha: 0, pointerEvents: "none" });
-      setIntroDone(true);
+      window.requestAnimationFrame(() => setIntroDone(true));
       return;
     }
     document.documentElement.classList.add("intro-running");
