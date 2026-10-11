@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hasAdminSession } from "@/lib/admin-auth";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 const CONTENT_PATH = "data/project-content.json";
 const REPOSITORY = process.env.GITHUB_REPOSITORY || "Abdo1629/assem-portfolio-web";
