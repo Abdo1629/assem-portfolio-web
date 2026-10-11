@@ -66,7 +66,7 @@ export const homepageFixture = {
       ],
     },
     services: {
-      eyebrow: "من الفكرة إلى الصورة النهائية",
+      eyebrow: "الخدمات",
       title: "كل تفصيلة",
       accent: "لها دور في الحكاية.",
       description: "مجالات عمل مترابطة، يمكن جمعها في مشروع واحد أو الاستعانة بكل منها بحسب الاحتياج.",
@@ -171,7 +171,7 @@ export const homepageFixture = {
       ],
     },
     services: {
-      eyebrow: "FROM FIRST IDEA TO FINAL FRAME",
+      eyebrow: "SERVICES",
       title: "Every detail",
       accent: "has a role in the story.",
       description: "Connected disciplines that can work together as one production or be commissioned according to the brief.",
