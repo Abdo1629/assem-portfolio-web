@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import type { HomeProjectFixture } from "@/data/homepage-fixture";
 
@@ -32,7 +32,7 @@ export function AdminStudio() {
   const [error, setError] = useState("");
   const [branch, setBranch] = useState("main");
 
-  const loadContent = async () => {
+  const loadContent = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
@@ -50,9 +50,12 @@ export function AdminStudio() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  useEffect(() => { void loadContent(); }, []);
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => { void loadContent(); });
+    return () => window.cancelAnimationFrame(frame);
+  }, [loadContent]);
 
   const updateField = (projectId: string, field: EditableField, value: string) => {
     setContent((current) => {
