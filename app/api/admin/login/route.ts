@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_COOKIE, createAdminSession, safePasswordMatch } from "@/lib/admin-auth";
 
-export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   const expected = process.env.ADMIN_PASSWORD;
