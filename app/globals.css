@@ -2586,3 +2586,10 @@ html[data-theme="light"] .assem-assistant-form input { background:#e9e8e2; }
 @media (prefers-reduced-motion: reduce) {
   .new-home .nav::before,.new-home .mobile-navigation,.new-home .nav-link::after { transition:none !important; }
 }
+
+.admin-heading-actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.admin-add-button { padding:13px 16px; border:1px solid rgba(90,194,195,.5); color:#8edddb; font-size:11px; }
+.admin-field select { width:100%; min-width:0; padding:13px 14px; border:1px solid rgba(255,255,255,.16); border-radius:0; outline:none; background:#0b202d; color:#edf1ef; font:inherit; font-size:13px; }
+.admin-field select:focus { border-color:#5ac2c3; }
+.admin-remove-button { color:#e89b8f; font-size:10px; }
+@media (max-width:720px) { .admin-heading-actions { width:100%; } .admin-heading-actions > button { flex:1; } }
