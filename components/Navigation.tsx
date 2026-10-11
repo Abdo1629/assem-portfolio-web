@@ -55,10 +55,6 @@ export function Navigation() {
   }, [menuOpen]);
 
   useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     const closeOnDesktop = () => {
       if (window.innerWidth > 1100) setMenuOpen(false);
     };
