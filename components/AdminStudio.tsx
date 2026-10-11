@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import Link from "next/link";
 import type { HomeProjectFixture } from "@/data/homepage-fixture";
 
 type ProjectContent = { ar: HomeProjectFixture[]; en: HomeProjectFixture[] };
