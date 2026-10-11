@@ -50,7 +50,7 @@ export function CameraScrollSequence() {
     });
     media.add("(max-width: 799px)", () => {
       const ctx = gsap.context(() => {
-        gsap.fromTo(".camera-sequence-copy", { y: 18, autoAlpha: 0 }, {
+        gsap.fromTo(".camera-sequence-intro", { y: 18, autoAlpha: 0 }, {
           y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.12, ease: "power3.out",
           scrollTrigger: { trigger: section, start: "top 75%", once: true },
         });
