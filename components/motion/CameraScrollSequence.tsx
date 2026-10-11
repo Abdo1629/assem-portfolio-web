@@ -62,7 +62,7 @@ export function CameraScrollSequence() {
   }, []);
 
   return (
-    <section ref={root} className="camera-sequence" aria-label={ar ? "رحلة الكاميرا مع التمرير" : "A camera-led scroll sequence"}>
+    <section ref={root} dir={ar ? "rtl" : "ltr"} className="camera-sequence" aria-label={ar ? "رحلة الكاميرا مع التمرير" : "A camera-led scroll sequence"}>
       <div className="camera-sequence-stage">
         <div className="camera-sequence-grid" aria-hidden="true" />
         <div className="camera-sequence-frame" aria-hidden="true"><i /><i /><i /><i /></div>
