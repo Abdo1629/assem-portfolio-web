@@ -2593,3 +2593,12 @@ html[data-theme="light"] .assem-assistant-form input { background:#e9e8e2; }
 .admin-field select:focus { border-color:#5ac2c3; }
 .admin-remove-button { color:#e89b8f; font-size:10px; }
 @media (max-width:720px) { .admin-heading-actions { width:100%; } .admin-heading-actions > button { flex:1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .camera-sequence { height:auto; padding-block:64px; }
+  .camera-sequence-stage { position:relative; display:flex; flex-direction:column; align-items:stretch; gap:24px; height:auto; min-height:0; padding:0 clamp(22px,8vw,90px); }
+  .camera-sequence-copy { position:relative; inset:auto; transform:none; max-width:100%; opacity:1; visibility:visible; }
+  .scroll-camera-rig { position:relative; top:auto; left:auto; width:min(80%,450px); margin:12px auto; transform:none !important; }
+  .camera-sequence-hold,.camera-sequence-outro { opacity:1; visibility:visible; }
+  .camera-sequence-counter { position:relative; right:auto; left:auto; bottom:auto; align-self:flex-end; }
+}
