@@ -1,3 +1,8 @@
+/**
+ * Temporary bilingual content fixture for finalizing the homepage UX.
+ * All four portfolio projects below are fictional concept studies, not verified client work.
+ * Replace project copy/posters with approved material when real content becomes available.
+ */
 export type HomeProjectFixture = {
   id: string;
   number: string;
