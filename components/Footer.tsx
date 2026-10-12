@@ -31,7 +31,7 @@ export function Footer() {
         </div>
       </div>
       <div className="site-footer-bottom">
-        <span>© {new Date().getFullYear()} MOHAMED ASSEM</span>
+        <span>© 2026 MOHAMED ASSEM</span>
         <div className="site-footer-controls">
           <button type="button" onClick={toggleLanguage}>{ar ? "English" : "العربية"} <span aria-hidden="true">↗</span></button>
           <button type="button" onClick={toggleTheme} aria-pressed={theme === "light"}>{theme === "dark" ? (ar ? "الوضع الفاتح" : "Light mode") : (ar ? "الوضع الداكن" : "Dark mode")}</button>
