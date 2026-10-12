@@ -33,9 +33,19 @@ export function HomeExperience() {
     const overlay = intro.current;
     const mark = introMark.current;
     const target = document.querySelector<HTMLElement>(".brand-logo");
-    if (!overlay || !mark || !target) { window.requestAnimationFrame(() => setIntroDone(true)); return; }
+    if (!overlay || !mark || !target) {
+      gsap.set(".assembly-piece, .hero-copy-line", { autoAlpha: 1, clearProps: "transform" });
+      gsap.set(".hero-media", { autoAlpha: 1, clipPath: "inset(0% 0% 0% 0%)" });
+      gsap.set(".nav", { autoAlpha: 1, y: 0 });
+      window.requestAnimationFrame(() => setIntroDone(true));
+      return;
+    }
     if (reduced) {
       gsap.set(overlay, { autoAlpha: 0, pointerEvents: "none" });
+      gsap.set(".assembly-piece, .hero-copy-line", { autoAlpha: 1, clearProps: "transform" });
+      gsap.set(".hero-media", { autoAlpha: 1, clipPath: "inset(0% 0% 0% 0%)", scale: 1 });
+      gsap.set(".nav", { autoAlpha: 1, y: 0 });
+      gsap.set(".intro-progress i", { scaleX: 1 });
       window.requestAnimationFrame(() => setIntroDone(true));
       return;
     }
@@ -54,8 +64,10 @@ export function HomeExperience() {
       });
       gsap.set(".nav", { y: -24, autoAlpha: 0 });
       gsap.set(".assembly-piece", { autoAlpha: 0 });
+      gsap.set(".intro-progress i", { transformOrigin: "left center", scaleX: 0 });
       gsap.set(".hero-copy-line", { yPercent: 120, autoAlpha: 0 });
-      tl.fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
+      tl.fromTo(".intro-progress i", { scaleX: 0 }, { scaleX: 1, duration: 4.9, ease: "none" }, 0)
+        .fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
         .fromTo(".intro-orbit-icon", { autoAlpha: 0, scale: .3, rotate: -18 }, { autoAlpha: 1, scale: 1, rotate: 0, duration: .42, stagger: .055, ease: "back.out(1.7)" }, "-=.12")
         .to(".intro-orbit", { rotation: 360, duration: 1.1, ease: "none" }, "<")
         .to(".intro-orbit-icon", {
