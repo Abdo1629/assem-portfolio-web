@@ -36,7 +36,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const preferred = queryLanguage === "en" || queryLanguage === "ar"
       ? queryLanguage
       : savedLanguage === "en" || savedLanguage === "ar" ? savedLanguage : null;
-    if (preferred) setLanguage(preferred);
+    if (preferred) {
+      const frame = window.requestAnimationFrame(() => setLanguage(preferred));
+      return () => window.cancelAnimationFrame(frame);
+    }
   }, []);
   useEffect(() => {
     let savedTheme: string | null = null;
