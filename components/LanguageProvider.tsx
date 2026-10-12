@@ -26,7 +26,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = dir;
+    try { window.localStorage.setItem("assem-language", language); } catch { /* Language still applies for this visit. */ }
   }, [dir, language]);
+
+  useEffect(() => {
+    let savedLanguage: string | null = null;
+    try { savedLanguage = window.localStorage.getItem("assem-language"); } catch { /* Storage may be disabled. */ }
+    const queryLanguage = new URLSearchParams(window.location.search).get("lang");
+    const preferred = queryLanguage === "en" || queryLanguage === "ar"
+      ? queryLanguage
+      : savedLanguage === "en" || savedLanguage === "ar" ? savedLanguage : null;
+    if (preferred) setLanguage(preferred);
+  }, []);
   useEffect(() => {
     let savedTheme: string | null = null;
     try { savedTheme = window.localStorage.getItem("assem-theme"); } catch { /* Storage may be disabled by the browser. */ }
