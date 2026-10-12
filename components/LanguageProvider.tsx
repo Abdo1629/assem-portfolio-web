@@ -20,13 +20,13 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("ar");
+  const [languageReady, setLanguageReady] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [themeReady, setThemeReady] = useState(false);
   const dir: "rtl" | "ltr" = language === "ar" ? "rtl" : "ltr";
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = dir;
-    try { window.localStorage.setItem("assem-language", language); } catch { /* Language still applies for this visit. */ }
   }, [dir, language]);
 
   useEffect(() => {
@@ -36,11 +36,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const preferred = queryLanguage === "en" || queryLanguage === "ar"
       ? queryLanguage
       : savedLanguage === "en" || savedLanguage === "ar" ? savedLanguage : null;
-    if (preferred) {
-      const frame = window.requestAnimationFrame(() => setLanguage(preferred));
-      return () => window.cancelAnimationFrame(frame);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      if (preferred) setLanguage(preferred);
+      setLanguageReady(true);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
+
+  useEffect(() => {
+    if (!languageReady) return;
+    try { window.localStorage.setItem("assem-language", language); } catch { /* Language still applies for this visit. */ }
+  }, [language, languageReady]);
   useEffect(() => {
     let savedTheme: string | null = null;
     try { savedTheme = window.localStorage.getItem("assem-theme"); } catch { /* Storage may be disabled by the browser. */ }
