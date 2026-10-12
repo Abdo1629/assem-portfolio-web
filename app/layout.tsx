@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://assem-portfolio-web.vercel.app"),
   title: "Mohamed Assem Ahmed — Visual Director",
   description: "Mohamed Assem Ahmed is a Visual Director working across cinematography, video editing, graphic design and brand identity.",
   alternates: { canonical: "/", languages: { ar: "/", en: "/?lang=en" } },
@@ -9,8 +10,9 @@ export const metadata: Metadata = {
     title: "Mohamed Assem Ahmed — Visual Director",
     description: "Visual direction, storytelling and purposeful creative work.",
     type: "website",
+    images: ["/opengraph-image"],
   },
-  twitter: { card: "summary_large_image", title: "Mohamed Assem Ahmed — Visual Director", description: "Visual direction, storytelling and purposeful creative work." },
+  twitter: { card: "summary_large_image", title: "Mohamed Assem Ahmed — Visual Director", description: "Visual direction, storytelling and purposeful creative work.", images: ["/opengraph-image"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

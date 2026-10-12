@@ -20,6 +20,7 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("ar");
+  const [languageReady, setLanguageReady] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [themeReady, setThemeReady] = useState(false);
   const dir: "rtl" | "ltr" = language === "ar" ? "rtl" : "ltr";
@@ -27,6 +28,25 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = language;
     document.documentElement.dir = dir;
   }, [dir, language]);
+
+  useEffect(() => {
+    let savedLanguage: string | null = null;
+    try { savedLanguage = window.localStorage.getItem("assem-language"); } catch { /* Storage may be disabled. */ }
+    const queryLanguage = new URLSearchParams(window.location.search).get("lang");
+    const preferred = queryLanguage === "en" || queryLanguage === "ar"
+      ? queryLanguage
+      : savedLanguage === "en" || savedLanguage === "ar" ? savedLanguage : null;
+    const frame = window.requestAnimationFrame(() => {
+      if (preferred) setLanguage(preferred);
+      setLanguageReady(true);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (!languageReady) return;
+    try { window.localStorage.setItem("assem-language", language); } catch { /* Language still applies for this visit. */ }
+  }, [language, languageReady]);
   useEffect(() => {
     let savedTheme: string | null = null;
     try { savedTheme = window.localStorage.getItem("assem-theme"); } catch { /* Storage may be disabled by the browser. */ }
