@@ -9,7 +9,7 @@ const navigationItems = [
   { key: "home", href: "/", section: "top" },
   { key: "about", href: "/about", section: "manifesto" },
   { key: "services", href: "/services", section: "services" },
-  { key: "projects", href: "/projects", section: "work" },
+  { key: "projects", href: "/projects", section: "selected-work" },
 ] as const;
 
 export function Navigation() {
@@ -83,7 +83,8 @@ export function Navigation() {
     projects: t.navProjects,
   })[key];
   const isActive = (item: (typeof navigationItems)[number]) =>
-    pathname === item.href || (pathname === "/" && activeSection === item.section);
+    (pathname === item.href && (item.href !== "/" || activeSection === "top")) ||
+    (pathname === "/" && activeSection === item.section);
 
   return <header
     ref={headerRef}
