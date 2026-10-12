@@ -10,8 +10,9 @@ export const metadata: Metadata = {
     title: "Mohamed Assem Ahmed — Visual Director",
     description: "Visual direction, storytelling and purposeful creative work.",
     type: "website",
+    images: ["/opengraph-image"],
   },
-  twitter: { card: "summary_large_image", title: "Mohamed Assem Ahmed — Visual Director", description: "Visual direction, storytelling and purposeful creative work." },
+  twitter: { card: "summary_large_image", title: "Mohamed Assem Ahmed — Visual Director", description: "Visual direction, storytelling and purposeful creative work.", images: ["/opengraph-image"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
