@@ -9,7 +9,7 @@ import { AssemAssistant } from "@/components/AssemAssistant";
 
 function RouteContent({ children }: { children: ReactNode }) {
   const { language, dir } = useLanguage();
-  return <main dir={dir} className={language === "ar" ? "site arabic content-route" : "site content-route"}>
+  return <main dir={dir} className={`site new-home content-route ${language === "ar" ? "arabic" : "latin"}`}>
     <div className="grain" aria-hidden="true" />
     <CinematicDirector />
     <Navigation />
