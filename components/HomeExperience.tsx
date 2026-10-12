@@ -20,6 +20,7 @@ export function HomeExperience() {
   const root = useRef<HTMLElement>(null);
   const intro = useRef<HTMLDivElement>(null);
   const introMark = useRef<HTMLImageElement>(null);
+  const introTimeline = useRef<gsap.core.Timeline | null>(null);
   const [introDone, setIntroDone] = useState(false);
   const { language, dir, theme } = useLanguage();
   const home = homepageFixture[language];
@@ -66,7 +67,8 @@ export function HomeExperience() {
       gsap.set(".assembly-piece", { autoAlpha: 0 });
       gsap.set(".intro-progress i", { transformOrigin: "left center", scaleX: 0 });
       gsap.set(".hero-copy-line", { yPercent: 120, autoAlpha: 0 });
-      tl.fromTo(".intro-progress i", { scaleX: 0 }, { scaleX: 1, duration: 4.9, ease: "none" }, 0)
+      introTimeline.current = tl;
+      tl.fromTo(".intro-progress i", { scaleX: 0 }, { scaleX: 1, duration: 5.8, ease: "none" }, 0)
         .fromTo(mark, { scale: 1, rotate: -8 }, { scale: 1, rotate: 0, duration: .5, ease: "power2.out" })
         .fromTo(".intro-orbit-icon", { autoAlpha: 0, scale: .3, rotate: -18 }, { autoAlpha: 1, scale: 1, rotate: 0, duration: .42, stagger: .055, ease: "back.out(1.7)" }, "-=.12")
         .to(".intro-orbit", { rotation: 360, duration: 1.1, ease: "none" }, "<")
@@ -90,7 +92,7 @@ export function HomeExperience() {
         gsap.to(tool, { y: index % 2 ? -13 : 15, x: index % 2 ? 5 : -6, rotate: index % 2 ? -3 : 3, duration: 2.7 + index * .22, delay: 4 + index * .13, repeat: -1, yoyo: true, ease: "sine.inOut" });
       });
     }, root);
-    return () => { ctx.revert(); document.documentElement.classList.remove("intro-running"); };
+    return () => { introTimeline.current = null; ctx.revert(); document.documentElement.classList.remove("intro-running"); };
   }, []);
 
   useLayoutEffect(() => {
@@ -148,7 +150,7 @@ export function HomeExperience() {
 
   return (
     <main ref={root} dir={dir} className={`site new-home ${ar ? "arabic" : "latin"}`}>
-      <div ref={intro} className="intro-overlay" aria-hidden="true">
+      <div ref={intro} className="intro-overlay">
         <div className="intro-grid" />
         <div className="intro-orbit">
           {[
@@ -168,6 +170,7 @@ export function HomeExperience() {
         </div>
         <div className="intro-mark"><Image ref={introMark} className="intro-logo" src={logo} alt="" width={220} height={146} priority /><span className="intro-wordmark">MOHAMED ASSEM</span></div>
         <div className="intro-caption"><span>{ar ? "ممارسة بصرية مستقلة" : "INDEPENDENT VISUAL PRACTICE"}</span><span>{ar ? "القاهرة · مصر" : "CAIRO · EGYPT"}</span></div>
+        <button className="intro-skip" type="button" onClick={() => introTimeline.current?.progress(1)}>{ar ? "تخطي المقدمة" : "SKIP INTRO"} <span aria-hidden="true">↗</span></button>
         <div className="intro-progress"><i /></div>
       </div>
       <div className="grain" aria-hidden="true" />
@@ -182,6 +185,13 @@ export function HomeExperience() {
           <div className="hero-media-shade" />
           <span className="media-cross cross-a" /><span className="media-cross cross-b" />
           <div className="media-caption"><span>FIG. 01</span><span>{home.hero.portraitCaption}</span></div>
+        </div>
+        <div className="hero-tools" aria-hidden="true">
+          <span className="hero-tool tool-pr" style={{ left: "48%", top: "23%" }}><b>Pr</b><small>Premiere Pro</small></span>
+          <span className="hero-tool tool-ae" style={{ left: "61%", top: "34%" }}><b>Ae</b><small>After Effects</small></span>
+          <span className="hero-tool tool-ps" style={{ left: "54%", top: "57%" }}><b>Ps</b><small>Photoshop</small></span>
+          <span className="hero-tool tool-ai" style={{ left: "75%", top: "19%" }}><b>Ai</b><small>Illustrator</small></span>
+          <span className="hero-tool tool-id" style={{ left: "76%", top: "63%" }}><b>Lr</b><small>Lightroom</small></span>
         </div>
         <div className="hero-copy">
           <p className="hero-kicker hero-copy-line"><span className="signal" />{home.hero.kicker}</p>
