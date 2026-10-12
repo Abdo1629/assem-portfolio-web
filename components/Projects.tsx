@@ -58,6 +58,22 @@ export function Projects() {
         <p>{home.work.description}</p>
         <span className="project-index-count">04 <i /> {ar ? "دراسات مفاهيمية" : "CONCEPT STUDIES"}</span>
       </header>
+      <section className="verified-credits" aria-labelledby="verified-credits-title">
+        <div className="verified-credits-heading">
+          <p className="eyebrow">{ar ? "مشاركات موثقة" : "SELECTED VERIFIED CREDITS"}</p>
+          <h2 id="verified-credits-title">{ar ? "أعمال حقيقية، قبل الدراسات المفاهيمية." : "Real credits, before concept studies."}</h2>
+        </div>
+        <div className="verified-credit-grid">
+          <article className="verified-credit">
+            <span className="verified-credit-index">01 / VIDEO</span>
+            <div><p>{ar ? "كوادرا · نقطة تحول" : "KUADRA · NOQTA TAHWOL"}</p><h3>{ar ? "نقطة تحول" : "Noqta Tahwol"}</h3><span>{ar ? "تصوير ومونتاج حلقة مع حاتم جبر، المدير التقني في كوادرا." : "Filming and editing an episode featuring Hatem Gabr, CTO at Kuadra."}</span></div>
+          </article>
+          <article className="verified-credit">
+            <span className="verified-credit-index">02 / IDENTITY</span>
+            <div><p>{ar ? "بنيان جيم" : "BONYAN GYM"}</p><h3>{ar ? "هوية بنيان جيم" : "Bonyan Gym Identity"}</h3><span>{ar ? "مشروع هوية بصرية لبنيان جيم." : "Visual identity project for Bonyan Gym."}</span></div>
+          </article>
+        </div>
+      </section>
       <div className="project-index-grid">
         {home.projects.map((project, index) => (
           <article className={`project-index-card project-${project.tone}`} key={project.id}>
